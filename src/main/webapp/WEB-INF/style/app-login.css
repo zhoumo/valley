@@ -1,0 +1,86 @@
+.login {
+	height: 340px;
+	margin-top: 20px;
+}
+
+.login-container {
+	background-color: #83aecc;
+}
+
+.login-image {
+	height: 340px;
+	width: 950px;
+	text-align: center;
+	margin: 0 auto;
+	background-image: url(../images/login.png);
+}
+
+.login-panel {
+	border: 1px solid #cfdede;
+	background-color: white;
+	width: 300px;
+	height: 300px;
+	position: relative;
+	left: 620px;
+	top: -20px;
+}
+
+.login-panel form {
+	margin: 20px;
+}
+
+.login-panel>div {
+	float: left;
+	margin-left: 20px;
+}
+
+.register-form>div>label {
+	font-size: 16px;
+	color: #8e8a8a;
+	font-weight: normal;
+	padding: 5px;
+}
+
+.register-panel {
+	width: 950px;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.register-form {
+	height: 340px;
+	width: 600px;
+	border: 1px solid #e5e5e5;
+	float: left;
+}
+
+.register-image {
+	height: 340px;
+	width: 320px;
+	background-image: url(../images/register.png);
+	float: left;
+}
+
+.register-title {
+	background-color: #fafafa;
+	text-align: left;
+	font-size: 16px;
+	color: #00a0ea;
+	padding: 10px;
+}
+
+.about-panel {
+	width: 950px;
+	height: 350px;
+	text-align: center;
+	margin: 0 auto;
+	border: 1px solid #e5e5e5;
+}
+
+.cooperate-panel {
+	width: 950px;
+	height: 350px;
+	text-align: center;
+	margin: 0 auto;
+	border: 1px solid #e5e5e5;
+}

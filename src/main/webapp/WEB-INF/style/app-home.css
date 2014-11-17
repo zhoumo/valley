@@ -1,0 +1,23 @@
+.home {
+	width: 100%;
+	height: 640px;
+}
+
+.home>div {
+	width: 900px;
+	margin: 0 auto;
+}
+
+.panel {
+	border: 1px solid #ccdbec;
+	background-color: #f6fafe;
+	width: 440px;
+	height: 150px;
+	float: left;
+	margin: 5px;
+}
+
+.panel-title {
+	padding: 10px;
+	font-size: 18px;
+}

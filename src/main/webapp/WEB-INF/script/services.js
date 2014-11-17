@@ -1,0 +1,33 @@
+var services = angular.module('services', []);
+services.service('userService', [ '$http', function($http) {
+	return {
+		getAuthority : function() {
+			return $http({
+				method : 'post',
+				url : 'getAuthority.do'
+			});
+		},
+		getUserList : function(pageNo, pageSize) {
+			return $http({
+				method : 'post',
+				url : 'getUserList.do?pageNo=' + pageNo + "&pageSize=" + pageSize
+			});
+		}
+	};
+} ]);
+services.service('jobService', [ '$http', function($http) {
+	return {
+		getJobList : function() {
+			return $http({
+				method : 'post',
+				url : 'getJobList.do'
+			});
+		},
+		getJobTree : function() {
+			return $http({
+				method : 'post',
+				url : 'getJobTree.do'
+			});
+		}
+	};
+} ]);

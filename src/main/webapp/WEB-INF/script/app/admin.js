@@ -1,0 +1,1 @@
+angular.module('admin', [ 'controllers', 'directives', 'filters', 'services' ]);
