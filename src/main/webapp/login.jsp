@@ -4,16 +4,16 @@
 	<head>
 		<title>登录</title>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-		<jsp:include page="JSP-INF/script.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/views/common/script.jsp"></jsp:include>
 		<script src="script/app/login.js"></script>
 		<script src="script/controller/login.js"></script>
 		<link href="style/app-login.css" type="text/css" rel="stylesheet" media="screen" />
 	</head>
 	<body>
-		<jsp:include page="JSP-INF/header.jsp"></jsp:include>
+		<jsp:include page="WEB-INF/views/common/header.jsp"></jsp:include>
 		<div class="login" ng-view></div>
 		<div class="footer-position">
-			<jsp:include page="JSP-INF/footer.jsp"></jsp:include>
+			<jsp:include page="WEB-INF/views/common/footer.jsp"></jsp:include>
 		</div>
 	</body>
 </html>
