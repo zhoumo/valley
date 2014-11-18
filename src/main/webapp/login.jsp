@@ -12,8 +12,6 @@
 	<body>
 		<jsp:include page="WEB-INF/views/common/header.jsp"></jsp:include>
 		<div class="login" ng-view></div>
-		<div class="footer-always-on-bottom">
-			<jsp:include page="WEB-INF/views/common/footer.jsp"></jsp:include>
-		</div>
+		<jsp:include page="WEB-INF/views/common/footer.jsp"></jsp:include>
 	</body>
 </html>

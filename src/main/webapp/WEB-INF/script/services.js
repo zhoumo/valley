@@ -10,7 +10,7 @@ services.service('userService', [ '$http', function($http) {
 		getUserList : function(pageNo, pageSize) {
 			return $http({
 				method : 'post',
-				url : 'getUserList.do?pageNo=' + pageNo + "&pageSize=" + pageSize
+				url : 'getUserList.do?pageNo=' + pageNo + '&pageSize=' + pageSize
 			});
 		}
 	};

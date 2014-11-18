@@ -12,8 +12,14 @@
 		</li>
 	</ul>
 	<div class="tab-content">
-		<div class="tab-pane" ng-class="{'active': actived=='job'||!actived}" ng-controller="jobController" ui-view="job"></div>
-		<div class="tab-pane" ng-class="{'active': actived=='user'}" ng-controller="userController" ui-view="user"></div>
-		<div class="tab-pane" ng-class="{'active': actived=='paper'}" ui-view="paper"></div>
+		<div class="tab-pane" ng-class="{'active': actived=='job'||!actived}" ng-controller="jobController">
+			<jsp:include page="module/job.jsp"></jsp:include>
+		</div>
+		<div class="tab-pane" ng-class="{'active': actived=='user'}" ng-controller="userController">
+			<jsp:include page="module/user.jsp"></jsp:include>
+		</div>
+		<div class="tab-pane" ng-class="{'active': actived=='paper'}" ng-controller="paperController">
+			<jsp:include page="module/paper.jsp"></jsp:include>
+		</div>
 	</div>
 </div>

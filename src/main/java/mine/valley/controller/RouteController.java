@@ -8,26 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RouteController extends BaseController {
 
-	@RequestMapping("admin/index")
-	public String adminIndex() {
-		return "admin/index";
-	}
-
-	@RequestMapping("admin/job")
-	public String adminJob() {
-		return "admin/module/job";
-	}
-
-	@RequestMapping("admin/user")
-	public String adminUser() {
-		return "admin/module/user";
-	}
-
-	@RequestMapping("admin/paper")
-	public String adminPaper() {
-		return "admin/module/paper";
-	}
-
 	@RequestMapping("home/index")
 	public String homeIndex() {
 		return "home/index";

@@ -115,3 +115,5 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 		}
 	};
 } ]);
+controller.controller('paperController', [ '$scope', function($scope) {
+} ]);

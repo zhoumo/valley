@@ -4,7 +4,6 @@
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular/angular.route.js"></script>
 <script src="lib/angular/ng-grid/ng-grid.js"></script>
-<script src="lib/angular/ui-router/ui-router.js"></script>
 <script src="script/directives.js"></script>
 <script src="script/filters.js"></script>
 <script src="script/services.js"></script>

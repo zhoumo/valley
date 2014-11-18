@@ -12,7 +12,7 @@
 	<body>
 		<jsp:include page="common/header.jsp"></jsp:include>
 		<div class="home">
-			<div ng-view></div>
+			<div ng-view ng-controller="homeController"></div>
 		</div>
 		<jsp:include page="common/footer.jsp"></jsp:include>
 	</body>

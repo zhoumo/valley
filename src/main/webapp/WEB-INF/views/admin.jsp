@@ -11,9 +11,7 @@
 	</head>
 	<body>
 		<jsp:include page="common/header.jsp"></jsp:include>
-		<div ui-view></div>
-		<div class="footer-always-on-bottom">
-			<jsp:include page="common/footer.jsp"></jsp:include>
-		</div>
+		<jsp:include page="admin/index.jsp"></jsp:include>
+		<jsp:include page="common/footer.jsp"></jsp:include>
 	</body>
 </html>
