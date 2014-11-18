@@ -83,10 +83,10 @@ a:hover {
 	background-color: #2b2b2b;
 }
 
-.footer-position {
+.footer-always-on-bottom {
 	top: 100%;
 	width: 100%;
-	position: absolute;
+	position: fixed;
 	margin-top: -150px;
 }
 

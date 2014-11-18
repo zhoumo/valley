@@ -11,24 +11,9 @@
 	</head>
 	<body>
 		<jsp:include page="common/header.jsp"></jsp:include>
-		<div class="admin-container" ng-controller="adminController">
-			<ul id="tab" class="nav nav-tabs">
-				<li ng-class="{'active': actived=='job'||!actived}">
-					<a data-toggle="tab" ng-click="activing('job')">职位分类</a>
-				</li>
-				<li ng-class="{'active': actived=='user'}">
-					<a data-toggle="tab" ng-click="activing('user')">用户管理</a>
-				</li>
-				<li ng-class="{'active': actived=='paper'}">
-					<a data-toggle="tab" ng-click="activing('paper')">试题库</a>
-				</li>
-			</ul>
-			<div class="tab-content">
-				<div class="tab-pane" ng-class="{'active': actived=='job'||!actived}" ng-controller="jobController"><%@ include file="admin/job.jsp"%></div>
-				<div class="tab-pane" ng-class="{'active': actived=='user'}"><%@ include file="admin/user.jsp"%></div>
-				<div class="tab-pane" ng-class="{'active': actived=='paper'}"><%@ include file="admin/paper.jsp"%></div>
-			</div>
+		<div ui-view></div>
+		<div class="footer-always-on-bottom">
+			<jsp:include page="common/footer.jsp"></jsp:include>
 		</div>
-		<jsp:include page="common/footer.jsp"></jsp:include>
 	</body>
 </html>
