@@ -13,14 +13,9 @@ public class RouteController extends BaseController {
 		return "home/index";
 	}
 
-	@RequestMapping("home/my-exam")
-	public String homeMyExam() {
-		return "home/module/my-exam";
-	}
-
-	@RequestMapping("home/system-message")
-	public String homeSystemMessage() {
-		return "home/module/system-message";
+	@RequestMapping("home/apply-auditor")
+	public String homeApplyAuditor() {
+		return "home/module/apply-auditor";
 	}
 
 	@RequestMapping("home/apply-producer")
@@ -28,23 +23,23 @@ public class RouteController extends BaseController {
 		return "home/module/apply-producer";
 	}
 
-	@RequestMapping("home/apply-auditor")
-	public String homeApplyAuditor() {
-		return "home/module/apply-auditor";
+	@RequestMapping("home/audited-paper-list")
+	public String homeAuditedPaperList() {
+		return "home/module/audited-paper-list";
 	}
 
-	@RequestMapping("home/produce")
-	public String homeProduce() {
-		return "home/module/produce";
+	@RequestMapping("home/create-paper")
+	public String homeCreatePaper() {
+		return "home/module/create-paper";
 	}
 
-	@RequestMapping("home/audit")
-	public String homeAudit() {
-		return "home/module/audit";
+	@RequestMapping("home/edit-user-info")
+	public String homeEditUserInfo() {
+		return "home/module/edit-user-info";
 	}
 
-	@RequestMapping("home/account")
-	public String homeAccount() {
-		return "home/module/account";
+	@RequestMapping("home/my-paper-list")
+	public String homeMyPaperList() {
+		return "home/module/my-paper-list";
 	}
 }

@@ -11,9 +11,7 @@
 	</head>
 	<body>
 		<jsp:include page="common/header.jsp"></jsp:include>
-		<div class="home">
-			<div ng-view ng-controller="homeController"></div>
-		</div>
+		<div class="home" ng-view ng-controller="homeController"></div>
 		<jsp:include page="common/footer.jsp"></jsp:include>
 	</body>
 </html>
