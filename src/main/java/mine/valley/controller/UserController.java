@@ -19,16 +19,6 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
 
-	@RequestMapping("/")
-	public String index(HttpSession session) {
-		User user = (User) session.getAttribute(super.getUserName());
-		if (user.getUserType().equals(User.USER_TYPE_ADMIN)) {
-			return "admin";
-		} else {
-			return "home";
-		}
-	}
-
 	@RequestMapping("/getAuthority.do")
 	@ResponseBody
 	public Authority getAuthority(HttpSession session) {

@@ -9,7 +9,7 @@
 		<script src="script/controller/login.js"></script>
 		<link href="style/app-login.css" type="text/css" rel="stylesheet" media="screen" />
 	</head>
-	<body>
+	<body ng-controller="loginController">
 		<jsp:include page="WEB-INF/views/common/header.jsp"></jsp:include>
 		<div class="login" ng-view></div>
 		<jsp:include page="WEB-INF/views/common/footer.jsp"></jsp:include>

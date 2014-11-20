@@ -19,6 +19,7 @@ controller.controller('homeController', [ '$scope', '$rootScope', 'userService',
 } ]);
 controller.controller('createPaperController', [ '$scope', '$rootScope', function($scope, $rootScope) {
 	if ($rootScope.selectJobId == null) {
-		location.href = '#/';
+		var index = location.href.indexOf('#/');
+		location.href = location.href.substring(0, index);
 	}
 } ]);

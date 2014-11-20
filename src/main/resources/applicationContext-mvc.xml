@@ -8,11 +8,11 @@
 			            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 	<context:component-scan base-package="mine.valley.controller" />
 	<mvc:annotation-driven />
+	<mvc:resources location="/upload/" mapping="/upload/**" />
 	<mvc:resources location="/WEB-INF/images/" mapping="/images/**" />
 	<mvc:resources location="/WEB-INF/plugin/" mapping="/plugin/**" />
 	<mvc:resources location="/WEB-INF/script/" mapping="/script/**" />
 	<mvc:resources location="/WEB-INF/style/" mapping="/style/**" />
-	<mvc:resources location="/WEB-INF/upload/" mapping="/upload/**" />
 	<mvc:resources location="/WEB-INF/views/**.html" mapping="/views/**" />
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
