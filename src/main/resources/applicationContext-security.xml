@@ -6,12 +6,12 @@
 						http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 	<security:http auto-config="true">
 		<security:intercept-url pattern="/images/**" filters="none" />
-		<security:intercept-url pattern="/lib/**" filters="none" />
+		<security:intercept-url pattern="/plugin/**" filters="none" />
 		<security:intercept-url pattern="/script/**" filters="none" />
 		<security:intercept-url pattern="/style/**" filters="none" />
 		<security:intercept-url pattern="/views/login/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/register**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:intercept-url pattern="/login.jsp**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:form-login login-page="/login.jsp" default-target-url="/" authentication-failure-url="/login.jsp?error=true" authentication-success-handler-ref="authSuccess" />
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
 	</security:http>

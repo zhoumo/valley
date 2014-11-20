@@ -6,7 +6,10 @@
 				<div class="modal-header">
 					<h4 class="modal-title">编辑单（多）选题</h4>
 				</div>
-				<div class="modal-body"></div>
+				<div class="modal-body">
+					<div class="ueditor" ng-model="content"></div>
+					<textarea ng-model="content"></textarea>
+				</div>
 				<div class="modal-footer">
 					<button class="btn btn-primary" type="submit">保存</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

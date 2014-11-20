@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RouteController extends BaseController {
 
+	@RequestMapping("ueditor/controller")
+	public String ueditorController() {
+		return "ueditor/controller";
+	}
+
 	@RequestMapping("home/index")
 	public String homeIndex() {
 		return "home/index";
