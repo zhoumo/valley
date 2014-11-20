@@ -8,7 +8,8 @@ angular.module('home', [ 'ngRoute', 'controllers', 'directives', 'filters', 'ser
 	}).when('/audited-paper-list', {
 		templateUrl : 'home/audited-paper-list'
 	}).when('/create-paper', {
-		templateUrl : 'home/create-paper'
+		templateUrl : 'home/create-paper',
+		controller : 'createPaperController'
 	}).when('/edit-user-info', {
 		templateUrl : 'home/edit-user-info'
 	}).when('/my-paper-list', {

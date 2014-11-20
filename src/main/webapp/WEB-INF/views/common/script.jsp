@@ -1,8 +1,12 @@
 <script src="lib/jquery/jquery.js"></script>
 <script src="lib/bootstrap/bootstrap.js"></script>
 <script src="lib/bootstrap/bootstrap.treeview.js"></script>
+<script src="lib/ueditor/ueditor.config.js"></script>
+<script src="lib/ueditor/ueditor.all.js"></script>
+<script src="lib/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular/angular.route.js"></script>
+<script src="lib/angular/angular.ueditor.js"></script>
 <script src="lib/angular/ng-grid/ng-grid.js"></script>
 <script src="script/directives.js"></script>
 <script src="script/filters.js"></script>

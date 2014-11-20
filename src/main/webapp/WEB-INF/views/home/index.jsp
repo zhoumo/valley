@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div style="height: 640px">
+<div style="height: 640px" safe-mode="false">
 	<p>欢迎来到秀才谷个人中心</p>
 	<panel title="我的笔试题" type="my-exam" color="#01caa0">
 		<div class="panel-content"></div>
@@ -25,10 +25,8 @@
 			<a href="#/my-paper-list">我的题库</a>
 		</div>
 		<div class="panel-content">
-			<select class="form-control" style="width: 200px">
-				<option value="0" selected="selected">请选择出题职位</option>
-			</select>
-			<button class="btn btn-primary" type="button" onclick="location.href='#/create-paper'">现在去出题</button>
+			<select id="jobSelect" class="form-control" style="width: 200px" data-ng-options="job.jobName for job in jobList track by job.id" data-ng-model="job"></select>
+			<button class="btn btn-primary" type="button" ng-click="selectJob()">现在去出题</button>
 		</div>
 	</panel>
 	<panel title="我要审题" type="audit" color="#6f8ba9">

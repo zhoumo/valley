@@ -13,3 +13,19 @@ directives.directive("panel", function() {
 		}
 	};
 });
+directives.directive('safeMode', function() {
+	return {
+		restrict : 'A',
+		link : function(scope, element, attrs) {
+			if (attrs.safeMode == 'true') {
+				window.onbeforeunload = function() {
+					return '';
+				};
+			} else {
+				window.onbeforeunload = function() {
+					return;
+				};
+			}
+		}
+	};
+});
