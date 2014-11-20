@@ -4914,9 +4914,6 @@
                     littleEndian = false;
                     break;
     
-                default:
-                    Base.log('Invalid Exif data: Invalid byte alignment marker.');
-                    return;
             }
     
             // Check for the TIFF tag marker (0x002A):
