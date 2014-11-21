@@ -22,21 +22,47 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		var index = location.href.indexOf('#/');
 		location.href = location.href.substring(0, index);
 	}
-	$scope.$watch('content', function(value) {
+	$scope.questions = new Array();
+	$scope.$watch('singleSelection', function(value) {
 		var dom = '';
 		var sections = (value == null ? [] : value.split('<p>'));
 		for ( var section in sections) {
 			var line = sections[section].trim();
-			if (line.indexOf('[[') == 0 && line.indexOf(']]') > 0) {
-				var option = line.substring(2).split(']]');
-				dom += '<input type="checkbox" value="' + option[1].trim().replace('</p>', '').replace('<br/>', '') + '" />' + option[0];
+			var option = /\[\[[a-zA-Z]\]\]/g.exec(line);
+			if (option != null) {
+				option = option.toString().replace('[[', '').replace(']]', '').trim();
+				dom += '<input type="radio" id="' + option + '" name="radio" />' + option;
+			}
+		}
+		$('.paper-choice-answers').html(dom);
+	}, true);
+	$scope.$watch('multipleSelection', function(value) {
+		var dom = '';
+		var sections = (value == null ? [] : value.split('<p>'));
+		for ( var section in sections) {
+			var line = sections[section].trim();
+			var option = /\[\[[a-zA-Z]\]\]/g.exec(line);
+			if (option != null) {
+				option = option.toString().replace('[[', '').replace(']]', '').trim();
+				dom += '<input type="checkbox" id="' + option + '" />' + option;
 			}
 		}
 		$('.paper-choice-answers').html(dom);
 	}, true);
 	$scope.clearQuestion = function() {
-		$scope.content = null;
+		$scope.singleSelection = null;
+		$scope.multipleSelection = null;
+		$scope.essayQuestion = null;
+		$scope.essayQuestionAnswer = null;
 	};
-	$scope.addQuestion = function() {
+	$scope.addQuestion = function(type) {
+		if (type == 'single') {
+			$('.paper-single-selection').append($($scope.singleSelection));
+		} else if (type == 'multiple') {
+			$('.paper-single-selection').append($($scope.multipleSelection));
+		} else if (type == 'essay') {
+			$('.paper-single-selection').append($($scope.essayQuestion));
+		}
+		$scope.clearQuestion();
 	};
 } ]);

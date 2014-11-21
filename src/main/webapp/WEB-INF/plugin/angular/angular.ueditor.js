@@ -34,7 +34,7 @@
 								_self.editorReady = true;
 								_self.editor.addListener("contentChange", function() {
 									ctrl.$setViewValue(_self.editor.getContent());
-									if (!$S.$$phase) {
+									if (!$S.$$phase && !$S.$root.$$phase) {
 										$S.$apply();
 									}
 								});
