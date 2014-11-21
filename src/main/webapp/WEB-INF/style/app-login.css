@@ -1,6 +1,6 @@
 .login {
-	height: 340px;
 	margin-top: 20px;
+	min-height: 600px;
 }
 
 .login-container {

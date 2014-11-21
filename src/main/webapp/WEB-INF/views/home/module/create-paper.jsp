@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <form safe-mode="true">
 	<div class="modal fade" id="singleSelectionModal" role="dialog" aria-hidden="true" data-backdrop="static">
-		<div class="modal-dialog">
+		<div class="modal-dialog" style="width: 900px">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title">编辑单（多）选题</h4>
 				</div>
 				<div class="modal-body">
-					<div class="ueditor" ng-model="content"></div>
-					<textarea ng-model="content"></textarea>
+					<label>题目：</label>
+					<div class="ueditor" ng-model="content" style="width: 835px; height: 380px"></div>
+					<label>答案：</label>
+					<div class="paper-choice-answers"></div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-primary" type="submit">保存</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addQuestion()">保存</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearQuestion()">关闭</button>
 				</div>
 			</div>
 		</div>

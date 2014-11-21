@@ -22,4 +22,21 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		var index = location.href.indexOf('#/');
 		location.href = location.href.substring(0, index);
 	}
+	$scope.$watch('content', function(value) {
+		var dom = '';
+		var sections = (value == null ? [] : value.split('<p>'));
+		for ( var section in sections) {
+			var line = sections[section].trim();
+			if (line.indexOf('[[') == 0 && line.indexOf(']]') > 0) {
+				var option = line.substring(2).split(']]');
+				dom += '<input type="checkbox" value="' + option[1].trim().replace('</p>', '').replace('<br/>', '') + '" />' + option[0];
+			}
+		}
+		$('.paper-choice-answers').html(dom);
+	}, true);
+	$scope.clearQuestion = function() {
+		$scope.content = null;
+	};
+	$scope.addQuestion = function() {
+	};
 } ]);

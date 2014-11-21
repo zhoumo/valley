@@ -5,6 +5,7 @@
 .home>div,form {
 	width: 900px;
 	margin: 0 auto;
+	min-height: 620px;
 }
 
 .panel {
@@ -36,4 +37,9 @@
 
 .paper-line {
 	border: 1px solid #43b9ef;
+}
+
+.paper-choice-answers>input {
+	margin-left: 20px;
+	margin-right: 5px;
 }
