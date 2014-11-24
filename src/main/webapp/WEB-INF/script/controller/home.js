@@ -1,4 +1,4 @@
-var controller = angular.module('controllers', [ 'services', 'filters', 'ngGrid', 'ng.ueditor' ]);
+var controller = angular.module('controllers', [ 'services', 'filters', 'ngSanitize', 'ngGrid', 'ng.ueditor' ]);
 controller.controller('homeController', [ '$scope', '$rootScope', 'userService', 'jobService', function($scope, $rootScope, userService, jobService) {
 	userService.getAuthority().success(function(res) {
 		$rootScope.user = {
@@ -22,7 +22,9 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		var index = location.href.indexOf('#/');
 		location.href = location.href.substring(0, index);
 	}
-	$scope.questions = new Array();
+	$scope.singleSelections = new Object();
+	$scope.multipleSelections = new Object();
+	$scope.essayQuestions = new Object();
 	$scope.$watch('singleSelection', function(value) {
 		var dom = '';
 		var sections = (value == null ? [] : value.split('<p>'));
@@ -31,10 +33,12 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 			var option = /\[\[[a-zA-Z]\]\]/g.exec(line);
 			if (option != null) {
 				option = option.toString().replace('[[', '').replace(']]', '').trim();
-				dom += '<input type="radio" id="' + option + '" name="radio" />' + option;
+				dom += '<input type="radio" value="' + option + '" name="radio" />' + option;
 			}
 		}
-		$('.paper-choice-answers').html(dom);
+		$scope.validate = (dom != '');
+		$('#singleSelectionModal .paper-choice-answers').html(dom);
+		$('input[type=radio]').eq(0).attr("checked", 'checked');
 	}, true);
 	$scope.$watch('multipleSelection', function(value) {
 		var dom = '';
@@ -44,10 +48,11 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 			var option = /\[\[[a-zA-Z]\]\]/g.exec(line);
 			if (option != null) {
 				option = option.toString().replace('[[', '').replace(']]', '').trim();
-				dom += '<input type="checkbox" id="' + option + '" />' + option;
+				dom += '<input type="checkbox" value="' + option + '" checked="checked" />' + option;
 			}
 		}
-		$('.paper-choice-answers').html(dom);
+		$scope.validate = (dom != '');
+		$('#multipleSelectionModal .paper-choice-answers').html(dom);
 	}, true);
 	$scope.clearQuestion = function() {
 		$scope.singleSelection = null;
@@ -56,13 +61,46 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		$scope.essayQuestionAnswer = null;
 	};
 	$scope.addQuestion = function(type) {
+		var key = $scope.questionKey == null ? Date.now() : $scope.questionKey;
 		if (type == 'single') {
-			$('.paper-single-selection').append($($scope.singleSelection));
+			$scope.singleSelections['Q' + key] = $scope.singleSelection;
+			$scope.singleSelections['A' + key] = $('input[type=radio]:checked').val();
+			$('#singleSelectionModal').modal('hide');
 		} else if (type == 'multiple') {
-			$('.paper-single-selection').append($($scope.multipleSelection));
+			$scope.multipleSelections['Q' + key] = $scope.multipleSelection;
+			var answer = '';
+			$('input[type=checkbox]:checked').each(function() {
+				answer += $(this).val() + ',';
+			});
+			$scope.multipleSelections['A' + key] = answer;
+			$('#multipleSelectionModal').modal('hide');
 		} else if (type == 'essay') {
-			$('.paper-single-selection').append($($scope.essayQuestion));
+			$scope.essayQuestions['Q' + key] = $scope.essayQuestion;
+			$scope.essayQuestions['A' + key] = $scope.essayQuestionAnswer;
+			$('#essayQuestionModal').modal('hide');
 		}
+		$scope.questionKey = null;
 		$scope.clearQuestion();
+	};
+	$scope.editQuestion = function(type, id) {
+		$scope.questionKey = id.substring(1);
+		if (type == 'single') {
+			$scope.singleSelection = $scope.singleSelections['Q' + $scope.questionKey];
+		} else if (type == 'multiple') {
+			$scope.multipleSelection = $scope.multipleSelections['Q' + $scope.questionKey];
+		} else if (type == 'essay') {
+			$scope.essayQuestion = $scope.essayQuestions['Q' + $scope.questionKey];
+			$scope.essayQuestionAnswer = $scope.essayQuestions['A' + $scope.questionKey];
+		}
+	};
+	$scope.deleteQuestion = function(id) {
+		if (confirm("确认删除?")) {
+			delete $scope.singleSelections['Q' + id.substring(1)];
+			delete $scope.singleSelections['A' + id.substring(1)];
+			delete $scope.multipleSelections['Q' + id.substring(1)];
+			delete $scope.multipleSelections['A' + id.substring(1)];
+			delete $scope.essayQuestions['Q' + id.substring(1)];
+			delete $scope.essayQuestions['A' + id.substring(1)];
+		}
 	};
 } ]);

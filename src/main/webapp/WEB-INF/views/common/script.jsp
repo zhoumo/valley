@@ -6,6 +6,7 @@
 <script src="plugin/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script src="plugin/angular/angular.js"></script>
 <script src="plugin/angular/angular.route.js"></script>
+<script src="plugin/angular/angular.sanitize.js"></script>
 <script src="plugin/angular/angular.ueditor.js"></script>
 <script src="plugin/angular/ng-grid/ng-grid.js"></script>
 <script src="script/directives.js"></script>

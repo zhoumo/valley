@@ -35,6 +35,21 @@
 	margin: 20px;
 }
 
+.paper-question-odd {
+	vertical-align: top;
+	padding: 15px;
+}
+
+.paper-question-even {
+	vertical-align: top;
+	padding: 15px;
+	background-color: #f6fafe;
+}
+
+.paper-question-button {
+	padding-left: 10px;
+}
+
 .paper-line {
 	border: 1px solid #43b9ef;
 }
