@@ -67,7 +67,7 @@
 	<hr class="paper-line" />
 	<div class="paper-title">
 		题库名称：
-		<input required="required" type="text" />
+		<input required="required" type="text" name="paperName" />
 	</div>
 	<div class="paper-title">
 		<button class="btn btn-primary" data-toggle="modal" data-target="#singleSelectionModal">添加单选题</button>
