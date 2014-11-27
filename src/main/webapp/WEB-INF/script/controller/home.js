@@ -2,8 +2,8 @@ var controller = angular.module('controllers', [ 'services', 'filters', 'ngSanit
 controller.controller('homeController', [ '$scope', '$rootScope', 'userService', 'jobService', function($scope, $rootScope, userService, jobService) {
 	userService.getAuthority().success(function(res) {
 		$rootScope.user = {
+			loginName : res.loginName,
 			realName : res.realName,
-			userName : res.userName,
 			user : true
 		};
 	});
@@ -53,6 +53,12 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		}
 		$scope.validate = (dom != '');
 		$('#multipleSelectionModal .paper-choice-answers').html(dom);
+	}, true);
+	$scope.$watch('essayQuestion', function(value) {
+		$scope.validate = (value != '' && $scope.essayQuestionAnswer != '');
+	}, true);
+	$scope.$watch('essayQuestionAnswer', function(value) {
+		$scope.validate = (value != '' && $scope.essayQuestion != '');
 	}, true);
 	$scope.clearQuestion = function() {
 		$scope.singleSelection = null;

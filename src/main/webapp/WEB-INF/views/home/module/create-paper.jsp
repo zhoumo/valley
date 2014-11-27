@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form safe-mode="true" action="savePaper.do" method="post" novalidate>
+<form safe-mode="true" name="paperForm" action="savePaper.do" method="post" novalidate>
 	<input type="hidden" name="singleSelections" value="{{singleSelections}}" />
 	<input type="hidden" name="multipleSelections" value="{{multipleSelections}}" />
 	<input type="hidden" name="essayQuestions" value="{{essayQuestions}}" />
@@ -7,7 +7,7 @@
 		<div class="modal-dialog" style="width: 900px">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">编辑单选题{{questionKey}}</h4>
+					<h4 class="modal-title">编辑单选题</h4>
 				</div>
 				<div class="modal-body">
 					<label>题目：</label>
@@ -67,13 +67,13 @@
 	<hr class="paper-line" />
 	<div class="paper-title">
 		题库名称：
-		<input required="required" type="text" name="paperName" />
+		<input required="required" type="text" name="name" ng-model="paperName" />
 	</div>
 	<div class="paper-title">
 		<button class="btn btn-primary" data-toggle="modal" data-target="#singleSelectionModal">添加单选题</button>
 		<button class="btn btn-primary" data-toggle="modal" data-target="#multipleSelectionModal">添加多选题</button>
 		<button class="btn btn-primary" data-toggle="modal" data-target="#essayQuestionModal">添加问答题</button>
-		<button class="btn btn-primary" type="submit" onclick="window.onbeforeunload=null">提交题库</button>
+		<button class="btn btn-primary" type="submit" onclick="window.onbeforeunload=null" ng-disabled="paperForm.$invalid">提交题库</button>
 	</div>
 	<div class="paper-title">
 		<input id="hideSingleSelection" type="checkbox" ng-click="hideSingleSelections=!hideSingleSelections" />
@@ -91,6 +91,7 @@
 		<div ng-repeat="(id, text) in singleSelections|getQuestions">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="text|showQuestion:$index:id"></div>
+				<div ng-bind-html="singleSelections|showAnswer:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#singleSelectionModal" ng-click="editQuestion('single',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
 			</div>
@@ -103,6 +104,7 @@
 		<div ng-repeat="(id, text) in multipleSelections|getQuestions">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="text|showQuestion:$index:id"></div>
+				<div ng-bind-html="multipleSelections|showAnswer:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#multipleSelectionModal" ng-click="editQuestion('multiple',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
 			</div>
@@ -115,6 +117,7 @@
 		<div ng-repeat="(id, text) in essayQuestions|getQuestions">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="text|showQuestion:$index:id"></div>
+				<div ng-bind-html="essayQuestions|showAnswer:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#essayQuestionModal" ng-click="editQuestion('essay',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
 			</div>

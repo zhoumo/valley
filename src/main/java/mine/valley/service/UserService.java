@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService extends BaseService {
 
 	public void saveOrUpdate(User user) {
-		user.setRoles(Arrays.asList(new Role[] { getRole(Role.ROLE_USER), getRole(User.getRoleName(user.getUserType())) }));
+		user.setRoles(Arrays.asList(new Role[] { getRole(Role.ROLE_USER), getRole(User.getRoleName(user.getType())) }));
 		if (user.getId() == null) {
 			user.setCreateTime();
 		}
@@ -30,11 +30,11 @@ public class UserService extends BaseService {
 	}
 
 	public Role getRole(String roleName) {
-		return (Role) baseDao.find("FROM Role WHERE roleName = ? AND isDeleted = false", roleName).get(0);
+		return (Role) baseDao.find("FROM Role WHERE name = ? AND isDeleted = false", roleName).get(0);
 	}
 
-	public User getUserByName(String userName) {
-		List<User> users = baseDao.find("FROM User WHERE userName = ? AND isDeleted = false", userName);
+	public User getUserByName(String loginName) {
+		List<User> users = baseDao.find("FROM User WHERE loginName = ? AND isDeleted = false", loginName);
 		return users.size() == 0 ? new User() : users.get(0);
 	}
 

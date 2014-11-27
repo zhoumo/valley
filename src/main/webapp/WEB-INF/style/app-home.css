@@ -46,6 +46,16 @@
 	background-color: #f6fafe;
 }
 
+.paper-question-odd>div {
+	vertical-align: top;
+	min-height: 30px;
+}
+
+.paper-question-even>div {
+	vertical-align: top;
+	min-height: 30px;
+}
+
 .paper-question-button {
 	padding-left: 10px;
 }

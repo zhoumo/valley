@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -28,8 +27,8 @@ public class User extends BaseEntity {
 
 	public static final short USER_TYPE_HEADHUNTER = 3;
 
-	@Column(name = "USER_NAME", nullable = false)
-	private String userName;
+	@Column(name = "LOGIN_NAME", nullable = false)
+	private String loginName;
 
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
@@ -37,23 +36,23 @@ public class User extends BaseEntity {
 	@Column(name = "REAL_NAME", nullable = false)
 	private String realName;
 
-	@Column(name = "USER_TYPE", nullable = false, columnDefinition = "TINYINT")
-	private Short userType;
+	@Column(name = "TYPE", nullable = false, columnDefinition = "TINYINT")
+	private Short type;
 
 	@Column(name = "ENABLED", nullable = false, columnDefinition = "BIT DEFAULT 1")
 	private Boolean enabled = true;
 
 	@JsonIgnore
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	private List<Role> roles;
 
-	public String getUserName() {
-		return userName;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 
 	public String getPassword() {
@@ -72,12 +71,12 @@ public class User extends BaseEntity {
 		this.realName = realName;
 	}
 
-	public Short getUserType() {
-		return userType;
+	public Short getType() {
+		return type;
 	}
 
-	public void setUserType(Short userType) {
-		this.userType = userType;
+	public void setType(Short type) {
+		this.type = type;
 	}
 
 	public Boolean getEnabled() {

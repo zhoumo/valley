@@ -14,7 +14,7 @@ public class RouteController extends BaseController {
 	@RequestMapping("/")
 	public String index(HttpSession session) {
 		User user = (User) session.getAttribute(super.getUserName());
-		if (user.getUserType().equals(User.USER_TYPE_ADMIN)) {
+		if (user.getType().equals(User.USER_TYPE_ADMIN)) {
 			return "admin";
 		} else {
 			return "home";

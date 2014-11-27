@@ -22,13 +22,11 @@ public class PaperController extends BaseController {
 	private PaperService paperService;
 
 	@RequestMapping("/savePaper.do")
-	public String savePaper(String paperName, HttpServletRequest request) {
-		Paper paper = new Paper();
+	public String savePaper(Paper paper, HttpServletRequest request) {
 		List<Question> questionList = new ArrayList<Question>();
-		questionList.addAll(paperService.convertQuestionList(request.getParameter("singleSelections"), Question.TYPE_SINGLE_SELECTIONS, paper));
-		questionList.addAll(paperService.convertQuestionList(request.getParameter("multipleSelections"), Question.TYPE_MULTIPLE_SELECTIONS, paper));
-		questionList.addAll(paperService.convertQuestionList(request.getParameter("essayQuestions"), Question.TYPE_ESSAY_QUESTIONS, paper));
-		paper.setPaperName(paperName);
+		questionList.addAll(paperService.createSingleSelectionList(request.getParameter("singleSelections"), paper));
+		questionList.addAll(paperService.createMultipleSelectionList(request.getParameter("multipleSelections"), paper));
+		questionList.addAll(paperService.createEssayQuestionList(request.getParameter("essayQuestions"), paper));
 		paper.setQuestions(questionList);
 		paper.setAuthor((User) request.getSession().getAttribute(super.getUserName()));
 		paper.setCreateTime();

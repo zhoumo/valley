@@ -22,9 +22,9 @@
 						<div class="form-group">
 							<label class="col-sm-2">登录名</label>
 							<div class="col-sm-6">
-								<input name="userName" type="text" class="form-control" placeholder="手机号/邮箱" ng-model="userName" ng-pattern="/^[0-9]{11}|([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/" required="required" />
+								<input name="loginName" type="text" class="form-control" placeholder="手机号/邮箱" ng-model="loginName" ng-pattern="/^[0-9]{11}|([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/" required="required" />
 							</div>
-							<div class="error" ng-if="userForm.userName.$invalid">未填写或非法登录名</div>
+							<div class="error" ng-if="userForm.loginName.$invalid">未填写或非法登录名</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2">密 码</label>
@@ -43,7 +43,7 @@
 						<div class="form-group">
 							<label class="col-sm-2">用户角色</label>
 							<div class="col-sm-6">
-								<select class="form-control" name="userType">
+								<select class="form-control" name="type">
 									<option value="0" selected="selected">管理员</option>
 									<option value="1">IT从业者</option>
 									<option value="2">HR</option>

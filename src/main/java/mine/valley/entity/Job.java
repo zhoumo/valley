@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -20,37 +19,37 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 @SuppressWarnings("serial")
 public class Job extends BaseEntity {
 
-	@Column(name = "JOB_NAME", nullable = false)
-	private String jobName;
+	@Column(name = "NAME", nullable = false)
+	private String name;
 
-	@Column(name = "JOB_LEVEL", nullable = false)
-	private Integer jobLevel = 0;
+	@Column(name = "LEVEL", nullable = false)
+	private Integer level = 0;
 
 	@JsonBackReference
-	@OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "parent")
 	private List<Job> children;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "P_ID")
 	private Job parent;
 
 	@Transient
 	private Long parentId;
 
-	public String getJobName() {
-		return jobName;
+	public String getName() {
+		return name;
 	}
 
-	public void setJobName(String jobName) {
-		this.jobName = jobName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Integer getJobLevel() {
-		return jobLevel;
+	public Integer getLevel() {
+		return level;
 	}
 
-	public void setJobLevel(Integer jobLevel) {
-		this.jobLevel = jobLevel;
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 
 	public List<Job> getChildren() {

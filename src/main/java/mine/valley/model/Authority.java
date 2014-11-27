@@ -5,21 +5,21 @@ import mine.valley.base.BaseModel;
 @SuppressWarnings("serial")
 public class Authority extends BaseModel {
 
-	private String userName;
+	private String loginName;
 
 	private String realName;
 
-	public Authority(String userName, String realName) {
-		this.userName = userName;
+	public Authority(String loginName, String realName) {
+		this.loginName = loginName;
 		this.realName = realName;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 
 	public String getRealName() {

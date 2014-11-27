@@ -5,39 +5,38 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import mine.valley.base.BaseEntity;
+
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
-import mine.valley.base.BaseEntity;
 
 @Entity
 @Table(name = "PAPER")
 @SuppressWarnings("serial")
 public class Paper extends BaseEntity {
 
-	@Column(name = "PAPER_NAME", nullable = false)
-	private String paperName;
+	@Column(name = "NAME", nullable = false)
+	private String name;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "AUTHOR")
 	private User author;
 
-	@OneToMany(mappedBy = "paper", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "paper", cascade = CascadeType.ALL)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Question> questions;
 
-	public String getPaperName() {
-		return paperName;
+	public String getName() {
+		return name;
 	}
 
-	public void setPaperName(String paperName) {
-		this.paperName = paperName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public User getAuthor() {

@@ -29,7 +29,7 @@ public class JobService extends BaseService {
 	}
 
 	private Tree buildJobTree(Job job) {
-		Tree tree = new Tree(job.getJobName(), job.getId());
+		Tree tree = new Tree(job.getName(), job.getId());
 		tree.setParent(job.getParent() == null ? null : job.getParent().getId());
 		if (job.getChildren() == null) {
 			return tree;
@@ -45,20 +45,20 @@ public class JobService extends BaseService {
 	}
 
 	public void saveJob(Job job) {
-		String jobName = job.getJobName();
+		String jobName = job.getName();
 		Long jobParentId = job.getParentId();
 		if (job.getId() != null) {
 			job = baseDao.get(Job.class, job.getId());
-			job.setJobName(jobName);
+			job.setName(jobName);
 		} else {
 			job.setCreateTime();
 		}
 		if (jobParentId != null && jobParentId != job.getId()) {
 			job.setParent(baseDao.get(Job.class, jobParentId));
-			job.setJobLevel(job.getParent().getJobLevel() + 1);
+			job.setLevel(job.getParent().getLevel() + 1);
 		} else {
 			job.setParent(null);
-			job.setJobLevel(0);
+			job.setLevel(0);
 		}
 		baseDao.save(job);
 	}

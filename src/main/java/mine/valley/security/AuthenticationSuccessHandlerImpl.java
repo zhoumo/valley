@@ -22,7 +22,7 @@ public class AuthenticationSuccessHandlerImpl implements AuthenticationSuccessHa
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = userService.getUserByName(userDetails.getUsername());
-		request.getSession().setAttribute(user.getUserName(), user);
+		request.getSession().setAttribute(user.getLoginName(), user);
 		response.sendRedirect(request.getContextPath());
 	}
 }

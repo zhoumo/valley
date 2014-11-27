@@ -28,19 +28,19 @@ public class Role extends BaseEntity {
 
 	public static final String ROLE_HEADHUNTER = "ROLE_HEADHUNTER";
 
-	@Column(name = "ROLE_NAME", nullable = false)
-	private String roleName;
+	@Column(name = "NAME", nullable = false)
+	private String name;
 
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "roles", fetch = FetchType.LAZY)
 	private Set<User> users;
 
-	public String getRoleName() {
-		return roleName;
+	public String getName() {
+		return name;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Set<User> getUsers() {

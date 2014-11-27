@@ -7,8 +7,8 @@ controller.controller('adminController', [ '$scope', '$rootScope', 'userService'
 	};
 	userService.getAuthority().success(function(res) {
 		$rootScope.user = {
+			loginName : res.loginName,
 			realName : res.realName,
-			userName : res.userName,
 			admin : true
 		};
 	});
@@ -68,14 +68,14 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 			displayName : 'ID',
 			width : 50
 		}, {
-			field : 'userName',
+			field : 'loginName',
 			displayName : '用户名',
 			width : 200
 		}, {
 			field : 'realName',
 			displayName : '真实姓名'
 		}, {
-			field : 'userType',
+			field : 'type',
 			displayName : '用户类型',
 			cellTemplate : '<div style="margin:5px">{{COL_FIELD|userType}}</div>'
 		}, {
@@ -105,12 +105,12 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 	}, true);
 	$scope.updateUser = function(entity) {
 		$scope.userId = entity.user.id;
-		$scope.userName = entity.user.userName;
+		$scope.loginName = entity.user.loginName;
 		$scope.realName = entity.user.realName;
 		$('#userModal').modal('show');
 	};
 	$scope.deleteUser = function(entity) {
-		if (window.confirm('确定要删除' + entity.user.userName + '吗？')) {
+		if (window.confirm('确定要删除' + entity.user.loginName + '吗？')) {
 			location.href = 'deleteUser.do?id=' + entity.user.id;
 		}
 	};

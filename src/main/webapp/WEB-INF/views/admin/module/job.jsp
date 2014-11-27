@@ -5,14 +5,14 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">职位名称</label>
 			<div class="col-sm-6">
-				<input name="jobName" type="text" class="form-control" ng-model="jobName" required="required" />
+				<input name="name" type="text" class="form-control" ng-model="jobName" required="required" />
 			</div>
-			<div class="error" ng-if="jobForm.jobName.$invalid">必填</div>
+			<div class="error" ng-if="jobForm.name.$invalid">必填</div>
 		</div>
 		<div class="form-group">
 			<label class="col-sm-2 control-label">所属分类</label>
 			<div class="col-sm-6">
-				<select class="form-control" name="parentId" data-ng-options="job.jobName for job in jobList track by job.id" data-ng-model="jobParent">
+				<select class="form-control" name="parentId" data-ng-options="job.name for job in jobList track by job.id" data-ng-model="jobParent">
 					<option selected="selected"></option>
 				</select>
 			</div>
@@ -34,14 +34,14 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">职位名称</label>
 						<div class="col-sm-6">
-							<input name="jobName" type="text" class="form-control" ng-model="jobName" required="required" />
+							<input name="name" type="text" class="form-control" ng-model="jobName" required="required" />
 						</div>
-						<div class="error" ng-if="jobForm.jobName.$invalid">必填</div>
+						<div class="error" ng-if="jobForm.name.$invalid">必填</div>
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">所属分类</label>
 						<div class="col-sm-6">
-							<select class="form-control" name="parentId" data-ng-options="job.jobName for job in jobList track by job.id" data-ng-model="jobParent">
+							<select class="form-control" name="parentId" data-ng-options="job.name for job in jobList track by job.id" data-ng-model="jobParent">
 								<option selected="selected"></option>
 							</select>
 						</div>

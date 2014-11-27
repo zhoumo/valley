@@ -2,7 +2,6 @@ package mine.valley.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -20,52 +19,52 @@ public class Question extends BaseEntity {
 
 	public static final Short TYPE_ESSAY_QUESTIONS = 2;
 
-	@Column(name = "QUESTION_CONTENT", nullable = false, length = 65535)
-	private String questionContent;
+	@Column(name = "QUESTION", nullable = false, length = 65535)
+	private String question;
 
-	@Column(name = "QUESTION_ANSWER", nullable = false, length = 65535)
-	private String questionAnswer;
+	@Column(name = "ANSWER", nullable = false, length = 65535)
+	private String answer;
 
-	@Column(name = "QUESTION_LEVEL", nullable = false)
-	private Short questionLevel;
+	@Column(name = "LEVEL", nullable = false)
+	private Short level;
 
-	@Column(name = "QUESTION_TYPE", nullable = false)
-	private Short questionType;
+	@Column(name = "TYPE", nullable = false)
+	private Short type;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
 	@JoinColumn(name = "PAPER_ID")
 	private Paper paper;
 
-	public String getQuestionContent() {
-		return questionContent;
+	public String getQuestion() {
+		return question;
 	}
 
-	public void setQuestionContent(String questionContent) {
-		this.questionContent = questionContent;
+	public void setQuestion(String question) {
+		this.question = question;
 	}
 
-	public String getQuestionAnswer() {
-		return questionAnswer;
+	public String getAnswer() {
+		return answer;
 	}
 
-	public void setQuestionAnswer(String questionAnswer) {
-		this.questionAnswer = questionAnswer;
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
-	public Short getQuestionLevel() {
-		return questionLevel;
+	public Short getLevel() {
+		return level;
 	}
 
-	public void setQuestionLevel(Short questionLevel) {
-		this.questionLevel = questionLevel;
+	public void setLevel(Short level) {
+		this.level = level;
 	}
 
-	public Short getQuestionType() {
-		return questionType;
+	public Short getType() {
+		return type;
 	}
 
-	public void setQuestionType(Short questionType) {
-		this.questionType = questionType;
+	public void setType(Short type) {
+		this.type = type;
 	}
 
 	public Paper getPaper() {

@@ -23,7 +23,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	public Authority getAuthority(HttpSession session) {
 		User user = (User) session.getAttribute(super.getUserName());
-		Authority authority = new Authority(user.getUserName(), user.getRealName());
+		Authority authority = new Authority(user.getLoginName(), user.getRealName());
 		return authority;
 	}
 

@@ -15,17 +15,29 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class PaperService extends BaseService {
 
-	public List<Question> convertQuestionList(String text, Short type, Paper paper) {
+	public List<Question> createSingleSelectionList(String text, Paper paper) {
+		return createQuestionList(text, paper, Question.TYPE_SINGLE_SELECTIONS);
+	}
+
+	public List<Question> createMultipleSelectionList(String text, Paper paper) {
+		return createQuestionList(text, paper, Question.TYPE_MULTIPLE_SELECTIONS);
+	}
+
+	public List<Question> createEssayQuestionList(String text, Paper paper) {
+		return createQuestionList(text, paper, Question.TYPE_ESSAY_QUESTIONS);
+	}
+
+	public List<Question> createQuestionList(String text, Paper paper, Short type) {
 		List<Question> questionList = new ArrayList<Question>();
 		JSONObject json = new JSONObject(text);
 		for (Object key : json.keySet()) {
 			if (key.toString().startsWith("Q")) {
 				key = key.toString().substring(1);
 				Question question = new Question();
-				question.setQuestionContent(json.getString("Q" + key));
-				question.setQuestionAnswer(json.getString("A" + key));
-				question.setQuestionType(type);
-				question.setQuestionLevel((short) 0);
+				question.setQuestion(json.getString("Q" + key));
+				question.setAnswer(json.getString("A" + key));
+				question.setType(type);
+				question.setLevel((short) 0);
 				question.setPaper(paper);
 				question.setCreateTime();
 				questionList.add(question);

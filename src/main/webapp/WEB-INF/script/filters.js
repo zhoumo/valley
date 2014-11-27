@@ -10,7 +10,7 @@ filters.filter('size', function() {
 });
 filters.filter('userInfo', function() {
 	return function(user) {
-		return user.realName + '<' + user.userName + '>';
+		return user.realName + '<' + user.loginName + '>';
 	};
 });
 filters.filter('adminInfo', function() {
@@ -50,5 +50,14 @@ filters.filter('showQuestion', function() {
 			return '<p>' + (index + 1) + '. ' + text.substring(3);
 		}
 		return (index + 1) + '. ' + text;
+	};
+});
+filters.filter('showAnswer', function() {
+	return function(questions, id) {
+		var text = questions[id.replace('Q', 'A')];
+		if (text.indexOf('<p>') == 0) {
+			return '<p><b>答案：</b>' + text.substring(3);
+		}
+		return '<b>答案：</b>' + text;
 	};
 });
