@@ -31,11 +31,6 @@ public class RouteController extends BaseController {
 		return "home/index";
 	}
 
-	@RequestMapping("home/audited-paper-list")
-	public String homeAuditedPaperList() {
-		return "home/module/audited-paper-list";
-	}
-
 	@RequestMapping("home/create-paper")
 	public String homeCreatePaper() {
 		return "home/module/create-paper";
@@ -46,8 +41,8 @@ public class RouteController extends BaseController {
 		return "home/module/edit-user-info";
 	}
 
-	@RequestMapping("home/my-paper-list")
-	public String homeMyPaperList() {
-		return "home/module/my-paper-list";
+	@RequestMapping("home/paper-list")
+	public String homePaperList() {
+		return "home/module/paper-list";
 	}
 }

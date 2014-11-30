@@ -2,6 +2,9 @@
 <div style="height: 640px" safe-mode="false">
 	<p>欢迎来到秀才谷个人中心</p>
 	<panel title="我的笔试题" type="my-exam" color="#01caa0">
+	<div class="panel-top-button">
+		<a href="#/paper-list">全部试题</a>
+	</div>
 	<div class="panel-content"></div>
 	</panel>
 	<panel title="系统消息" type="system-message" color="#01caa0">
@@ -22,7 +25,7 @@
 	</panel>
 	<panel title="我要出题" type="produce" color="#6f8ba9">
 	<div class="panel-top-button">
-		<a href="#/my-paper-list">我的题库</a>
+		<a href="#/paper-list">我的题库</a>
 	</div>
 	<div class="panel-content">
 		<select id="jobSelect" class="form-control" style="width: 200px" data-ng-options="job.jobName for job in jobList track by job.id" data-ng-model="job"></select>
@@ -31,7 +34,7 @@
 	</panel>
 	<panel title="我要审题" type="audit" color="#6f8ba9">
 	<div class="panel-top-button">
-		<a href="#/audited-paper-list">已审题库</a>
+		<a href="#/paper-list">已审题库</a>
 	</div>
 	</panel>
 	<panel title="账户管理" type="account" color="#15467a">
