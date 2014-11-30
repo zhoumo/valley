@@ -16,7 +16,7 @@
 				<div class="modal-header">
 					<h4 class="modal-title">用户管理</h4>
 				</div>
-				<form name="userForm" class="register-form form-horizontal" action="saveUser.do" method="post" novalidate>
+				<form name="userForm" class="form-horizontal" action="saveUser.do" method="post" novalidate>
 					<div class="modal-body">
 						<input type="hidden" name="id" ng-model="userId" value="{{userId}}" />
 						<div class="form-group">

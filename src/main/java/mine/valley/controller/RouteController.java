@@ -31,16 +31,6 @@ public class RouteController extends BaseController {
 		return "home/index";
 	}
 
-	@RequestMapping("home/apply-auditor")
-	public String homeApplyAuditor() {
-		return "home/module/apply-auditor";
-	}
-
-	@RequestMapping("home/apply-producer")
-	public String homeApplyProducer() {
-		return "home/module/apply-producer";
-	}
-
 	@RequestMapping("home/audited-paper-list")
 	public String homeAuditedPaperList() {
 		return "home/module/audited-paper-list";

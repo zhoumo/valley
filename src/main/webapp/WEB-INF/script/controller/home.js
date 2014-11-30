@@ -4,6 +4,8 @@ controller.controller('homeController', [ '$scope', '$rootScope', 'userService',
 		$rootScope.user = {
 			loginName : res.loginName,
 			realName : res.realName,
+			hasAppliedProducer : res.hasAppliedProducer,
+			hasAppliedAuditor : res.hasAppliedAuditor,
 			user : true
 		};
 	});
@@ -15,6 +17,29 @@ controller.controller('homeController', [ '$scope', '$rootScope', 'userService',
 		$rootScope.selectJobId = $('#jobSelect').val();
 		$rootScope.selectJobName = $('#jobSelect option:selected').text();
 		location.href = '#/create-paper';
+	};
+	$scope.selectedJobs = null;
+	$scope.addJob = function() {
+		var id = $('#jobList').val();
+		var text = $('#jobList option:selected').text();
+		if (text != '') {
+			if ($scope.selectedJobs == null) {
+				$scope.selectedJobs = new Object();
+			}
+			$scope.selectedJobs[id] = {
+				id : id,
+				text : text
+			};
+		}
+	};
+	$scope.removeJob = function(id) {
+		delete $scope.selectedJobs[id];
+		if ($.isEmptyObject($scope.selectedJobs)) {
+			$scope.selectedJobs = null;
+		}
+	};
+	$scope.setApplyType = function(type) {
+		$scope.applyType = type;
 	};
 } ]);
 controller.controller('createPaperController', [ '$scope', '$rootScope', function($scope, $rootScope) {
@@ -100,7 +125,7 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		}
 	};
 	$scope.deleteQuestion = function(id) {
-		if (confirm("确认删除?")) {
+		if (confirm('确认删除?')) {
 			delete $scope.singleSelections['Q' + id.substring(1)];
 			delete $scope.singleSelections['A' + id.substring(1)];
 			delete $scope.multipleSelections['Q' + id.substring(1)];

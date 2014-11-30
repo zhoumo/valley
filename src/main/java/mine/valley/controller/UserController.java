@@ -3,9 +3,11 @@ package mine.valley.controller;
 import javax.servlet.http.HttpSession;
 
 import mine.valley.base.BaseController;
+import mine.valley.entity.Apply;
 import mine.valley.entity.User;
 import mine.valley.model.Authority;
 import mine.valley.model.Page;
+import mine.valley.service.ApplyService;
 import mine.valley.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,18 @@ public class UserController extends BaseController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private ApplyService applyService;
+
 	@RequestMapping("/getAuthority.do")
 	@ResponseBody
 	public Authority getAuthority(HttpSession session) {
 		User user = (User) session.getAttribute(super.getUserName());
-		Authority authority = new Authority(user.getLoginName(), user.getRealName());
+		Authority authority = new Authority();
+		authority.setLoginName(user.getLoginName());
+		authority.setRealName(user.getRealName());
+		authority.setHasAppliedProducer(applyService.hasApplied(Apply.Type.PRODUCER.getCode()));
+		authority.setHasAppliedAuditor(applyService.hasApplied(Apply.Type.AUDITOR.getCode()));
 		return authority;
 	}
 

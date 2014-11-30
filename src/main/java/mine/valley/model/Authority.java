@@ -9,10 +9,9 @@ public class Authority extends BaseModel {
 
 	private String realName;
 
-	public Authority(String loginName, String realName) {
-		this.loginName = loginName;
-		this.realName = realName;
-	}
+	private Boolean hasAppliedProducer;
+
+	private Boolean hasAppliedAuditor;
 
 	public String getLoginName() {
 		return loginName;
@@ -28,5 +27,21 @@ public class Authority extends BaseModel {
 
 	public void setRealName(String realName) {
 		this.realName = realName;
+	}
+
+	public Boolean getHasAppliedProducer() {
+		return hasAppliedProducer;
+	}
+
+	public void setHasAppliedProducer(Boolean hasAppliedProducer) {
+		this.hasAppliedProducer = hasAppliedProducer;
+	}
+
+	public Boolean getHasAppliedAuditor() {
+		return hasAppliedAuditor;
+	}
+
+	public void setHasAppliedAuditor(Boolean hasAppliedAuditor) {
+		this.hasAppliedAuditor = hasAppliedAuditor;
 	}
 }

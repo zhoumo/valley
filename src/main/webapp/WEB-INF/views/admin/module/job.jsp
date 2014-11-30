@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div id="jobTree" class="col-sm-4 admin-job-tree"></div>
 <div class="col-sm-8 admin-job-panel" style="border-left: 0px">
-	<form name="jobForm" class="register-form form-horizontal" action="saveJob.do" method="post" novalidate>
+	<form name="jobForm" class="form-horizontal" action="saveJob.do" method="post" novalidate>
 		<div class="form-group">
 			<label class="col-sm-2 control-label">职位名称</label>
 			<div class="col-sm-6">
@@ -29,7 +29,7 @@
 			<div class="modal-header">
 				<h4 class="modal-title">职位管理</h4>
 			</div>
-			<form name="jobForm" class="register-form form-horizontal" action="saveJob.do" method="post" novalidate>
+			<form name="jobForm" class="form-horizontal" action="saveJob.do" method="post" novalidate>
 				<div class="modal-body">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">职位名称</label>

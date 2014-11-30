@@ -12,6 +12,7 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Component;
@@ -19,12 +20,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class BaseDao extends HibernateDaoSupport {
 
+	protected Logger logger = LoggerFactory.getLogger(getClass());
+
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+
+	public void executeSQL(String sql) {
+		jdbcTemplate.execute(sql);
+	}
+
 	@Autowired
 	public void setSessionFacotry(SessionFactory sessionFacotry) {
 		super.setSessionFactory(sessionFacotry);
 	}
-
-	protected Logger logger = LoggerFactory.getLogger(getClass());
 
 	public <T extends BaseEntity> void save(T entity) {
 		this.getHibernateTemplate().saveOrUpdate(entity);

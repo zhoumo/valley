@@ -61,3 +61,14 @@ filters.filter('showAnswer', function() {
 		return '<b>答案：</b>' + text;
 	};
 });
+filters.filter('thirdLevelJob', function() {
+	return function(jobList) {
+		var thirdLevelJobList = new Array();
+		for ( var index = 0; index < jobList.length; index++) {
+			if (jobList[index].level + 1 == 3) {
+				thirdLevelJobList.push(jobList[index]);
+			}
+		}
+		return thirdLevelJobList;
+	};
+});
