@@ -6,6 +6,7 @@ import java.util.List;
 import mine.valley.base.BaseService;
 import mine.valley.entity.Paper;
 import mine.valley.entity.Question;
+import mine.valley.model.Page;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -48,5 +49,9 @@ public class PaperService extends BaseService {
 
 	public void savePaper(Paper paper) {
 		baseDao.save(paper);
+	}
+
+	public Page<Paper> getAllPaper(Page<Paper> page) {
+		return baseDao.findByPage("FROM Paper ORDER BY JOB", new Object[] {}, page);
 	}
 }

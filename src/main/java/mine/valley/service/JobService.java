@@ -14,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class JobService extends BaseService {
 
+	public Job getJob(Long id) {
+		return baseDao.get(Job.class, id);
+	}
+
 	public List<Job> getJobList() {
 		return baseDao.find("FROM Job WHERE isDeleted = false");
 	}

@@ -2,39 +2,39 @@
 <div style="height: 640px" safe-mode="false">
 	<p>欢迎来到秀才谷个人中心</p>
 	<panel title="我的笔试题" type="my-exam" color="#01caa0">
-	<div class="panel-top-button">
-		<a href="#/paper-list">全部试题</a>
-	</div>
-	<div class="panel-content"></div>
+		<div class="panel-top-button">
+			<a href="#/paper-list?all">全部试题</a>
+		</div>
+		<div class="panel-content"></div>
 	</panel>
 	<panel title="系统消息" type="system-message" color="#01caa0">
-	<div class="panel-top-button">
-		<a>全部清除</a>
-	</div>
-	<div class="panel-content"></div>
+		<div class="panel-top-button">
+			<a>全部清除</a>
+		</div>
+		<div class="panel-content"></div>
 	</panel>
 	<panel title="申请成为题库生产者，贡献你的智慧！" type="apply-producer" color="#00aeef">
-	<div class="panel-content">
-		<a href="#" data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('生产者')">现在申请</a>
-	</div>
+		<div class="panel-content">
+			<a href="#" data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('生产者')">现在申请</a>
+		</div>
 	</panel>
 	<panel title="申请成为题库审核人，为题库把关！" type="apply-auditor" color="#00aeef">
-	<div class="panel-content">
-		<a href="#" data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('审核者')">现在申请</a>
-	</div>
+		<div class="panel-content">
+			<a href="#" data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('审核者')">现在申请</a>
+		</div>
 	</panel>
 	<panel title="我要出题" type="produce" color="#6f8ba9">
-	<div class="panel-top-button">
-		<a href="#/paper-list">我的题库</a>
-	</div>
-	<div class="panel-content">
-		<select id="jobSelect" class="form-control" style="width: 200px" data-ng-options="job.jobName for job in jobList track by job.id" data-ng-model="job"></select>
-		<button class="btn btn-primary" type="button" ng-click="selectJob()">现在去出题</button>
-	</div>
+		<div class="panel-top-button">
+			<a href="#/paper-list?mine">我的题库</a>
+		</div>
+		<div class="panel-content">
+			<select id="jobSelect" class="form-control" style="width: 200px" data-ng-options="job.name for job in jobList|thirdLevelJob track by job.id" data-ng-model="job"></select>
+			<button class="btn btn-primary" type="button" ng-click="selectJob()">现在去出题</button>
+		</div>
 	</panel>
 	<panel title="我要审题" type="audit" color="#6f8ba9">
 	<div class="panel-top-button">
-		<a href="#/paper-list">已审题库</a>
+		<a href="#/paper-list?audit">已审题库</a>
 	</div>
 	</panel>
 	<panel title="账户管理" type="account" color="#15467a">

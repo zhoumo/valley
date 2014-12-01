@@ -7,6 +7,7 @@ angular.module('home', [ 'ngRoute', 'controllers', 'directives', 'filters', 'ser
 	}).when('/edit-user-info', {
 		templateUrl : 'home/edit-user-info'
 	}).when('/paper-list', {
-		templateUrl : 'home/paper-list'
+		templateUrl : 'home/paper-list',
+		controller : 'paperListController'
 	});
 });

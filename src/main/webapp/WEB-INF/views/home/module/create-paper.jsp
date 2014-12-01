@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <form safe-mode="true" name="paperForm" action="savePaper.do" method="post" novalidate>
+	<input type="hidden" name="selectJobId" value="{{selectJobId}}">
 	<input type="hidden" name="singleSelections" value="{{singleSelections}}" />
 	<input type="hidden" name="multipleSelections" value="{{multipleSelections}}" />
 	<input type="hidden" name="essayQuestions" value="{{essayQuestions}}" />

@@ -31,3 +31,13 @@ services.service('jobService', [ '$http', function($http) {
 		}
 	};
 } ]);
+services.service('paperService', [ '$http', function($http) {
+	return {
+		getPaperList : function(type, pageNo, pageSize) {
+			return $http({
+				method : 'post',
+				url : 'getPaperList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type
+			});
+		}
+	};
+} ]);

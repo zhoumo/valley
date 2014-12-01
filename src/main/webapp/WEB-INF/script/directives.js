@@ -8,6 +8,9 @@ directives.directive("panel", function() {
 			var panel = element.children().eq(0);
 			var title = panel.children().eq(0);
 			panel.css('border-left', '5px solid ' + attrs.color);
+			panel.css('background', 'url(images/panel/' + attrs.type + '.png)');
+			panel.css('background-position', 'bottom right');
+			panel.css('background-repeat', 'no-repeat');
 			title.css('color', attrs.color);
 			title.text(attrs.title);
 		}
