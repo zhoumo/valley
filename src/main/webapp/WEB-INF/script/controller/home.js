@@ -140,12 +140,19 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		}
 	};
 } ]);
+controller.controller('answerPaperController', [ '$scope', '$routeParams', 'paperService', function($scope, $routeParams, paperService) {
+	paperService.getPaper($routeParams.id).success(function(res) {
+		$scope.paper = res;
+	});
+} ]);
+controller.controller('auditPaperController', [ '$scope', 'paperService', function($scope, paperService) {
+} ]);
 controller.controller('paperListController', [ '$scope', 'paperService', function($scope, paperService) {
 	var href = window.location.href;
 	var type = href.substring(href.indexOf('?') + 1);
 	var options = '';
 	if (type == 'all') {
-		options = '<div style="margin:5px"><a ng-click="startAnswer({user:row.entity})">开始答题</a></div>';
+		options = '<div style="margin:5px"><a href="#/answer-paper/{{COL_FIELD}}">开始答题</a></div>';
 	}
 	$scope.paperList = [];
 	$scope.totalServerItems = 0;
@@ -184,6 +191,7 @@ controller.controller('paperListController', [ '$scope', 'paperService', functio
 			width : 150,
 			cellTemplate : '<div style="margin:5px">{{COL_FIELD|date:"yyyy-MM-dd hh:mm:ss"}}</div>'
 		}, {
+			field : 'id',
 			displayName : '操作',
 			cellTemplate : options
 		} ]
@@ -200,7 +208,4 @@ controller.controller('paperListController', [ '$scope', 'paperService', functio
 			$scope.paging();
 		}
 	}, true);
-	$scope.startAnswer = function(id) {
-		alert(id);
-	};
 } ]);

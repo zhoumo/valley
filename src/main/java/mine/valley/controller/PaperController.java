@@ -46,4 +46,10 @@ public class PaperController extends BaseController {
 	public Page<Paper> getPaperList(String type, Page<Paper> page) {
 		return paperService.getAllPaper(page);
 	}
+
+	@RequestMapping("/getPaper.do")
+	@ResponseBody
+	public Paper getPaperList(Long id) {
+		return paperService.getPaper(id);
+	}
 }

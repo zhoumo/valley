@@ -54,4 +54,14 @@ public class PaperService extends BaseService {
 	public Page<Paper> getAllPaper(Page<Paper> page) {
 		return baseDao.findByPage("FROM Paper ORDER BY JOB", new Object[] {}, page);
 	}
+
+	public Paper getPaper(Long id) {
+		List<Paper> paperList = baseDao.find("FROM Paper WHERE ID = ?", id);
+		if (paperList.size() > 0) {
+			Paper paper = paperList.get(0);
+			System.out.println(paper.getQuestions().size());
+			return paper;
+		}
+		return null;
+	}
 }

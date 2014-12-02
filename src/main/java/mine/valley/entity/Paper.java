@@ -26,7 +26,7 @@ public class Paper extends BaseEntity {
 	private String name;
 
 	@Column(name = "STATUS", nullable = false, columnDefinition = "TINYINT")
-	private Short status;
+	private Short status = 0;
 
 	@ManyToOne
 	@JoinColumn(name = "AUTHOR")

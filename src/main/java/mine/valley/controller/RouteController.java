@@ -36,13 +36,23 @@ public class RouteController extends BaseController {
 		return "home/module/create-paper";
 	}
 
-	@RequestMapping("home/edit-user-info")
-	public String homeEditUserInfo() {
-		return "home/module/edit-user-info";
+	@RequestMapping("home/answer-paper")
+	public String homeAnswerPaper() {
+		return "home/module/answer-paper";
+	}
+
+	@RequestMapping("home/audit-paper")
+	public String homeAuditPaper() {
+		return "home/module/audit-paper";
 	}
 
 	@RequestMapping("home/paper-list")
 	public String homePaperList() {
 		return "home/module/paper-list";
+	}
+
+	@RequestMapping("home/edit-user-info")
+	public String homeEditUserInfo() {
+		return "home/module/edit-user-info";
 	}
 }

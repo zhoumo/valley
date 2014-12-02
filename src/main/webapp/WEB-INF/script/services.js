@@ -38,6 +38,12 @@ services.service('paperService', [ '$http', function($http) {
 				method : 'post',
 				url : 'getPaperList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type
 			});
+		},
+		getPaper : function(id) {
+			return $http({
+				method : 'post',
+				url : 'getPaper.do?id=' + id
+			});
 		}
 	};
 } ]);

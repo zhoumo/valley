@@ -3,6 +3,7 @@ package mine.valley.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import mine.valley.base.BaseEntity;
@@ -33,6 +34,7 @@ public class Question extends BaseEntity {
 	private Short type;
 
 	@JsonIgnore
+	@ManyToOne
 	@JoinColumn(name = "PAPER_ID")
 	private Paper paper;
 
