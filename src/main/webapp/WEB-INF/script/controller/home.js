@@ -142,7 +142,24 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 } ]);
 controller.controller('answerPaperController', [ '$scope', '$routeParams', 'paperService', function($scope, $routeParams, paperService) {
 	paperService.getPaper($routeParams.id).success(function(res) {
-		$scope.paper = res;
+		$scope.paperName = res.name;
+		$scope.updateTime = res.updateTime;
+		var singleSelections = new Array();
+		var multipleSelections = new Array();
+		var essayQuestions = new Array();
+		for ( var index = 0; index < res.questions.length; index++) {
+			var question = res.questions[index];
+			if (question.type == 0) {
+				singleSelections.push(question);
+			} else if (question.type == 1) {
+				multipleSelections.push(question);
+			} else if (question.type == 2) {
+				essayQuestions.push(question);
+			}
+		}
+		$scope.singleSelections = singleSelections;
+		$scope.multipleSelections = multipleSelections;
+		$scope.essayQuestions = essayQuestions;
 	});
 } ]);
 controller.controller('auditPaperController', [ '$scope', 'paperService', function($scope, paperService) {

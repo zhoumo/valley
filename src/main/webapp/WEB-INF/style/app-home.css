@@ -26,6 +26,19 @@
 	margin: 15px;
 }
 
+.paper-top {
+	width: 300px;
+	margin-right: 50px;
+	float: right;
+}
+
+.paper-time {
+	background-color: #da4b4b;
+	margin-bottom: 100px;
+	font-size: 20px;
+	padding: 10px;
+}
+
 .panel-top-button {
 	margin-top: -35px;
 	margin-left: 350px;
@@ -67,4 +80,8 @@
 .paper-choice-answers>input {
 	margin-left: 20px;
 	margin-right: 5px;
+}
+
+.paper-bottom {
+	text-align: center;
 }

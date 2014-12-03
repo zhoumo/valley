@@ -3,8 +3,10 @@ filters.filter('size', function() {
 	return function(object) {
 		if (object instanceof Object) {
 			return Object.keys(object).length;
-		} else {
+		} else if (object instanceof Array) {
 			return object.length;
+		} else {
+			return 0;
 		}
 	};
 });
@@ -43,15 +45,26 @@ filters.filter('getQuestions', function() {
 		return questions;
 	};
 });
-filters.filter('showQuestion', function() {
-	return function(text, index, id) {
-		text = text.trim().replace(/\[\[/gi, '').replace(/\]\]/gi, '. ');
-		if (text.indexOf('<p>') == 0) {
-			return '<p>' + (index + 1) + '. ' + text.substring(3);
+filters.filter('showQuestion', [ '$sce', function($sce) {
+	function checkHtml(text, checkable) {
+		if (checkable) {
+			return $sce.trustAsHtml(text);
+		} else {
+			return text;
 		}
-		return (index + 1) + '. ' + text;
+	}
+	return function(text, index, id, checkable, type) {
+		if (type == null) {
+			text = text.trim().replace(/\[\[/gi, '').replace(/\]\]/gi, '. ');
+		} else {
+			text = text.trim().replace(/\[\[/gi, '\<input name="' + type + id + '" type=\"' + type + '\"\ /\> ').replace(/\]\]/gi, '. ');
+		}
+		if (text.indexOf('<p>') == 0) {
+			return checkHtml('<p>' + (index + 1) + '. ' + text.substring(3), checkable);
+		}
+		return checkHtml((index + 1) + '. ' + text, checkable);
 	};
-});
+} ]);
 filters.filter('showAnswer', function() {
 	return function(questions, id) {
 		var text = questions[id.replace('Q', 'A')];
