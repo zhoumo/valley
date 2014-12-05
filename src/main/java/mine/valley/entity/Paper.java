@@ -25,6 +25,9 @@ public class Paper extends BaseEntity {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
+	@Column(name = "TIME", nullable = false)
+	private Integer time;
+
 	@Column(name = "STATUS", nullable = false, columnDefinition = "TINYINT")
 	private Short status = 0;
 
@@ -49,6 +52,14 @@ public class Paper extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public Integer getTime() {
+		return time;
+	}
+
+	public void setTime(Integer time) {
+		this.time = time;
 	}
 
 	public Short getStatus() {

@@ -35,14 +35,28 @@ filters.filter('userType', function() {
 	};
 });
 filters.filter('getQuestions', function() {
-	return function(object, start) {
-		var questions = new Object();
-		for ( var field in object) {
-			if (field.indexOf('Q') == 0) {
-				questions[field] = object[field];
-			}
+	return function(object, type) {
+		if (object == null) {
+			return;
 		}
-		return questions;
+		if (type == null) {
+			var questions = new Object();
+			for ( var field in object) {
+				if (field.indexOf('Q') == 0) {
+					questions[field] = object[field];
+				}
+			}
+			return questions;
+		} else {
+			var questions = new Array();
+			for ( var index = 0; index < object.length; index++) {
+				var question = object[index];
+				if (question.type == type) {
+					questions.push(question);
+				}
+			}
+			return questions;
+		}
 	};
 });
 filters.filter('showQuestion', [ '$sce', function($sce) {
@@ -53,11 +67,15 @@ filters.filter('showQuestion', [ '$sce', function($sce) {
 			return text;
 		}
 	}
-	return function(text, index, id, checkable, type) {
+	return function(text, index, checkable, type) {
 		if (type == null) {
 			text = text.trim().replace(/\[\[/gi, '').replace(/\]\]/gi, '. ');
 		} else {
-			text = text.trim().replace(/\[\[/gi, '\<input name="' + type + id + '" type=\"' + type + '\"\ /\> ').replace(/\]\]/gi, '. ');
+			var regexp = new RegExp(/(\[\[)(.{1})(\]\])/g);
+			var result = null;
+			while ((result = regexp.exec(text.trim())) != null) {
+				text = text.trim().replace(result[0], '<input name="' + type + index + '" type="' + type + '" value="' + result[2] + '" /> ' + result[2] + '. ');
+			}
 		}
 		if (text.indexOf('<p>') == 0) {
 			return checkHtml('<p>' + (index + 1) + '. ' + text.substring(3), checkable);

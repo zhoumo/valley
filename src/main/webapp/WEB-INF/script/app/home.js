@@ -7,13 +7,13 @@ angular.module('home', [ 'ngRoute', 'controllers', 'directives', 'filters', 'ser
 	}).when('/create-paper', {
 		templateUrl : 'home/create-paper',
 		controller : 'createPaperController'
-	}).when('/answer-paper/:id', {
-		templateUrl : 'home/answer-paper',
-		controller : 'answerPaperController'
 	}).when('/audit-paper', {
 		templateUrl : 'home/audit-paper',
 		controller : 'auditPaperController'
-	}).when('/edit-user-info', {
-		templateUrl : 'home/edit-user-info'
+	}).when('/answer-paper/:id', {
+		templateUrl : 'home/exam',
+		controller : 'examController'
+	}).when('/edit-user', {
+		templateUrl : 'home/edit-user'
 	});
 });

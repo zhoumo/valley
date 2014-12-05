@@ -109,3 +109,27 @@ textarea {
 .footer-container img {
 	cursor: pointer;
 }
+
+.list-title {
+	font-size: 18px;
+	padding: 10px;
+	margin-top: 5px;
+}
+
+.list-button {
+	float: right;
+	margin-top: -90px;
+	margin-right: 100px;
+}
+
+.list-item {
+	border: 1px solid #c9c9c9;
+	height: 150px;
+	background-color: #fcfcfc;
+	margin: 10px;
+}
+
+.list-item>div {
+	padding: 6px;
+	padding-left: 50px;
+}

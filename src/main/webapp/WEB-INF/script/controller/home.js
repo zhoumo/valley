@@ -1,5 +1,5 @@
 var controller = angular.module('controllers', [ 'services', 'filters', 'ngSanitize', 'ngGrid', 'ng.ueditor' ]);
-controller.controller('homeController', [ '$scope', '$rootScope', 'userService', 'jobService', function($scope, $rootScope, userService, jobService) {
+controller.controller('homeController', [ '$scope', '$rootScope', '$location', 'userService', 'jobService', function($scope, $rootScope, $location, userService, jobService) {
 	userService.getAuthority().success(function(res) {
 		$rootScope.user = {
 			loginName : res.loginName,
@@ -20,7 +20,7 @@ controller.controller('homeController', [ '$scope', '$rootScope', 'userService',
 		} else {
 			$rootScope.selectJobId = jobId;
 			$rootScope.selectJobName = $('#jobSelect option:selected').text();
-			location.href = '#/create-paper';
+			$location.path('create-paper');
 		}
 	};
 	$scope.selectedJobs = null;
@@ -47,10 +47,10 @@ controller.controller('homeController', [ '$scope', '$rootScope', 'userService',
 		$scope.applyType = type;
 	};
 } ]);
-controller.controller('createPaperController', [ '$scope', '$rootScope', function($scope, $rootScope) {
+controller.controller('createPaperController', [ '$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
 	if ($rootScope.selectJobId == null) {
-		var index = location.href.indexOf('#/');
-		location.href = location.href.substring(0, index);
+		var index = $location.path().indexOf('#/');
+		$location.path($location.path().substring(0, index));
 	}
 	$scope.singleSelections = new Object();
 	$scope.multipleSelections = new Object();
@@ -140,89 +140,55 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', functio
 		}
 	};
 } ]);
-controller.controller('answerPaperController', [ '$scope', '$routeParams', 'paperService', function($scope, $routeParams, paperService) {
+controller.controller('examController', [ '$scope', '$routeParams', '$interval', 'paperService', function($scope, $routeParams, $interval, paperService) {
 	paperService.getPaper($routeParams.id).success(function(res) {
-		$scope.paperName = res.name;
-		$scope.updateTime = res.updateTime;
-		var singleSelections = new Array();
-		var multipleSelections = new Array();
-		var essayQuestions = new Array();
-		for ( var index = 0; index < res.questions.length; index++) {
-			var question = res.questions[index];
-			if (question.type == 0) {
-				singleSelections.push(question);
-			} else if (question.type == 1) {
-				multipleSelections.push(question);
-			} else if (question.type == 2) {
-				essayQuestions.push(question);
-			}
-		}
-		$scope.singleSelections = singleSelections;
-		$scope.multipleSelections = multipleSelections;
-		$scope.essayQuestions = essayQuestions;
+		$scope.paper = res;
+		$interval(function() {
+			$scope.paper.time = $scope.paper.time - 1;
+		}, 1000);
+		paperService.timer($routeParams.id).success(function(res) {
+			$scope.paper.time = res;
+		});
 	});
+	$scope.submitPaper = function() {
+		$('[type=radio]:checked').each(function() {
+			$('[name^=' + $(this).attr('name') + '_]').val($(this).val());
+		});
+		var anwsers = new Object();
+		$('[type=checkbox]:checked').each(function() {
+			var name = $(this).attr('name');
+			if (!anwsers[name]) {
+				var array = new Array();
+				array.push($(this).val());
+				anwsers[name] = array;
+			} else {
+				anwsers[name].push($(this).val());
+			}
+		});
+		for ( var name in anwsers) {
+			$('[name^=' + name + '_]').val(anwsers[name]);
+		}
+	};
 } ]);
 controller.controller('auditPaperController', [ '$scope', 'paperService', function($scope, paperService) {
 } ]);
-controller.controller('paperListController', [ '$scope', 'paperService', function($scope, paperService) {
-	var href = window.location.href;
-	var type = href.substring(href.indexOf('?') + 1);
-	var options = '';
-	if (type == 'all') {
-		options = '<div style="margin:5px"><a href="#/answer-paper/{{COL_FIELD}}">开始答题</a></div>';
-	}
-	$scope.paperList = [];
-	$scope.totalServerItems = 0;
-	$scope.pagingOptions = {
-		pageSizes : [ 15 ],
-		pageSize : 15,
-		currentPage : 1
-	};
-	$scope.gridOptions = {
-		data : 'paperList',
-		multiSelect : false,
-		enablePaging : true,
-		showFooter : true,
-		i18n : "zh-cn",
-		totalServerItems : 'totalServerItems',
-		pagingOptions : $scope.pagingOptions,
-		columnDefs : [ {
-			field : 'id',
-			displayName : 'ID',
-			width : 80
-		}, {
-			field : 'name',
-			displayName : '试卷名称',
-			width : 250
-		}, {
-			field : 'job.name',
-			displayName : '职位',
-			width : 200
-		}, {
-			field : 'author.realName',
-			displayName : '出题人',
-			width : 100
-		}, {
-			field : 'updateTime',
-			displayName : '更新时间',
-			width : 150,
-			cellTemplate : '<div style="margin:5px">{{COL_FIELD|date:"yyyy-MM-dd hh:mm:ss"}}</div>'
-		}, {
-			field : 'id',
-			displayName : '操作',
-			cellTemplate : options
-		} ]
-	};
-	$scope.paging = function() {
-		paperService.getPaperList(type, $scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize).success(function(res) {
-			$scope.paperList = res.result;
-			$scope.totalServerItems = res.totalCount;
-		});
-	};
-	$scope.paging();
-	$scope.$watch('pagingOptions', function(newVal, oldVal) {
-		if (newVal !== oldVal) {
-			$scope.paging();
+controller.controller('paperListController', [ '$scope', '$location', 'paperService', function($scope, $location, paperService) {
+	$scope.type = $location.search().type;
+	$scope.startAnswer = function(id) {
+		if (confirm("确定开始答题吗?")) {
+			paperService.startExam(id).success(function(res) {
+				if (res) {
+					$location.path('answer-paper/' + id);
+				} else {
+					alert('考试未能成功开始！');
+				}
+			});
 		}
-	}, true);
+	};
+	$scope.continueAnswer = function(id) {
+		$location.path('answer-paper/' + id);
+	};
+	paperService.getPaperList($scope.type, 1, 10).success(function(res) {
+		$scope.paperList = res.result;
+	});
 } ]);

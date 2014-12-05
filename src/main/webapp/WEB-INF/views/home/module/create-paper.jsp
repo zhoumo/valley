@@ -91,7 +91,7 @@
 		</div>
 		<div ng-repeat="(id, text) in singleSelections|getQuestions">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
-				<div ng-bind-html="text|showQuestion:$index:id"></div>
+				<div ng-bind-html="text|showQuestion:$index"></div>
 				<div ng-bind-html="singleSelections|showAnswer:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#singleSelectionModal" ng-click="editQuestion('single',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
@@ -104,7 +104,7 @@
 		</div>
 		<div ng-repeat="(id, text) in multipleSelections|getQuestions">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
-				<div ng-bind-html="text|showQuestion:$index:id"></div>
+				<div ng-bind-html="text|showQuestion:$index"></div>
 				<div ng-bind-html="multipleSelections|showAnswer:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#multipleSelectionModal" ng-click="editQuestion('multiple',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
@@ -117,7 +117,7 @@
 		</div>
 		<div ng-repeat="(id, text) in essayQuestions|getQuestions">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
-				<div ng-bind-html="text|showQuestion:$index:id"></div>
+				<div ng-bind-html="text|showQuestion:$index"></div>
 				<div ng-bind-html="essayQuestions|showAnswer:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#essayQuestionModal" ng-click="editQuestion('essay',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>

@@ -1,9 +1,9 @@
 var controller = angular.module('controllers', [ 'services', 'filters', 'ngGrid' ]);
-controller.controller('adminController', [ '$scope', '$rootScope', 'userService', function($scope, $rootScope, userService) {
-	$scope.actived = location.search.replace('?', '');
+controller.controller('adminController', [ '$scope', '$rootScope', '$location', 'userService', function($scope, $rootScope, $location, userService) {
+	$scope.actived = $location.search().active;
 	$scope.activing = function(active) {
 		$scope.actived = active;
-		window.location.href = '?' + active;
+		$location.search('active=' + active);
 	};
 	userService.getAuthority().success(function(res) {
 		$rootScope.user = {
@@ -30,7 +30,7 @@ controller.controller('jobController', [ '$scope', 'jobService', function($scope
 		$scope.$apply(function(scope) {
 			scope.jobId = node.id;
 			scope.jobName = node.text;
-			$scope.jobParent = null;
+			scope.jobParent = null;
 			for ( var i = 0; i < scope.jobList.length; i++) {
 				if (scope.jobList[i].id == node.parent) {
 					$scope.jobParent = scope.jobList[i];
@@ -39,7 +39,9 @@ controller.controller('jobController', [ '$scope', 'jobService', function($scope
 		});
 	});
 	$scope.deleteJob = function() {
-		location.href = 'deleteJob.do?id=' + $scope.jobId;
+		if (window.confirm('确定要删除' + $scope.jobName + '吗？')) {
+			location.href = 'deleteJob.do?id=' + $scope.jobId;
+		}
 	};
 	$scope.clearJob = function() {
 		$scope.jobId = null;

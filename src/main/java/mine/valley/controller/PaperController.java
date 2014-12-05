@@ -10,6 +10,7 @@ import mine.valley.entity.Paper;
 import mine.valley.entity.Question;
 import mine.valley.entity.User;
 import mine.valley.model.Page;
+import mine.valley.service.ExamService;
 import mine.valley.service.JobService;
 import mine.valley.service.PaperService;
 
@@ -23,6 +24,9 @@ public class PaperController extends BaseController {
 
 	@Autowired
 	private PaperService paperService;
+
+	@Autowired
+	private ExamService examService;
 
 	@Autowired
 	private JobService jobService;
@@ -51,5 +55,38 @@ public class PaperController extends BaseController {
 	@ResponseBody
 	public Paper getPaperList(Long id) {
 		return paperService.getPaper(id);
+	}
+
+	@RequestMapping("/submitPaper.do")
+	public String submitPaper(HttpServletRequest request) {
+		for (Object key : request.getParameterMap().keySet()) {
+			if (!key.toString().contains("_")) {
+				continue;
+			}
+			String questionId = key.toString().split("_")[1];
+			System.out.println(questionId + "-" + request.getParameter(key.toString()));
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping("/startExam.do")
+	@ResponseBody
+	public boolean startExam(Long paperId, HttpServletRequest request) {
+		try {
+			User user = (User) request.getSession().getAttribute(super.getUserName());
+			Paper paper = paperService.getPaper(paperId);
+			examService.startExam(paper, user);
+			return true;
+		} catch (Exception e) {
+			logger.error("start exam error!", e);
+			return false;
+		}
+	}
+
+	@RequestMapping("/timer.do")
+	@ResponseBody
+	public int timer(Long paperId, HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute(super.getUserName());
+		return examService.getTime(paperId + "-" + user.getId());
 	}
 }

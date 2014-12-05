@@ -3,7 +3,7 @@
 	<p>欢迎来到秀才谷个人中心</p>
 	<panel title="我的笔试题" type="my-exam" color="#01caa0">
 		<div class="panel-top-button">
-			<a href="#/paper-list?all">全部试题</a>
+			<a href="#/paper-list?type=mine">全部试题</a>
 		</div>
 		<div class="panel-content"></div>
 	</panel>
@@ -25,7 +25,7 @@
 	</panel>
 	<panel title="我要出题" type="produce" color="#6f8ba9">
 		<div class="panel-top-button">
-			<a href="#/paper-list?mine">我的题库</a>
+			<a href="#/paper-list?type=produce">我的题库</a>
 		</div>
 		<div class="panel-content">
 			<select id="jobSelect" class="form-control" style="width: 200px" data-ng-options="job.name for job in jobList|thirdLevelJob track by job.id" data-ng-model="job"></select>
@@ -34,12 +34,12 @@
 	</panel>
 	<panel title="我要审题" type="audit" color="#6f8ba9">
 	<div class="panel-top-button">
-		<a href="#/paper-list?audit">已审题库</a>
+		<a href="#/paper-list?type=audit">已审题库</a>
 	</div>
 	</panel>
 	<panel title="账户管理" type="account" color="#15467a">
 	<div class="panel-content">
-		<a href="#/edit-user-info">修改个人资料</a>
+		<a href="#/edit-user">修改个人资料</a>
 	</div>
 	</panel>
 	<div class="modal fade" id="applyModal" role="dialog" aria-hidden="true" data-backdrop="static">

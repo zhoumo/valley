@@ -45,13 +45,13 @@ public class UserController extends BaseController {
 	@RequestMapping("/saveUser.do")
 	public String saveUser(User user) {
 		userService.saveOrUpdate(user);
-		return "redirect:/?user";
+		return "redirect:/#?active=user";
 	}
 
 	@RequestMapping("/deleteUser.do")
 	public String deleteUser(Long id) {
 		userService.delete(id);
-		return "redirect:/?user";
+		return "redirect:/#?active=user";
 	}
 
 	@RequestMapping("/getUserList.do")

@@ -44,6 +44,18 @@ services.service('paperService', [ '$http', function($http) {
 				method : 'post',
 				url : 'getPaper.do?id=' + id
 			});
+		},
+		startExam : function(id) {
+			return $http({
+				method : 'post',
+				url : 'startExam.do?paperId=' + id
+			});
+		},
+		timer : function(id) {
+			return $http({
+				method : 'post',
+				url : 'timer.do?paperId=' + id
+			});
 		}
 	};
 } ]);
