@@ -2,7 +2,7 @@
 	"use strict";
 	(function() {
 		var NGUeditor;
-		NGUeditor = angular.module("ng.ueditor", []);
+		NGUeditor = angular.module("ngUeditor", []);
 		NGUeditor.directive("ueditor", [ function() {
 			return {
 				restrict : "C",

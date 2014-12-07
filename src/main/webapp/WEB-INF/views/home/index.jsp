@@ -15,12 +15,12 @@
 	</panel>
 	<panel title="申请成为题库生产者，贡献你的智慧！" type="apply-producer" color="#00aeef">
 		<div class="panel-content">
-			<a href="#" data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('生产者')">现在申请</a>
+			<a data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('生产者')">现在申请</a>
 		</div>
 	</panel>
 	<panel title="申请成为题库审核人，为题库把关！" type="apply-auditor" color="#00aeef">
 		<div class="panel-content">
-			<a href="#" data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('审核者')">现在申请</a>
+			<a data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('审核者')">现在申请</a>
 		</div>
 	</panel>
 	<panel title="我要出题" type="produce" color="#6f8ba9">

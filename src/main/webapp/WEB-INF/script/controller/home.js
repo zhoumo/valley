@@ -1,4 +1,4 @@
-var controller = angular.module('controllers', [ 'services', 'filters', 'ngSanitize', 'ngGrid', 'ng.ueditor' ]);
+var controller = angular.module('controllers', [ 'ngGrid', 'ngSanitize', 'ngUeditor', 'services', 'filters' ]);
 controller.controller('homeController', [ '$scope', '$rootScope', '$location', 'userService', 'jobService', function($scope, $rootScope, $location, userService, jobService) {
 	userService.getAuthority().success(function(res) {
 		$rootScope.user = {
@@ -178,7 +178,7 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 		if (confirm("确定开始答题吗?")) {
 			paperService.startExam(id).success(function(res) {
 				if (res) {
-					$location.path('answer-paper/' + id);
+					window.open('#/answer-paper/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
 				} else {
 					alert('考试未能成功开始！');
 				}
@@ -186,7 +186,7 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 		}
 	};
 	$scope.continueAnswer = function(id) {
-		$location.path('answer-paper/' + id);
+		window.open('#/answer-paper/' + id);
 	};
 	paperService.getPaperList($scope.type, 1, 10).success(function(res) {
 		$scope.paperList = res.result;

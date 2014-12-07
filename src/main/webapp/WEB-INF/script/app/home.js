@@ -1,4 +1,4 @@
-angular.module('home', [ 'ngRoute', 'controllers', 'directives', 'filters', 'services' ]).config(function($routeProvider) {
+angular.module('home', [ 'ngAnimate', 'ngRoute', 'controllers', 'directives' ]).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'home/index'
 	}).when('/paper-list', {

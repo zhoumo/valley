@@ -1,4 +1,4 @@
-var controller = angular.module('controllers', [ 'services', 'filters', 'ngGrid' ]);
+var controller = angular.module('controllers', [ 'ngGrid', 'services', 'filters' ]);
 controller.controller('adminController', [ '$scope', '$rootScope', '$location', 'userService', function($scope, $rootScope, $location, userService) {
 	$scope.actived = $location.search().active;
 	$scope.activing = function(active) {

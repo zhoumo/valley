@@ -8,10 +8,12 @@
 <script src="plugin/angular/angular.route.js"></script>
 <script src="plugin/angular/angular.sanitize.js"></script>
 <script src="plugin/angular/angular.ueditor.js"></script>
+<script src="plugin/angular/ng-animate/ng-animate.js"></script>
 <script src="plugin/angular/ng-grid/ng-grid.js"></script>
 <script src="script/directives.js"></script>
 <script src="script/filters.js"></script>
 <script src="script/services.js"></script>
 <link href="plugin/bootstrap/bootstrap.css" type="text/css" rel="stylesheet" media="screen" />
+<link href="plugin/angular/ng-animate/ng-animate.css" type="text/css" rel="stylesheet" media="screen" />
 <link href="plugin/angular/ng-grid/ng-grid.css" type="text/css" rel="stylesheet" media="screen" />
 <link href="style/common.css" type="text/css" rel="stylesheet" media="screen" />

@@ -1,4 +1,4 @@
-var controller = angular.module('controllers', [ 'services', 'filters' ]);
+var controller = angular.module('controllers', []);
 controller.controller('loginController', function($scope) {
 	var blackList = [ 'create-paper', 'answer-paper', 'paper-list' ];
 	var arr = location.href.split('#/');

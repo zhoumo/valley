@@ -13,10 +13,10 @@
 			</div>
 		</div>
 		<div class="header-action" ng-if="!user">
-			<a href="login.jsp#/register">注册</a>
-			<a href="login.jsp">登录</a>
-			<a href="login.jsp#/about">关于我们</a>
-			<a href="login.jsp#/cooperate">商务合作</a>
+			<a href="#/register">注册</a>
+			<a href="#">登录</a>
+			<a href="#/about">关于我们</a>
+			<a href="#/cooperate">商务合作</a>
 		</div>
 		<div class="header-action" ng-if="user.user">
 			<a>意见反馈</a>
