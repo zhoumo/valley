@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import mine.valley.base.BaseController;
 import mine.valley.constant.PaperStatus;
@@ -49,8 +50,16 @@ public class PaperController extends BaseController {
 
 	@RequestMapping("/getPaperList.do")
 	@ResponseBody
-	public Page<Paper> getPaperList(String type, Page<Paper> page) {
-		return paperService.getAllPaper(page);
+	public Page<Paper> getPaperList(String type, Page<Paper> page, HttpSession session) {
+		User user = (User) session.getAttribute(super.getUserName());
+		if ("create".equals(type)) {
+			page = paperService.getPaperByAuthor(page, user.getId());
+		} else if ("audit".equals(type)) {
+			page = paperService.getNoAuditPaper(page, user.getId());
+		} else if ("exam".equals(type)) {
+			page = paperService.getExamPaper(page, user.getId());
+		}
+		return page;
 	}
 
 	@RequestMapping("/getPaper.do")

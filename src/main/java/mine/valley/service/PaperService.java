@@ -1,10 +1,16 @@
 package mine.valley.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import mine.valley.base.BaseService;
+import mine.valley.constant.ApplyType;
+import mine.valley.constant.ExamStatus;
+import mine.valley.constant.PaperStatus;
 import mine.valley.constant.QuestionType;
+import mine.valley.entity.Exam;
 import mine.valley.entity.Paper;
 import mine.valley.entity.Question;
 import mine.valley.model.Page;
@@ -51,8 +57,33 @@ public class PaperService extends BaseService {
 		baseDao.save(paper);
 	}
 
-	public Page<Paper> getAllPaper(Page<Paper> page) {
-		return baseDao.findByPage("FROM Paper ORDER BY JOB", new Object[] {}, page);
+	public Page<Paper> getPaperByAuthor(Page<Paper> page, Long userId) {
+		return baseDao.findByPage("FROM Paper WHERE author.id = ? ORDER BY status, job", new Object[] { userId }, page);
+	}
+
+	public Page<Paper> getNoAuditPaper(Page<Paper> page, Long userId) {
+		String search = "FROM Paper WHERE status = ? AND job.id IN (SELECT job.id FROM Apply WHERE user.id = ? AND type = ? AND approved = TRUE) ORDER BY status, job";
+		return baseDao.findByPage(search, new Object[] { PaperStatus.AUDIT_NO.getValue(), userId, ApplyType.AUDITOR.getValue() }, page);
+	}
+
+	public Page<Paper> getExamPaper(Page<Paper> page, Long userId) {
+		List<Exam> examList = baseDao.find("FROM Exam WHERE user.id = ?", new Object[] { userId });
+		Map<Long, Short> statusMap = new HashMap<Long, Short>();
+		for (Exam exam : examList) {
+			statusMap.put(exam.getPaper().getId(), exam.getStatus());
+		}
+		page = baseDao.findByPage("FROM Paper WHERE status = ? ORDER BY job", new Object[] { PaperStatus.AUDIT_YES.getValue() }, page);
+		List<Paper> finishedPaper = new ArrayList<Paper>();
+		for (Paper paper : page.getResult()) {
+			Short status = statusMap.get(paper.getId());
+			if (status != null && status.equals(ExamStatus.END.getValue())) {
+				finishedPaper.add(paper);
+			} else {
+				paper.setExamStatus(status);
+			}
+		}
+		page.getResult().removeAll(finishedPaper);
+		return page;
 	}
 
 	public Paper getPaper(Long id) {

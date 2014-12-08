@@ -24,6 +24,9 @@ public class Apply extends BaseEntity {
 	@Column(name = "TYPE", nullable = false)
 	private Short type;
 
+	@Column(name = "APPROVED", nullable = false)
+	private Boolean approved = false;
+
 	@Column(name = "RESUME", nullable = false, length = 65535)
 	private String resume;
 

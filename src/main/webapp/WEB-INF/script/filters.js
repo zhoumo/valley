@@ -94,6 +94,7 @@ filters.filter('showAnswer', function() {
 });
 filters.filter('thirdLevelJob', function() {
 	return function(jobList) {
+		jobList = jobList || [];
 		var thirdLevelJobList = new Array();
 		for ( var index = 0; index < jobList.length; index++) {
 			if (jobList[index].level + 1 == 3) {

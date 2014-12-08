@@ -21,8 +21,8 @@
 			<div>最后更新时间：{{paper.updateTime|date:"yyyy-MM-dd hh:mm:ss"}}</div>
 			<div>附加消息：</div>
 			<div class="list-button">
-				<button type="button" class="btn btn-primary" ng-click="startAnswer(paper.id)" ng-show="type=='mine'">开始答题</button>
-				<button type="button" class="btn btn-primary" ng-click="continueAnswer(paper.id)" ng-show="type=='mine'">继续答题</button>
+				<button type="button" class="btn btn-primary" ng-click="startAnswer(paper.id)" ng-show="type=='exam' && paper.examStatus==null">开始答题</button>
+				<button type="button" class="btn btn-primary" ng-click="continueAnswer(paper.id)" ng-show="type=='exam' && paper.examStatus==0">继续答题</button>
 				<button type="button" class="btn btn-primary" ng-click="auditPaper(paper.id)" ng-show="type=='audit'">审核试卷</button>
 				<button type="button" class="btn btn-primary" ng-click="editPaper(paper.id)" ng-show="type=='create'">编辑试卷</button>
 				<button type="button" class="btn btn-primary" ng-click="submitPaper(paper.id)" ng-show="type=='create'">提交试卷</button>

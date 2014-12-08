@@ -146,6 +146,10 @@ controller.controller('examController', [ '$scope', '$routeParams', '$interval',
 		$interval(function() {
 			if ($scope.paper.time != 0) {
 				$scope.paper.time = $scope.paper.time - 1;
+			} else {
+				alert("答题时间到！");
+				window.onbeforeunload = null;
+				window.close();
 			}
 		}, 1000);
 		paperService.timer($routeParams.id).success(function(res) {
@@ -181,6 +185,7 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 			paperService.startExam(id).success(function(res) {
 				if (res) {
 					window.open('#/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+					location.reload();
 				} else {
 					alert('考试未能成功开始！');
 				}
@@ -188,7 +193,7 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 		}
 	};
 	$scope.continueAnswer = function(id) {
-		window.open('#/exam/' + id);
+		window.open('#/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
 	};
 	paperService.getPaperList($scope.type, 1, 10).success(function(res) {
 		$scope.paperList = res.result;

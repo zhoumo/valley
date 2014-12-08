@@ -3,7 +3,7 @@
 	<p>欢迎来到秀才谷个人中心</p>
 	<panel title="我的笔试题" type="exam" color="#01caa0">
 		<div class="panel-top-button">
-			<a href="#/papers?type=mine">全部试题</a>
+			<a href="#/papers?type=exam">全部试题</a>
 		</div>
 		<div class="panel-content"></div>
 	</panel>

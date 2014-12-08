@@ -47,6 +47,6 @@ public class ApplyService extends BaseService {
 	}
 
 	public boolean hasApplied(Short type) {
-		return baseDao.find("FROM Apply WHERE TYPE = ?", type).size() != 0;
+		return baseDao.find("FROM Apply WHERE type = ?", type).size() != 0;
 	}
 }
