@@ -1,6 +1,7 @@
 package mine.valley.service;
 
 import mine.valley.base.BaseService;
+import mine.valley.constant.ApplyType;
 import mine.valley.entity.Apply;
 import mine.valley.entity.Job;
 import mine.valley.entity.User;
@@ -37,12 +38,12 @@ public class ApplyService extends BaseService {
 		baseDao.executeSQL("DELETE FROM APPLY WHERE USER_ID = " + uesrId + " AND TYPE = " + type);
 	}
 
-	public void applyProducer(String jobIds, User user, String resume) {
-		apply(jobIds, user, resume, Apply.Type.PRODUCER.getCode());
+	public void applyCreator(String jobIds, User user, String resume) {
+		apply(jobIds, user, resume, ApplyType.CREATOR.getValue());
 	}
 
 	public void applyAuditor(String jobIds, User user, String resume) {
-		apply(jobIds, user, resume, Apply.Type.AUDITOR.getCode());
+		apply(jobIds, user, resume, ApplyType.AUDITOR.getValue());
 	}
 
 	public boolean hasApplied(Short type) {

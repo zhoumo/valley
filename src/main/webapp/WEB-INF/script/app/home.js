@@ -1,19 +1,19 @@
 angular.module('home', [ 'ngAnimate', 'ngRoute', 'controllers', 'directives' ]).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'home/index'
-	}).when('/paper-list', {
-		templateUrl : 'home/paper-list',
+	}).when('/papers', {
+		templateUrl : 'home/papers',
 		controller : 'paperListController'
-	}).when('/create-paper', {
-		templateUrl : 'home/create-paper',
+	}).when('/create', {
+		templateUrl : 'home/create',
 		controller : 'createPaperController'
-	}).when('/audit-paper', {
-		templateUrl : 'home/audit-paper',
+	}).when('/audit', {
+		templateUrl : 'home/audit',
 		controller : 'auditPaperController'
-	}).when('/answer-paper/:id', {
+	}).when('/exam/:id', {
 		templateUrl : 'home/exam',
 		controller : 'examController'
-	}).when('/edit-user', {
-		templateUrl : 'home/edit-user'
+	}).when('/account', {
+		templateUrl : 'home/account'
 	});
 });

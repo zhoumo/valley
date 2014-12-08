@@ -1,8 +1,10 @@
 package mine.valley.service;
 
-import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import mine.valley.base.BaseService;
+import mine.valley.constant.ExamStatus;
 import mine.valley.entity.Exam;
 import mine.valley.entity.Paper;
 import mine.valley.entity.User;
@@ -15,28 +17,28 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ExamService extends BaseService {
 
-	private HashMap<String, ExamDaemon> daemons = new HashMap<String, ExamDaemon>();
+	private Map<String, ExamDaemon> daemonMap = new ConcurrentHashMap<String, ExamDaemon>();
 
 	public void startExam(Paper paper, User user) {
 		Exam exam = new Exam();
 		exam.setUser(user);
 		exam.setPaper(paper);
 		exam.setCreateTime();
-		exam.setStatus(Exam.START);
+		exam.setStatus(ExamStatus.START.getValue());
 		baseDao.save(exam);
 		ExamDaemon daemon = new ExamDaemon(paper.getTime(), exam, this);
 		daemon.setDaemon(true);
-		daemons.put(paper.getId() + "-" + user.getId(), daemon);
+		daemonMap.put(paper.getId() + "-" + user.getId(), daemon);
 		daemon.start();
 	}
 
 	public void endExam(Exam exam) {
-		exam.setStatus(Exam.END);
+		exam.setStatus(ExamStatus.END.getValue());
 		baseDao.save(exam);
-		daemons.remove(exam.getPaper().getId() + "-" + exam.getUser().getId());
+		daemonMap.remove(exam.getPaper().getId() + "-" + exam.getUser().getId());
 	}
 
 	public int getTime(String id) {
-		return daemons.get(id).getTime();
+		return daemonMap.get(id).getTime();
 	}
 }

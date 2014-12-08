@@ -19,14 +19,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @SuppressWarnings("serial")
 public class User extends BaseEntity {
 
-	public static final short USER_TYPE_ADMIN = 0;
-
-	public static final short USER_TYPE_IT_ENGINEER = 1;
-
-	public static final short USER_TYPE_HR = 2;
-
-	public static final short USER_TYPE_HEADHUNTER = 3;
-
 	@Column(name = "LOGIN_NAME", nullable = false)
 	private String loginName;
 
@@ -44,7 +36,7 @@ public class User extends BaseEntity {
 
 	@JsonIgnore
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+	@JoinTable(name = "ACCESS", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	private List<Role> roles;
 
 	public String getLoginName() {
@@ -93,18 +85,5 @@ public class User extends BaseEntity {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
-	}
-
-	public static String getRoleName(Short type) {
-		switch (type) {
-		case USER_TYPE_IT_ENGINEER:
-			return Role.ROLE_IT_ENGINEER;
-		case USER_TYPE_HR:
-			return Role.ROLE_HR;
-		case USER_TYPE_HEADHUNTER:
-			return Role.ROLE_HEADHUNTER;
-		default:
-			return Role.ROLE_ADMIN;
-		}
 	}
 }

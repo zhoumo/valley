@@ -15,20 +15,17 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @SuppressWarnings("serial")
 public class Question extends BaseEntity {
 
-	public static final Short TYPE_SINGLE_SELECTIONS = 0;
-
-	public static final Short TYPE_MULTIPLE_SELECTIONS = 1;
-
-	public static final Short TYPE_ESSAY_QUESTIONS = 2;
-
 	@Column(name = "QUESTION", nullable = false, length = 65535)
 	private String question;
 
 	@Column(name = "ANSWER", nullable = false, length = 65535)
 	private String answer;
 
-	@Column(name = "LEVEL", nullable = false)
-	private Short level;
+	@Column(name = "DIFFICULTY", nullable = false)
+	private Short difficulty = 0;
+
+	@Column(name = "AUDIT", nullable = false)
+	private Boolean audit = false;
 
 	@Column(name = "TYPE", nullable = false)
 	private Short type;
@@ -54,12 +51,12 @@ public class Question extends BaseEntity {
 		this.answer = answer;
 	}
 
-	public Short getLevel() {
-		return level;
+	public Short getDifficulty() {
+		return difficulty;
 	}
 
-	public void setLevel(Short level) {
-		this.level = level;
+	public void setDifficulty(Short difficulty) {
+		this.difficulty = difficulty;
 	}
 
 	public Short getType() {

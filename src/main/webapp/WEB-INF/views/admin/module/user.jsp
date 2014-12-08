@@ -2,10 +2,10 @@
 <div class="admin-user-panel" ng-controller="userController">
 	<div class="form-group">
 		<select class="form-control">
-			<option value="0" selected="selected">管理员</option>
-			<option value="1">IT从业者</option>
-			<option value="2">HR</option>
-			<option value="3">猎头顾问</option>
+			<option value="1" selected="selected">管理员</option>
+			<option value="2">IT从业者</option>
+			<option value="3">HR</option>
+			<option value="4">猎头顾问</option>
 		</select>
 		<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#userModal">添加用户</button>
 	</div>
@@ -44,10 +44,10 @@
 							<label class="col-sm-2">用户角色</label>
 							<div class="col-sm-6">
 								<select class="form-control" name="type">
-									<option value="0" selected="selected">管理员</option>
-									<option value="1">IT从业者</option>
-									<option value="2">HR</option>
-									<option value="3">猎头顾问</option>
+									<option value="1" selected="selected">管理员</option>
+									<option value="2">IT从业者</option>
+									<option value="3">HR</option>
+									<option value="4">猎头顾问</option>
 								</select>
 							</div>
 						</div>

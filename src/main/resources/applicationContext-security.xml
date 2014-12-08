@@ -18,7 +18,7 @@
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="SELECT U.LOGIN_NAME,U.PASSWORD,U.ENABLED FROM USER U WHERE U.LOGIN_NAME = ?" authorities-by-username-query="SELECT U.LOGIN_NAME,R.NAME AS AUTHORITY FROM USER U,ROLE R,USER_ROLE UR WHERE U.LOGIN_NAME=? AND U.ID=UR.USER_ID AND UR.ROLE_ID=R.ID" />
+			<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="SELECT U.LOGIN_NAME, U.PASSWORD, U.ENABLED FROM USER U WHERE U.LOGIN_NAME = ?" authorities-by-username-query="SELECT U.LOGIN_NAME, R.NAME AS AUTHORITY FROM USER U, ROLE R, ACCESS A WHERE U.LOGIN_NAME = ? AND U.ID = A.USER_ID AND A.ROLE_ID = R.ID" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 	<bean id="authSuccess" class="mine.valley.security.AuthenticationSuccessHandlerImpl" />

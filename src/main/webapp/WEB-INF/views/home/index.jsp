@@ -1,19 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div style="height: 640px" safe-mode="false">
 	<p>欢迎来到秀才谷个人中心</p>
-	<panel title="我的笔试题" type="my-exam" color="#01caa0">
+	<panel title="我的笔试题" type="exam" color="#01caa0">
 		<div class="panel-top-button">
-			<a href="#/paper-list?type=mine">全部试题</a>
+			<a href="#/papers?type=mine">全部试题</a>
 		</div>
 		<div class="panel-content"></div>
 	</panel>
-	<panel title="系统消息" type="system-message" color="#01caa0">
+	<panel title="系统消息" type="message" color="#01caa0">
 		<div class="panel-top-button">
 			<a>全部清除</a>
 		</div>
 		<div class="panel-content"></div>
 	</panel>
-	<panel title="申请成为题库生产者，贡献你的智慧！" type="apply-producer" color="#00aeef">
+	<panel title="申请成为题库生产者，贡献你的智慧！" type="apply-creator" color="#00aeef">
 		<div class="panel-content">
 			<a data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('生产者')">现在申请</a>
 		</div>
@@ -23,9 +23,9 @@
 			<a data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('审核者')">现在申请</a>
 		</div>
 	</panel>
-	<panel title="我要出题" type="produce" color="#6f8ba9">
+	<panel title="我要出题" type="create" color="#6f8ba9">
 		<div class="panel-top-button">
-			<a href="#/paper-list?type=produce">我的题库</a>
+			<a href="#/papers?type=create">我的题库</a>
 		</div>
 		<div class="panel-content">
 			<select id="jobSelect" class="form-control" style="width: 200px" data-ng-options="job.name for job in jobList|thirdLevelJob track by job.id" data-ng-model="job"></select>
@@ -34,12 +34,12 @@
 	</panel>
 	<panel title="我要审题" type="audit" color="#6f8ba9">
 	<div class="panel-top-button">
-		<a href="#/paper-list?type=audit">已审题库</a>
+		<a href="#/papers?type=audit">已审题库</a>
 	</div>
 	</panel>
 	<panel title="账户管理" type="account" color="#15467a">
 	<div class="panel-content">
-		<a href="#/edit-user">修改个人资料</a>
+		<a href="#/account">修改个人资料</a>
 	</div>
 	</panel>
 	<div class="modal fade" id="applyModal" role="dialog" aria-hidden="true" data-backdrop="static">
@@ -51,7 +51,7 @@
 					</button>
 					<h4 class="modal-title">题库{{applyType}}申请</h4>
 				</div>
-				<form name="applyForm" class="form-horizontal" style="width: 778px" action="apply.do" method="post" novalidate ng-show="applyType=='生产者' && !user.hasAppliedProducer || applyType=='审核者' && !user.hasAppliedAuditor">
+				<form name="applyForm" class="form-horizontal" style="width: 778px" action="apply.do" method="post" novalidate ng-show="applyType=='生产者' && !user.hasAppliedCreator || applyType=='审核者' && !user.hasAppliedAuditor">
 					<input name="selectedJobs" type="hidden" value="{{selectedJobs}}" />
 					<input name="applyType" type="hidden" value="{{applyType}}" />
 					<div class="modal-body">
@@ -88,7 +88,7 @@
 						<button type="submit" class="btn btn-primary" ng-disabled="!resume || !selectedJobs">发送请求</button>
 					</div>
 				</form>
-				<div class="modal-body" ng-show="applyType=='生产者' && user.hasAppliedProducer || applyType=='审核者' && user.hasAppliedAuditor">
+				<div class="modal-body" ng-show="applyType=='生产者' && user.hasAppliedCreator || applyType=='审核者' && user.hasAppliedAuditor">
 					<p>申请成为题库{{applyType}}，为题库把关！</p>
 					<p>
 						<b>资格要求：</b>

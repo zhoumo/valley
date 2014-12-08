@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import mine.valley.base.BaseController;
+import mine.valley.constant.PaperStatus;
 import mine.valley.entity.Paper;
 import mine.valley.entity.Question;
 import mine.valley.entity.User;
@@ -40,6 +41,7 @@ public class PaperController extends BaseController {
 		paper.setQuestions(questionList);
 		paper.setAuthor((User) request.getSession().getAttribute(super.getUserName()));
 		paper.setJob(jobService.getJob(paper.getSelectJobId()));
+		paper.setStatus(PaperStatus.CREATE.getValue());
 		paper.setCreateTime();
 		paperService.savePaper(paper);
 		return "redirect:/";

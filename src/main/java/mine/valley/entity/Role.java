@@ -18,16 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @SuppressWarnings("serial")
 public class Role extends BaseEntity {
 
-	public static final String ROLE_USER = "ROLE_USER";
-
-	public static final String ROLE_ADMIN = "ROLE_ADMIN";
-
-	public static final String ROLE_IT_ENGINEER = "ROLE_IT_ENGINEER";
-
-	public static final String ROLE_HR = "ROLE_HR";
-
-	public static final String ROLE_HEADHUNTER = "ROLE_HEADHUNTER";
-
 	@Column(name = "NAME", nullable = false)
 	private String name;
 

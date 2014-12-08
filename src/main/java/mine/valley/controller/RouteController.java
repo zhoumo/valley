@@ -3,6 +3,7 @@ package mine.valley.controller;
 import javax.servlet.http.HttpSession;
 
 import mine.valley.base.BaseController;
+import mine.valley.constant.RoleType;
 import mine.valley.entity.User;
 
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ public class RouteController extends BaseController {
 	@RequestMapping("/")
 	public String index(HttpSession session) {
 		User user = (User) session.getAttribute(super.getUserName());
-		if (user.getType().equals(User.USER_TYPE_ADMIN)) {
+		if (user.getType().equals(RoleType.ADMIN.getValue())) {
 			return "admin";
 		} else {
 			return "home";
@@ -31,14 +32,14 @@ public class RouteController extends BaseController {
 		return "home/index";
 	}
 
-	@RequestMapping("home/create-paper")
-	public String homeCreatePaper() {
-		return "home/module/create-paper";
+	@RequestMapping("home/create")
+	public String homeCreate() {
+		return "home/module/create";
 	}
 
-	@RequestMapping("home/audit-paper")
-	public String homeAuditPaper() {
-		return "home/module/audit-paper";
+	@RequestMapping("home/audit")
+	public String homeAudit() {
+		return "home/module/audit";
 	}
 
 	@RequestMapping("home/exam")
@@ -46,13 +47,13 @@ public class RouteController extends BaseController {
 		return "home/module/exam";
 	}
 
-	@RequestMapping("home/paper-list")
-	public String homePaperList() {
-		return "home/module/paper-list";
+	@RequestMapping("home/papers")
+	public String homePapers() {
+		return "home/module/papers";
 	}
 
-	@RequestMapping("home/edit-user")
-	public String homeEditUser() {
-		return "home/module/edit-user";
+	@RequestMapping("home/account")
+	public String homeAccount() {
+		return "home/module/account";
 	}
 }

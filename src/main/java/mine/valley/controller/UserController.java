@@ -3,7 +3,7 @@ package mine.valley.controller;
 import javax.servlet.http.HttpSession;
 
 import mine.valley.base.BaseController;
-import mine.valley.entity.Apply;
+import mine.valley.constant.ApplyType;
 import mine.valley.entity.User;
 import mine.valley.model.Authority;
 import mine.valley.model.Page;
@@ -31,8 +31,8 @@ public class UserController extends BaseController {
 		Authority authority = new Authority();
 		authority.setLoginName(user.getLoginName());
 		authority.setRealName(user.getRealName());
-		authority.setHasAppliedProducer(applyService.hasApplied(Apply.Type.PRODUCER.getCode()));
-		authority.setHasAppliedAuditor(applyService.hasApplied(Apply.Type.AUDITOR.getCode()));
+		authority.setHasAppliedCreator(applyService.hasApplied(ApplyType.CREATOR.getValue()));
+		authority.setHasAppliedAuditor(applyService.hasApplied(ApplyType.AUDITOR.getValue()));
 		return authority;
 	}
 

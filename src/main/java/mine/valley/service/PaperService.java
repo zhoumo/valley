@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mine.valley.base.BaseService;
+import mine.valley.constant.QuestionType;
 import mine.valley.entity.Paper;
 import mine.valley.entity.Question;
 import mine.valley.model.Page;
@@ -17,15 +18,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class PaperService extends BaseService {
 
 	public List<Question> createSingleSelectionList(String text, Paper paper) {
-		return createQuestionList(text, paper, Question.TYPE_SINGLE_SELECTIONS);
+		return createQuestionList(text, paper, QuestionType.SINGLE_SELECTIONS.getValue());
 	}
 
 	public List<Question> createMultipleSelectionList(String text, Paper paper) {
-		return createQuestionList(text, paper, Question.TYPE_MULTIPLE_SELECTIONS);
+		return createQuestionList(text, paper, QuestionType.MULTIPLE_SELECTIONS.getValue());
 	}
 
 	public List<Question> createEssayQuestionList(String text, Paper paper) {
-		return createQuestionList(text, paper, Question.TYPE_ESSAY_QUESTIONS);
+		return createQuestionList(text, paper, QuestionType.ESSAY_QUESTIONS.getValue());
 	}
 
 	public List<Question> createQuestionList(String text, Paper paper, Short type) {
@@ -38,7 +39,6 @@ public class PaperService extends BaseService {
 				question.setQuestion(json.getString("Q" + key));
 				question.setAnswer(json.getString("A" + key));
 				question.setType(type);
-				question.setLevel((short) 0);
 				question.setPaper(paper);
 				question.setCreateTime();
 				questionList.add(question);

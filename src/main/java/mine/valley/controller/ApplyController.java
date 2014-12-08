@@ -3,7 +3,7 @@ package mine.valley.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import mine.valley.base.BaseController;
-import mine.valley.entity.Apply;
+import mine.valley.constant.ApplyType;
 import mine.valley.entity.User;
 import mine.valley.service.ApplyService;
 
@@ -27,8 +27,8 @@ public class ApplyController extends BaseController {
 			jobIds += job.getString("id") + ",";
 		}
 		User user = (User) request.getSession().getAttribute(super.getUserName());
-		if (Apply.Type.PRODUCER.getName().equals(applyType)) {
-			applyService.applyProducer(jobIds, user, resume);
+		if (ApplyType.CREATOR.getName().equals(applyType)) {
+			applyService.applyCreator(jobIds, user, resume);
 		} else {
 			applyService.applyAuditor(jobIds, user, resume);
 		}

@@ -13,10 +13,6 @@ import mine.valley.base.BaseEntity;
 @SuppressWarnings("serial")
 public class Exam extends BaseEntity {
 
-	public static final Short START = 1;
-
-	public static final Short END = 2;
-
 	@ManyToOne
 	@JoinColumn(name = "USER")
 	private User user;
@@ -26,7 +22,7 @@ public class Exam extends BaseEntity {
 	private Paper paper;
 
 	@Column(name = "STATUS", nullable = false)
-	private Short status = 0;
+	private Short status;
 
 	public User getUser() {
 		return user;

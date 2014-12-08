@@ -26,10 +26,10 @@ public class Paper extends BaseEntity {
 	private String name;
 
 	@Column(name = "TIME", nullable = false)
-	private Integer time;
+	private Integer time = 90;
 
 	@Column(name = "STATUS", nullable = false, columnDefinition = "TINYINT")
-	private Short status = 0;
+	private Short status;
 
 	@ManyToOne
 	@JoinColumn(name = "AUTHOR")

@@ -4,7 +4,7 @@ controller.controller('homeController', [ '$scope', '$rootScope', '$location', '
 		$rootScope.user = {
 			loginName : res.loginName,
 			realName : res.realName,
-			hasAppliedProducer : res.hasAppliedProducer,
+			hasAppliedCreator : res.hasAppliedCreator,
 			hasAppliedAuditor : res.hasAppliedAuditor,
 			user : true
 		};
@@ -144,7 +144,9 @@ controller.controller('examController', [ '$scope', '$routeParams', '$interval',
 	paperService.getPaper($routeParams.id).success(function(res) {
 		$scope.paper = res;
 		$interval(function() {
-			$scope.paper.time = $scope.paper.time - 1;
+			if ($scope.paper.time != 0) {
+				$scope.paper.time = $scope.paper.time - 1;
+			}
 		}, 1000);
 		paperService.timer($routeParams.id).success(function(res) {
 			$scope.paper.time = res;
@@ -178,7 +180,7 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 		if (confirm("确定开始答题吗?")) {
 			paperService.startExam(id).success(function(res) {
 				if (res) {
-					window.open('#/answer-paper/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+					window.open('#/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
 				} else {
 					alert('考试未能成功开始！');
 				}
@@ -186,7 +188,7 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 		}
 	};
 	$scope.continueAnswer = function(id) {
-		window.open('#/answer-paper/' + id);
+		window.open('#/exam/' + id);
 	};
 	paperService.getPaperList($scope.type, 1, 10).success(function(res) {
 		$scope.paperList = res.result;
