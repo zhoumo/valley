@@ -61,9 +61,19 @@
 			</div>
 		</div>
 	</div>
+	<ol class="breadcrumb">
+		<li>
+			<a href="#" onclick="window.onbeforeunload = null">首页</a>
+		</li>
+		<li>
+			<a href="#/paper/list?type=create" onclick="window.onbeforeunload = null">我的笔试题</a>
+		</li>
+		<li class="active">创建试卷</li>
+	</ol>
 	<div class="paper-title">
 		新增笔试题：
 		<label ng-bind="selectJobName"></label>
+		<input name="id" value="{{id}}" type="hidden" />
 	</div>
 	<hr class="paper-line" />
 	<div class="paper-title">
@@ -74,7 +84,7 @@
 		<button class="btn btn-primary" data-toggle="modal" data-target="#singleSelectionModal">添加单选题</button>
 		<button class="btn btn-primary" data-toggle="modal" data-target="#multipleSelectionModal">添加多选题</button>
 		<button class="btn btn-primary" data-toggle="modal" data-target="#essayQuestionModal">添加问答题</button>
-		<button class="btn btn-primary" type="submit" onclick="window.onbeforeunload=null" ng-disabled="paperForm.$invalid">提交题库</button>
+		<button class="btn btn-primary" type="submit" onclick="window.onbeforeunload = null" ng-disabled="paperForm.$invalid">提交题库</button>
 	</div>
 	<div class="paper-title">
 		<input id="hideSingleSelection" type="checkbox" ng-click="hideSingleSelections=!hideSingleSelections" />

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<form safe-mode="true" name="paperForm" action="submitPaper.do" method="post" novalidate>
+<form safe-mode="true" name="paperForm" action="finishExam.do" method="post" novalidate>
 	<div class="paper-top">
 		<div class="paper-time">剩余时间：{{paper.time}}</div>
 	</div>
@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	<div class="paper-bottom">
-		<button type="submit" class="btn btn-primary" ng-click="submitPaper()" onclick="window.onbeforeunload=null">提交试题</button>
-		<button type="button" class="btn btn-default" ng-click="closePaper()">放弃试题</button>
+		<button type="submit" class="btn btn-primary" ng-click="finishExam()" onclick="window.onbeforeunload = null">提交试题</button>
+		<button type="button" class="btn btn-default" ng-click="endExam()">放弃试题</button>
 	</div>
 </form>

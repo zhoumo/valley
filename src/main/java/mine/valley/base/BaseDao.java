@@ -42,6 +42,10 @@ public class BaseDao extends HibernateDaoSupport {
 		this.getHibernateTemplate().delete(entity);
 	}
 
+	public <T extends BaseEntity> void deleteAll(List<T> list) {
+		this.getHibernateTemplate().deleteAll(list);
+	}
+
 	@SuppressWarnings("unchecked")
 	public <T extends BaseEntity> List<T> find(String hql, Object... params) {
 		return this.getHibernateTemplate().find(hql, params);

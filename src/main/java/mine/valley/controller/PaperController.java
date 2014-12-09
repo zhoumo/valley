@@ -45,7 +45,15 @@ public class PaperController extends BaseController {
 		paper.setStatus(PaperStatus.CREATE.getValue());
 		paper.setCreateTime();
 		paperService.savePaper(paper);
-		return "redirect:/";
+		return "redirect:/#/paper/list?type=create";
+	}
+
+	@RequestMapping("/submitPaper.do")
+	public String submitPaper(Long id) {
+		Paper paper = paperService.getPaper(id);
+		paper.setStatus(PaperStatus.AUDIT_NO.getValue());
+		paperService.savePaper(paper);
+		return "redirect:/#/paper/list?type=create";
 	}
 
 	@RequestMapping("/getPaperList.do")
@@ -68,7 +76,7 @@ public class PaperController extends BaseController {
 		return paperService.getPaper(id);
 	}
 
-	@RequestMapping("/submitPaper.do")
+	@RequestMapping("/endExam.do")
 	public String submitPaper(HttpServletRequest request) {
 		for (Object key : request.getParameterMap().keySet()) {
 			if (!key.toString().contains("_")) {

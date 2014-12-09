@@ -32,28 +32,33 @@ public class RouteController extends BaseController {
 		return "home/index";
 	}
 
-	@RequestMapping("home/create")
-	public String homeCreate() {
-		return "home/module/create";
+	@RequestMapping("home/paper/create")
+	public String homePaperCreate() {
+		return "home/module/paper/create";
 	}
 
-	@RequestMapping("home/audit")
-	public String homeAudit() {
-		return "home/module/audit";
+	@RequestMapping("home/paper/audit")
+	public String homePaperAudit() {
+		return "home/module/paper/audit";
 	}
 
-	@RequestMapping("home/exam")
-	public String homeExam() {
-		return "home/module/exam";
+	@RequestMapping("home/paper/show")
+	public String homePaperShow() {
+		return "home/module/paper/show";
 	}
 
-	@RequestMapping("home/papers")
-	public String homePapers() {
-		return "home/module/papers";
+	@RequestMapping("home/paper/exam")
+	public String homePaperExam() {
+		return "home/module/paper/exam";
 	}
 
-	@RequestMapping("home/account")
-	public String homeAccount() {
-		return "home/module/account";
+	@RequestMapping("home/paper/list")
+	public String homePaperList() {
+		return "home/module/paper/list";
+	}
+
+	@RequestMapping("home/account/edit")
+	public String homeAccountEdit() {
+		return "home/module/account/edit";
 	}
 }

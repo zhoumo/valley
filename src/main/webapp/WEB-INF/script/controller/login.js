@@ -1,6 +1,6 @@
 var controller = angular.module('controllers', []);
 controller.controller('loginController', function($scope) {
-	var blackList = [ 'create', 'audit', 'exam', 'papers' ];
+	var blackList = [ 'paper' ];
 	var arr = location.href.split('#/');
 	if (arr.length > 1) {
 		for ( var index in blackList) {

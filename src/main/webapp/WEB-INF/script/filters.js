@@ -85,7 +85,7 @@ filters.filter('showQuestion', [ '$sce', function($sce) {
 } ]);
 filters.filter('showAnswer', function() {
 	return function(questions, id) {
-		var text = questions[id.replace('Q', 'A')];
+		var text = (id == null ? questions : questions[id.replace('Q', 'A')]);
 		if (text.indexOf('<p>') == 0) {
 			return '<p><b>答案：</b>' + text.substring(3);
 		}

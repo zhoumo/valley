@@ -20,7 +20,7 @@ controller.controller('homeController', [ '$scope', '$rootScope', '$location', '
 		} else {
 			$rootScope.selectJobId = jobId;
 			$rootScope.selectJobName = $('#jobSelect option:selected').text();
-			$location.path('create-paper');
+			$location.path('paper/create');
 		}
 	};
 	$scope.selectedJobs = null;
@@ -47,14 +47,31 @@ controller.controller('homeController', [ '$scope', '$rootScope', '$location', '
 		$scope.applyType = type;
 	};
 } ]);
-controller.controller('createPaperController', [ '$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
-	if ($rootScope.selectJobId == null) {
-		var index = $location.path().indexOf('#/');
-		$location.path($location.path().substring(0, index));
-	}
+controller.controller('paperCreateController', [ '$scope', '$rootScope', '$location', 'paperService', function($scope, $rootScope, $location, paperService) {
+	$scope.id = $location.search().id;
 	$scope.singleSelections = new Object();
 	$scope.multipleSelections = new Object();
 	$scope.essayQuestions = new Object();
+	if ($scope.id != null) {
+		paperService.getPaper($scope.id).success(function(res) {
+			$scope.paperName = res.name;
+			$scope.selectJobId = res.job.id;
+			$scope.selectJobName = res.job.name;
+			for ( var index = 0; index < res.questions.length; index++) {
+				var question = res.questions[index];
+				if (question.type == 0) {
+					$scope.singleSelections['Q' + question.id] = question.question;
+					$scope.singleSelections['A' + question.id] = question.answer;
+				} else if (question.type == 1) {
+					$scope.multipleSelections['Q' + question.id] = question.question;
+					$scope.multipleSelections['A' + question.id] = question.answer;
+				} else if (question.type == 2) {
+					$scope.essayQuestions['Q' + question.id] = question.question;
+					$scope.essayQuestions['A' + question.id] = question.answer;
+				}
+			}
+		});
+	}
 	$scope.$watch('singleSelection', function(value) {
 		var dom = '';
 		var sections = (value == null ? [] : value.split('<p>'));
@@ -140,14 +157,14 @@ controller.controller('createPaperController', [ '$scope', '$rootScope', '$locat
 		}
 	};
 } ]);
-controller.controller('examController', [ '$scope', '$routeParams', '$interval', 'paperService', function($scope, $routeParams, $interval, paperService) {
+controller.controller('paperExamController', [ '$scope', '$routeParams', '$interval', 'paperService', function($scope, $routeParams, $interval, paperService) {
 	paperService.getPaper($routeParams.id).success(function(res) {
 		$scope.paper = res;
 		$interval(function() {
 			if ($scope.paper.time != 0) {
 				$scope.paper.time = $scope.paper.time - 1;
 			} else {
-				alert("答题时间到！");
+				alert('答题时间到！');
 				window.onbeforeunload = null;
 				window.close();
 			}
@@ -156,7 +173,7 @@ controller.controller('examController', [ '$scope', '$routeParams', '$interval',
 			$scope.paper.time = res;
 		});
 	});
-	$scope.submitPaper = function() {
+	$scope.finishExam = function() {
 		$('[type=radio]:checked').each(function() {
 			$('[name^=' + $(this).attr('name') + '_]').val($(this).val());
 		});
@@ -175,16 +192,30 @@ controller.controller('examController', [ '$scope', '$routeParams', '$interval',
 			$('[name^=' + name + '_]').val(anwsers[name]);
 		}
 	};
+	$scope.endExam = function() {
+		if (confirm('确定放弃答题吗?')) {
+			window.onbeforeunload = null;
+			window.close();
+		}
+	};
 } ]);
-controller.controller('auditPaperController', [ '$scope', 'paperService', function($scope, paperService) {
+controller.controller('paperAuditController', [ '$scope', '$routeParams', 'paperService', function($scope, $routeParams, paperService) {
+	paperService.getPaper($routeParams.id).success(function(res) {
+		$scope.paper = res;
+	});
+} ]);
+controller.controller('paperShowController', [ '$scope', '$routeParams', 'paperService', function($scope, $routeParams, paperService) {
+	paperService.getPaper($routeParams.id).success(function(res) {
+		$scope.paper = res;
+	});
 } ]);
 controller.controller('paperListController', [ '$scope', '$location', 'paperService', function($scope, $location, paperService) {
 	$scope.type = $location.search().type;
 	$scope.startAnswer = function(id) {
-		if (confirm("确定开始答题吗?")) {
+		if (confirm('确定开始答题吗?')) {
 			paperService.startExam(id).success(function(res) {
 				if (res) {
-					window.open('#/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+					window.open('#/paper/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
 					location.reload();
 				} else {
 					alert('考试未能成功开始！');
@@ -193,7 +224,21 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 		}
 	};
 	$scope.continueAnswer = function(id) {
-		window.open('#/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+		window.open('#/paper/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+	};
+	$scope.auditPaper = function(id) {
+		$location.path('paper/audit').search('id=' + id);
+	};
+	$scope.editPaper = function(id) {
+		$location.path('paper/create').search('id=' + id);
+	};
+	$scope.submitPaper = function(id) {
+		if (confirm('确定提交试卷吗?')) {
+			location.href = 'submitPaper.do?id=' + id;
+		}
+	};
+	$scope.showPaper = function(id) {
+		$location.path('paper/show/' + id).search('');
 	};
 	paperService.getPaperList($scope.type, 1, 10).success(function(res) {
 		$scope.paperList = res.result;

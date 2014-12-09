@@ -117,9 +117,8 @@ textarea {
 }
 
 .list-button {
-	float: right;
 	margin-top: -90px;
-	margin-right: 100px;
+	margin-left: 500px;
 }
 
 .list-item {

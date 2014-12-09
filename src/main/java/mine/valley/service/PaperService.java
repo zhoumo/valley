@@ -42,6 +42,9 @@ public class PaperService extends BaseService {
 			if (key.toString().startsWith("Q")) {
 				key = key.toString().substring(1);
 				Question question = new Question();
+				if (key.toString().length() < 13) {
+					question.setId(Long.parseLong(key.toString()));
+				}
 				question.setQuestion(json.getString("Q" + key));
 				question.setAnswer(json.getString("A" + key));
 				question.setType(type);
