@@ -51,9 +51,32 @@ public class PaperController extends BaseController {
 	@RequestMapping("/submitPaper.do")
 	public String submitPaper(Long id) {
 		Paper paper = paperService.getPaper(id);
-		paper.setStatus(PaperStatus.AUDIT_NO.getValue());
+		paper.setStatus(PaperStatus.SUBMIT.getValue());
 		paperService.savePaper(paper);
 		return "redirect:/#/paper/list?type=create";
+	}
+
+	@RequestMapping("/auditPaper.do")
+	public String auditPaper(Long id, HttpServletRequest request) {
+		Paper paper = paperService.getPaper(id);
+		Boolean isAuditYes = true;
+		for (Question question : paper.getQuestions()) {
+			String auditResult = request.getParameter("audit" + question.getId());
+			if ("true".equalsIgnoreCase(auditResult)) {
+				question.setAudit(true);
+			} else {
+				isAuditYes = false;
+				question.setAudit(false);
+				question.setComment(auditResult);
+			}
+		}
+		if (isAuditYes) {
+			paper.setStatus(PaperStatus.AUDIT_YES.getValue());
+		} else {
+			paper.setStatus(PaperStatus.AUDIT_NO.getValue());
+		}
+		paperService.savePaper(paper);
+		return "redirect:/#/paper/list?type=audit";
 	}
 
 	@RequestMapping("/getPaperList.do")

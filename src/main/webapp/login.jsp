@@ -11,7 +11,7 @@
 	</head>
 	<body ng-controller="loginController">
 		<jsp:include page="WEB-INF/views/common/header.jsp"></jsp:include>
-		<div class="login toggle" ng-view></div>
+		<div class="login slide-left" ng-view></div>
 		<jsp:include page="WEB-INF/views/common/footer.jsp"></jsp:include>
 	</body>
 </html>

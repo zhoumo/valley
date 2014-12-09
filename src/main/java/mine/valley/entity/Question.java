@@ -27,6 +27,9 @@ public class Question extends BaseEntity {
 	@Column(name = "AUDIT", nullable = false)
 	private Boolean audit = false;
 
+	@Column(name = "COMMENT", nullable = true, length = 65535)
+	private String comment;
+
 	@Column(name = "TYPE", nullable = false)
 	private Short type;
 
@@ -57,6 +60,22 @@ public class Question extends BaseEntity {
 
 	public void setDifficulty(Short difficulty) {
 		this.difficulty = difficulty;
+	}
+
+	public Boolean getAudit() {
+		return audit;
+	}
+
+	public void setAudit(Boolean audit) {
+		this.audit = audit;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
 	public Short getType() {

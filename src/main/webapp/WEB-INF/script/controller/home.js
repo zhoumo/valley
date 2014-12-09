@@ -200,6 +200,12 @@ controller.controller('paperExamController', [ '$scope', '$routeParams', '$inter
 	};
 } ]);
 controller.controller('paperAuditController', [ '$scope', '$routeParams', 'paperService', function($scope, $routeParams, paperService) {
+	$scope.id = $routeParams.id;
+	$scope.counter = 0;
+	$scope.accumulate = function() {
+		$scope.counter++;
+		$scope.$apply();
+	};
 	paperService.getPaper($routeParams.id).success(function(res) {
 		$scope.paper = res;
 	});
@@ -227,7 +233,7 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 		window.open('#/paper/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
 	};
 	$scope.auditPaper = function(id) {
-		$location.path('paper/audit').search('id=' + id);
+		$location.path('paper/audit/' + id).search('');
 	};
 	$scope.editPaper = function(id) {
 		$location.path('paper/create').search('id=' + id);

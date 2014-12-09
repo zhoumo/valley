@@ -16,6 +16,38 @@ directives.directive("panel", function() {
 		}
 	};
 });
+directives.directive("auditPanel", function() {
+	return {
+		restrict : 'E',
+		template : '<button type="button" class="btn btn-success">通过</button><div class="space"></div><button type="button" class="btn btn-danger">不通过</button>',
+		link : function(scope, element, attrs) {
+			var input = $('<input type="hidden" name="audit' + attrs.id + '" />');
+			var label = $('<label></label>');
+			label.css('float', 'left');
+			var auditYes = element.children().eq(0);
+			auditYes.click(function() {
+				input.val(true);
+				auditYes.css('display', 'none');
+				auditNo.css('display', 'none');
+				label.text('审核通过');
+				label.css('color', 'green');
+				scope.accumulate();
+			});
+			var auditNo = element.children().eq(2);
+			auditNo.click(function() {
+				var reason = window.prompt('请输入不通过的原因：', '');
+				input.val(reason == '' ? '未知' : reason);
+				auditYes.css('display', 'none');
+				auditNo.css('display', 'none');
+				label.text('审核不通过，原因：' + reason);
+				label.css('color', 'red');
+				scope.accumulate();
+			});
+			element.append(label);
+			element.append(input);
+		}
+	};
+});
 directives.directive('safeMode', function() {
 	return {
 		restrict : 'A',

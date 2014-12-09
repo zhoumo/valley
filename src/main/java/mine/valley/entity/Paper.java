@@ -36,6 +36,10 @@ public class Paper extends BaseEntity {
 	private User author;
 
 	@ManyToOne
+	@JoinColumn(name = "AUDITOR")
+	private User auditor;
+
+	@ManyToOne
 	@JoinColumn(name = "JOB")
 	private Job job;
 
@@ -79,6 +83,14 @@ public class Paper extends BaseEntity {
 
 	public void setAuthor(User author) {
 		this.author = author;
+	}
+
+	public User getAuditor() {
+		return auditor;
+	}
+
+	public void setAuditor(User auditor) {
+		this.auditor = auditor;
 	}
 
 	public Job getJob() {

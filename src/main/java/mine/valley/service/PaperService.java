@@ -66,7 +66,7 @@ public class PaperService extends BaseService {
 
 	public Page<Paper> getNoAuditPaper(Page<Paper> page, Long userId) {
 		String search = "FROM Paper WHERE status = ? AND job.id IN (SELECT job.id FROM Apply WHERE user.id = ? AND type = ? AND approved = TRUE) ORDER BY status, job";
-		return baseDao.findByPage(search, new Object[] { PaperStatus.AUDIT_NO.getValue(), userId, ApplyType.AUDITOR.getValue() }, page);
+		return baseDao.findByPage(search, new Object[] { PaperStatus.SUBMIT.getValue(), userId, ApplyType.AUDITOR.getValue() }, page);
 	}
 
 	public Page<Paper> getExamPaper(Page<Paper> page, Long userId) {

@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<jsp:include page="common/header.jsp"></jsp:include>
-		<div class="home flip-in" ng-view ng-controller="homeController"></div>
+		<div class="home slide-down" ng-view ng-controller="homeController"></div>
 		<jsp:include page="common/footer.jsp"></jsp:include>
 	</body>
 </html>
