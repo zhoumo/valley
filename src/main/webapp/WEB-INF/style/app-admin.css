@@ -35,3 +35,11 @@
 	width: 150px;
 	float: right;
 }
+
+.admin-paper-panel {
+	padding: 20px;
+}
+
+.admin-paper-panel .form-group {
+	text-align: left;
+}

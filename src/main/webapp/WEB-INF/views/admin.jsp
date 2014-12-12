@@ -7,6 +7,7 @@
 		<jsp:include page="common/script.jsp"></jsp:include>
 		<script src="script/app/admin.js"></script>
 		<script src="script/controller/admin.js"></script>
+		<link href="style/app-home.css" type="text/css" rel="stylesheet" media="screen" />
 		<link href="style/app-admin.css" type="text/css" rel="stylesheet" media="screen" />
 	</head>
 	<body>

@@ -1,1 +1,1 @@
-angular.module('admin', [ 'controllers' ]);
+angular.module('admin', [ 'controllers', 'directives' ]);

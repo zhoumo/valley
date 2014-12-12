@@ -34,6 +34,20 @@ filters.filter('userType', function() {
 		}
 	};
 });
+filters.filter('paperStatus', function() {
+	return function(status) {
+		switch (status) {
+		case 1:
+			return '已提交';
+		case 2:
+			return '通过';
+		case 3:
+			return '未通过';
+		default:
+			return '已创建';
+		}
+	};
+});
 filters.filter('getQuestions', function() {
 	return function(object, type) {
 		if (object == null) {
@@ -60,14 +74,7 @@ filters.filter('getQuestions', function() {
 	};
 });
 filters.filter('showQuestion', [ '$sce', function($sce) {
-	function checkHtml(text, checkable) {
-		if (checkable) {
-			return $sce.trustAsHtml(text);
-		} else {
-			return text;
-		}
-	}
-	return function(text, index, checkable, type) {
+	return function(text, index, type) {
 		if (type == null) {
 			text = text.trim().replace(/\[\[/gi, '').replace(/\]\]/gi, '. ');
 		} else {
@@ -78,20 +85,20 @@ filters.filter('showQuestion', [ '$sce', function($sce) {
 			}
 		}
 		if (text.indexOf('<p>') == 0) {
-			return checkHtml('<p>' + (index + 1) + '. ' + text.substring(3), checkable);
+			return $sce.trustAsHtml('<p>' + (index + 1) + '. ' + text.substring(3));
 		}
-		return checkHtml((index + 1) + '. ' + text, checkable);
+		return $sce.trustAsHtml((index + 1) + '. ' + text);
 	};
 } ]);
-filters.filter('showAnswer', function() {
+filters.filter('showAnswer', [ '$sce', function($sce) {
 	return function(questions, id) {
 		var text = (id == null ? questions : questions[id.replace('Q', 'A')]);
 		if (text.indexOf('<p>') == 0) {
-			return '<p><b>答案：</b>' + text.substring(3);
+			return $sce.trustAsHtml('<p><b>答案：</b>' + text.substring(3));
 		}
-		return '<b>答案：</b>' + text;
+		return $sce.trustAsHtml('<b>答案：</b>' + text);
 	};
-});
+} ]);
 filters.filter('thirdLevelJob', function() {
 	return function(jobList) {
 		jobList = jobList || [];

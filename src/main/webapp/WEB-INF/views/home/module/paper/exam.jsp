@@ -30,7 +30,7 @@
 		</div>
 		<div ng-repeat="singleSelection in paper.questions|getQuestions:0">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
-				<div ng-bind-html="singleSelection.question|showQuestion:$index:true:'radio'"></div>
+				<div ng-bind-html="singleSelection.question|showQuestion:$index:'radio'"></div>
 			</div>
 			<input type="hidden" name="radio{{$index}}_{{singleSelection.id}}" />
 		</div>
@@ -41,7 +41,7 @@
 		</div>
 		<div ng-repeat="multipleSelection in paper.questions|getQuestions:1">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
-				<div ng-bind-html="multipleSelection.question|showQuestion:$index:true:'checkbox'"></div>
+				<div ng-bind-html="multipleSelection.question|showQuestion:$index:'checkbox'"></div>
 			</div>
 			<input type="hidden" name="checkbox{{$index}}_{{multipleSelection.id}}" />
 		</div>
@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	<div class="paper-bottom">
-		<button type="submit" class="btn btn-primary" ng-click="finishExam()" onclick="window.onbeforeunload = null">提交试题</button>
-		<button type="button" class="btn btn-default" ng-click="endExam()">放弃试题</button>
+		<button type="submit" class="btn btn-primary" ng-click="finishExam()" onclick="window.onbeforeunload = null">提交试卷</button>
+		<button type="button" class="btn btn-default" ng-click="endExam()">放弃考试</button>
 	</div>
 </form>

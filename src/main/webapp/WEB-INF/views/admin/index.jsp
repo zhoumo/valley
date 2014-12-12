@@ -8,7 +8,7 @@
 			<a data-toggle="tab" ng-click="activing('user')">用户管理</a>
 		</li>
 		<li ng-class="{'active': actived=='paper'}">
-			<a data-toggle="tab" ng-click="activing('paper')">试题库</a>
+			<a data-toggle="tab" ng-click="activing('paper')">试卷管理</a>
 		</li>
 	</ul>
 	<div class="tab-content">

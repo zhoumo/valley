@@ -1,61 +1,81 @@
 var services = angular.module('services', []);
-services.service('userService', [ '$http', function($http) {
+services.service('baseService', [ '$http', function($http) {
 	return {
-		getAuthority : function() {
+		getHttp : function(url) {
 			return $http({
 				method : 'post',
-				url : 'getAuthority.do'
+				url : url
 			});
+		},
+		setGridPaging : function(scope, config, paging) {
+			angular.extend(config, {
+				enableColumnResize : true,
+				multiSelect : false,
+				enablePaging : true,
+				showFooter : true,
+				i18n : 'zh-cn',
+				totalServerItems : 'totalServerItems',
+				pagingOptions : scope.pagingOptions,
+			});
+			scope.gridOptions = config;
+			scope.totalServerItems = 0;
+			scope.pagingOptions = {
+				pageSizes : [ 10 ],
+				pageSize : 10,
+				currentPage : 1
+			};
+			scope.$watch('pagingOptions', function(newVal, oldVal) {
+				if (newVal !== oldVal) {
+					scope.paging();
+				}
+			}, true);
+			scope.paging = paging;
+			scope.paging();
+		}
+	};
+} ]);
+services.service('userService', [ 'baseService', function(baseService) {
+	return {
+		setGridPaging : function(scope, config, paging) {
+			baseService.setGridPaging(scope, config, paging);
+		},
+		getAuthority : function() {
+			return baseService.getHttp('getAuthority.do');
 		},
 		getUserList : function(pageNo, pageSize) {
-			return $http({
-				method : 'post',
-				url : 'getUserList.do?pageNo=' + pageNo + '&pageSize=' + pageSize
-			});
+			return baseService.getHttp('getUserList.do?pageNo=' + pageNo + '&pageSize=' + pageSize);
 		}
 	};
 } ]);
-services.service('jobService', [ '$http', function($http) {
+services.service('jobService', [ 'baseService', function(baseService) {
 	return {
+		setGridPaging : function(scope, config, paging) {
+			baseService.setGridPaging(scope, config, paging);
+		},
 		getJobList : function() {
-			return $http({
-				method : 'post',
-				url : 'getJobList.do'
-			});
+			return baseService.getHttp('getJobList.do');
 		},
 		getJobTree : function() {
-			return $http({
-				method : 'post',
-				url : 'getJobTree.do'
-			});
+			return baseService.getHttp('getJobTree.do');
 		}
 	};
 } ]);
-services.service('paperService', [ '$http', function($http) {
+services.service('paperService', [ 'baseService', function(baseService) {
 	return {
+		setGridPaging : function(scope, config, paging) {
+			baseService.setGridPaging(scope, config, paging);
+		},
 		getPaperList : function(type, pageNo, pageSize) {
-			return $http({
-				method : 'post',
-				url : 'getPaperList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type
-			});
+			return baseService.getHttp('getPaperList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type);
 		},
 		getPaper : function(id) {
-			return $http({
-				method : 'post',
-				url : 'getPaper.do?id=' + id
-			});
+			return baseService.getHttp('getPaper.do?id=' + id);
 		},
 		startExam : function(id) {
-			return $http({
-				method : 'post',
-				url : 'startExam.do?paperId=' + id
-			});
+			return baseService.getHttp('startExam.do?paperId=' + id);
 		},
 		timer : function(id) {
-			return $http({
-				method : 'post',
-				url : 'timer.do?paperId=' + id
-			});
+			return baseService.getHttp('timer.do?paperId=' + id);
 		}
 	};
 } ]);

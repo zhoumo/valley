@@ -5,7 +5,7 @@
 		<div class="form-group">
 			<label class="col-sm-2 control-label">职位名称</label>
 			<div class="col-sm-6">
-				<input name="name" type="text" class="form-control" ng-model="jobName" required="required" />
+				<input name="name" type="text" class="form-control" ng-model="jobName" required="required" autocomplete="off" />
 			</div>
 			<div class="error" ng-if="jobForm.name.$invalid">必填</div>
 		</div>
@@ -34,7 +34,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">职位名称</label>
 						<div class="col-sm-6">
-							<input name="name" type="text" class="form-control" ng-model="jobName" required="required" />
+							<input name="name" type="text" class="form-control" ng-model="jobName" required="required" autocomplete="off" />
 						</div>
 						<div class="error" ng-if="jobForm.name.$invalid">必填</div>
 					</div>

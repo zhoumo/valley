@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div>
+<form action="renewPaper.do" method="post" novalidate>
 	<ol class="breadcrumb">
 		<li>
 			<a href="#">首页</a>
@@ -9,6 +9,7 @@
 		</li>
 		<li class="active">查看试卷</li>
 	</ol>
+	<input type="hidden" name="id" value="{{paper.id}}" />
 	<div class="paper-title">{{paper.name}} - 笔试题</div>
 	<div class="paper-title">
 		题目总数： {{(paper.questions|getQuestions:0|size)+(paper.questions|getQuestions:1|size)+(paper.questions|getQuestions:2|size)}}
@@ -36,9 +37,10 @@
 		</div>
 		<div ng-repeat="singleSelection in paper.questions|getQuestions:0">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
-				<div ng-bind-html="singleSelection.question|showQuestion:$index:true:'radio'"></div>
+				<div ng-bind-html="singleSelection.question|showQuestion:$index:'radio'"></div>
 				<div ng-bind-html="singleSelection.answer|showAnswer"></div>
 			</div>
+			<audit-status paper="{{paper}}" question="{{singleSelection}}" />
 		</div>
 	</div>
 	<div ng-show="!hideMultipleSelections">
@@ -47,9 +49,10 @@
 		</div>
 		<div ng-repeat="multipleSelection in paper.questions|getQuestions:1">
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
-				<div ng-bind-html="multipleSelection.question|showQuestion:$index:true:'checkbox'"></div>
+				<div ng-bind-html="multipleSelection.question|showQuestion:$index:'checkbox'"></div>
 				<div ng-bind-html="multipleSelection.answer|showAnswer"></div>
 			</div>
+			<audit-status paper="{{paper}}" question="{{multipleSelection}}" />
 		</div>
 	</div>
 	<div ng-show="!hideEssayQuestions">
@@ -61,6 +64,10 @@
 				<div ng-bind-html="essayQuestion.question|showQuestion:$index"></div>
 				<div ng-bind-html="essayQuestion.answer|showAnswer"></div>
 			</div>
+			<audit-status paper="{{paper}}" question="{{essayQuestion}}" />
 		</div>
 	</div>
-</div>
+	<div class="paper-bottom" ng-show="paper.status == 2">
+		<button type="submit" class="btn btn-primary">重新编辑试卷</button>
+	</div>
+</form>

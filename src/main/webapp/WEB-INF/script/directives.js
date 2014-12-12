@@ -25,6 +25,7 @@ directives.directive("auditPanel", function() {
 			var label = $('<label></label>');
 			label.css('float', 'left');
 			var auditYes = element.children().eq(0);
+			alert();
 			auditYes.click(function() {
 				input.val(true);
 				auditYes.css('display', 'none');
@@ -45,6 +46,24 @@ directives.directive("auditPanel", function() {
 			});
 			element.append(label);
 			element.append(input);
+		}
+	};
+});
+directives.directive("auditStatus", function() {
+	return {
+		restrict : 'E',
+		link : function(scope, element, attrs) {
+			var paper = JSON.parse(attrs.paper);
+			var question = JSON.parse(attrs.question);
+			if (paper.status == 2 || paper.status == 3) {
+				if (question.audit) {
+					element.append('<label style="color:green">已通过审核</label>');
+				} else {
+					element.append('<label style="color:red">未通过审核，原因是：' + question.comment + '</label>');
+				}
+			} else {
+				element.append('<label style="color:#808080">未审核</label>');
+			}
 		}
 	};
 });

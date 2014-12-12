@@ -92,3 +92,8 @@
 .paper-bottom {
 	text-align: center;
 }
+
+.paper-list-empty {
+	text-align: center;
+	padding: 20px;
+}

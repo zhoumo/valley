@@ -6,6 +6,7 @@
 		</li>
 		<li class="active">我的笔试题</li>
 	</ol>
+	<div class="paper-list-empty" ng-show="(paperList|size) == 0">未找到满足条件的试卷！</div>
 	<div ng-repeat="paper in paperList">
 		<div class="list-item">
 			<div class="list-title">{{$index+1}}、{{paper.name}}</div>

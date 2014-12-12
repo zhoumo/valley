@@ -22,21 +22,21 @@
 						<div class="form-group">
 							<label class="col-sm-2">登录名</label>
 							<div class="col-sm-6">
-								<input name="loginName" type="text" class="form-control" placeholder="手机号/邮箱" ng-model="loginName" ng-pattern="/^[0-9]{11}|([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/" required="required" />
+								<input name="loginName" type="text" class="form-control" placeholder="手机号/邮箱" ng-model="loginName" ng-pattern="/^[0-9]{11}|([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/" required="required" autocomplete="off" />
 							</div>
 							<div class="error" ng-if="userForm.loginName.$invalid">未填写或非法登录名</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2">密 码</label>
 							<div class="col-sm-6">
-								<input name="password" type="password" class="form-control" placeholder="6-12位的密码" ng-model="password" required="required" ng-minlength="6" ng-maxlength="12" />
+								<input name="password" type="password" class="form-control" placeholder="6-12位的密码" ng-model="password" required="required" ng-minlength="6" ng-maxlength="12" autocomplete="off" />
 							</div>
 							<div class="error" ng-if="userForm.password.$invalid">密码格式错误</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-2">姓 名</label>
 							<div class="col-sm-6">
-								<input name="realName" type="text" class="form-control" placeholder="请输入您的真实姓名" ng-model="realName" required="required" />
+								<input name="realName" type="text" class="form-control" placeholder="请输入您的真实姓名" ng-model="realName" required="required" autocomplete="off" />
 							</div>
 							<div class="error" ng-if="userForm.realName.$invalid">未填写</div>
 						</div>

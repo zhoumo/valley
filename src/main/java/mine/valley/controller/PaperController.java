@@ -1,6 +1,7 @@
 package mine.valley.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,8 +76,33 @@ public class PaperController extends BaseController {
 		} else {
 			paper.setStatus(PaperStatus.AUDIT_NO.getValue());
 		}
+		paper.setAuditor((User) request.getSession().getAttribute(super.getUserName()));
+		paper.setAuditTime(new Date());
 		paperService.savePaper(paper);
 		return "redirect:/#/paper/list?type=audit";
+	}
+
+	@RequestMapping("/renewPaper.do")
+	public String renewPaper(Long id) {
+		Paper paper = paperService.getPaper(id);
+		paper.setStatus(PaperStatus.CREATE.getValue());
+		paperService.savePaper(paper);
+		return "redirect:/#/paper/create?id=" + id;
+	}
+
+	@RequestMapping("/reviewPaper.do")
+	public String reviewPaper(Long id) {
+		Paper paper = paperService.getPaper(id);
+		paper.setStatus(PaperStatus.SUBMIT.getValue());
+		paperService.savePaper(paper);
+		return "redirect:/#?active=paper";
+	}
+
+	@RequestMapping("/deletePaper.do")
+	public String deletePaper(Long id) {
+		Paper paper = paperService.getPaper(id);
+		paperService.deletePaper(paper);
+		return "redirect:/#?active=paper";
 	}
 
 	@RequestMapping("/getPaperList.do")
@@ -89,6 +115,8 @@ public class PaperController extends BaseController {
 			page = paperService.getNoAuditPaper(page, user.getId());
 		} else if ("exam".equals(type)) {
 			page = paperService.getExamPaper(page, user.getId());
+		} else {
+			page = paperService.getSubmitPaper(page);
 		}
 		return page;
 	}

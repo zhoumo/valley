@@ -1,5 +1,6 @@
 package mine.valley.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import mine.valley.base.BaseEntity;
@@ -38,6 +41,10 @@ public class Paper extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "AUDITOR")
 	private User auditor;
+
+	@Column(name = "AUDIT_TIME")
+	@Temporal(TemporalType.TIMESTAMP)
+	protected Date auditTime;
 
 	@ManyToOne
 	@JoinColumn(name = "JOB")
@@ -91,6 +98,14 @@ public class Paper extends BaseEntity {
 
 	public void setAuditor(User auditor) {
 		this.auditor = auditor;
+	}
+
+	public Date getAuditTime() {
+		return auditTime;
+	}
+
+	public void setAuditTime(Date auditTime) {
+		this.auditTime = auditTime;
 	}
 
 	public Job getJob() {

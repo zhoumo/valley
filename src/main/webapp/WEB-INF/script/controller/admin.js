@@ -39,7 +39,7 @@ controller.controller('jobController', [ '$scope', 'jobService', function($scope
 		});
 	});
 	$scope.deleteJob = function() {
-		if (window.confirm('确定要删除' + $scope.jobName + '吗？')) {
+		if (window.confirm('确定删除' + $scope.jobName + '吗？')) {
 			location.href = 'deleteJob.do?id=' + $scope.jobId;
 		}
 	};
@@ -51,20 +51,8 @@ controller.controller('jobController', [ '$scope', 'jobService', function($scope
 } ]);
 controller.controller('userController', [ '$scope', 'userService', function($scope, userService) {
 	$scope.userList = [];
-	$scope.totalServerItems = 0;
-	$scope.pagingOptions = {
-		pageSizes : [ 10 ],
-		pageSize : 10,
-		currentPage : 1
-	};
-	$scope.gridOptions = {
+	userService.setGridPaging($scope, {
 		data : 'userList',
-		multiSelect : false,
-		enablePaging : true,
-		showFooter : true,
-		i18n : "zh-cn",
-		totalServerItems : 'totalServerItems',
-		pagingOptions : $scope.pagingOptions,
 		columnDefs : [ {
 			field : 'id',
 			displayName : 'ID',
@@ -79,7 +67,7 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 		}, {
 			field : 'type',
 			displayName : '用户类型',
-			cellTemplate : '<div style="margin:5px">{{COL_FIELD|userType}}</div>'
+			cellTemplate : '<div">{{COL_FIELD|userType}}</div>'
 		}, {
 			field : 'enabled',
 			displayName : '用户状态',
@@ -87,24 +75,17 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 			field : 'updateTime',
 			displayName : '更新时间',
 			width : 150,
-			cellTemplate : '<div style="margin:5px">{{COL_FIELD|date:"yyyy-MM-dd hh:mm:ss"}}</div>'
+			cellTemplate : '<div>{{COL_FIELD|date:"yyyy-MM-dd hh:mm:ss"}}</div>'
 		}, {
 			displayName : '操作',
-			cellTemplate : '<div style="margin:5px"><a ng-click="updateUser({user:row.entity})">修改</a> | <a ng-click="deleteUser({user:row.entity})">删除</a></div>'
+			cellTemplate : '<a ng-click="updateUser({user:row.entity})">修改</a>&nbsp;&nbsp;<a ng-click="deleteUser({user:row.entity})">删除</a>'
 		} ]
-	};
-	$scope.paging = function() {
+	}, function() {
 		userService.getUserList($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize).success(function(res) {
 			$scope.userList = res.result;
 			$scope.totalServerItems = res.totalCount;
 		});
-	};
-	$scope.paging();
-	$scope.$watch('pagingOptions', function(newVal, oldVal) {
-		if (newVal !== oldVal) {
-			$scope.paging();
-		}
-	}, true);
+	});
 	$scope.updateUser = function(entity) {
 		$scope.userId = entity.user.id;
 		$scope.loginName = entity.user.loginName;
@@ -112,10 +93,95 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 		$('#userModal').modal('show');
 	};
 	$scope.deleteUser = function(entity) {
-		if (window.confirm('确定要删除' + entity.user.loginName + '吗？')) {
+		if (window.confirm('确定删除' + entity.user.loginName + '吗？')) {
 			location.href = 'deleteUser.do?id=' + entity.user.id;
 		}
 	};
 } ]);
-controller.controller('paperController', [ '$scope', function($scope) {
+controller.controller('paperController', [ '$scope', 'paperService', function($scope, paperService) {
+	$scope.paperList = [];
+	paperService.setGridPaging($scope, {
+		data : 'paperList',
+		columnDefs : [ {
+			field : 'id',
+			displayName : 'ID',
+			width : 30
+		}, {
+			field : 'name',
+			displayName : '试卷名',
+			width : 100,
+			cellTemplate : '<a ng-click="showPaper(row.entity.id)">{{COL_FIELD}}</a>'
+		}, {
+			field : 'job.name',
+			displayName : '所属职位',
+			width : 100
+		}, {
+			field : 'author.realName',
+			displayName : '作者',
+			width : 55
+		}, {
+			field : 'createTime',
+			displayName : '创建时间',
+			width : 100,
+			cellTemplate : '<div>{{COL_FIELD|date:"yyyy-MM-dd"}}</div>'
+		}, {
+			field : 'status',
+			displayName : '状态',
+			width : 60,
+			cellTemplate : '<div>{{COL_FIELD|paperStatus}}</div>'
+		}, {
+			field : 'auditor.realName',
+			displayName : '审核者',
+			width : 55
+		}, {
+			field : 'auditTime',
+			displayName : '审核时间',
+			width : 100,
+			cellTemplate : '<div>{{COL_FIELD|date:"yyyy-MM-dd"}}</div>'
+		}, {
+			field : 'questions',
+			displayName : '总题数',
+			width : 55,
+			cellTemplate : '<div>{{COL_FIELD|size}}</div>'
+		}, {
+			field : 'questions',
+			displayName : '单选题',
+			width : 55,
+			cellTemplate : '<div>{{COL_FIELD|getQuestions:0|size}}</div>'
+		}, {
+			field : 'questions',
+			displayName : '多选题',
+			width : 55,
+			cellTemplate : '<div>{{COL_FIELD|getQuestions:1|size}}</div>'
+		}, {
+			field : 'questions',
+			displayName : '问答题',
+			width : 55,
+			cellTemplate : '<div>{{COL_FIELD|getQuestions:2|size}}</div>'
+		}, {
+			displayName : '操作',
+			cellTemplate : '<a ng-click="deletePaper({paper:row.entity})">删除</a>&nbsp;&nbsp;<a ng-show="row.entity.status != 1" ng-click="reviewPaper({paper:row.entity})">重审</a>'
+		} ]
+	}, function() {
+		paperService.getPaperList("all", $scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize).success(function(res) {
+			$scope.paperList = res.result;
+			$scope.totalServerItems = res.totalCount;
+		});
+	});
+	$scope.deletePaper = function(entity) {
+		if (window.confirm('确定删除' + entity.paper.name + '吗？')) {
+			location.href = 'deletePaper.do?id=' + entity.paper.id;
+		}
+	};
+	$scope.reviewPaper = function(entity) {
+		if (window.confirm('确定重审' + entity.paper.name + '吗？')) {
+			location.href = 'reviewPaper.do?id=' + entity.paper.id;
+		}
+	};
+	$scope.showPaper = function(id) {
+		paperService.getPaper(id).success(function(res) {
+			$scope.paper = res;
+			$('#showPaperDialog').modal('show');
+		});
+	};
 } ]);

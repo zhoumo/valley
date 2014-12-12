@@ -77,14 +77,14 @@
 	</div>
 	<hr class="paper-line" />
 	<div class="paper-title">
-		题库名称：
+		试卷名称：
 		<input required="required" type="text" name="name" ng-model="paperName" />
 	</div>
 	<div class="paper-title">
 		<button class="btn btn-primary" data-toggle="modal" data-target="#singleSelectionModal">添加单选题</button>
 		<button class="btn btn-primary" data-toggle="modal" data-target="#multipleSelectionModal">添加多选题</button>
 		<button class="btn btn-primary" data-toggle="modal" data-target="#essayQuestionModal">添加问答题</button>
-		<button class="btn btn-primary" type="submit" onclick="window.onbeforeunload = null" ng-disabled="paperForm.$invalid">提交题库</button>
+		<button class="btn btn-primary" type="submit" onclick="window.onbeforeunload = null" ng-disabled="paperForm.$invalid">提交试卷</button>
 	</div>
 	<div class="paper-title">
 		<input id="hideSingleSelection" type="checkbox" ng-click="hideSingleSelections=!hideSingleSelections" />
