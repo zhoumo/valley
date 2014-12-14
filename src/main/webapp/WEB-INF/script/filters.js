@@ -23,14 +23,14 @@ filters.filter('adminInfo', function() {
 filters.filter('userType', function() {
 	return function(type) {
 		switch (type) {
-		case 1:
-			return 'IT从业者';
-		case 2:
-			return 'HR';
-		case 3:
-			return '猎头顾问';
-		default:
-			return '管理员';
+			case 1:
+				return 'IT从业者';
+			case 2:
+				return 'HR';
+			case 3:
+				return '猎头顾问';
+			default:
+				return '管理员';
 		}
 	};
 });
@@ -46,14 +46,14 @@ filters.filter('userEnabled', function() {
 filters.filter('paperStatus', function() {
 	return function(status) {
 		switch (status) {
-		case 1:
-			return '已提交';
-		case 2:
-			return '通过';
-		case 3:
-			return '未通过';
-		default:
-			return '已创建';
+			case 1:
+				return '已提交';
+			case 2:
+				return '通过';
+			case 3:
+				return '未通过';
+			default:
+				return '已创建';
 		}
 	};
 });
@@ -72,7 +72,7 @@ filters.filter('getQuestions', function() {
 			return questions;
 		} else {
 			var questions = new Array();
-			for (var index = 0; index < object.length; index++) {
+			for ( var index = 0; index < object.length; index++) {
 				var question = object[index];
 				if (question.type == type) {
 					questions.push(question);
@@ -108,11 +108,23 @@ filters.filter('showAnswer', [ '$sce', function($sce) {
 		return $sce.trustAsHtml('<b>答案：</b>' + text);
 	};
 } ]);
+filters.filter('showDifficulty', function() {
+	return function(questions, id) {
+		switch (parseInt(id == null ? questions : questions[id.replace('Q', 'A')])) {
+			case 0:
+				return '<b>难度：</b>简单';
+			case 1:
+				return '<b>难度：</b>一般';
+			case 2:
+				return '<b>难度：</b>困难';
+		}
+	};
+});
 filters.filter('thirdLevelJob', function() {
 	return function(jobList) {
 		jobList = jobList || [];
 		var thirdLevelJobList = new Array();
-		for (var index = 0; index < jobList.length; index++) {
+		for ( var index = 0; index < jobList.length; index++) {
 			if (jobList[index].level + 1 == 3) {
 				thirdLevelJobList.push(jobList[index]);
 			}

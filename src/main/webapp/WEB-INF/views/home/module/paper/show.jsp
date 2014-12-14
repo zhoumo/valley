@@ -39,6 +39,7 @@
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="singleSelection.question|showQuestion:$index:'radio'"></div>
 				<div ng-bind-html="singleSelection.answer|showAnswer"></div>
+				<div ng-bind-html="singleSelection.difficulty|showDifficulty"></div>
 			</div>
 			<audit-status paper="{{paper}}" question="{{singleSelection}}" />
 		</div>
@@ -51,6 +52,7 @@
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="multipleSelection.question|showQuestion:$index:'checkbox'"></div>
 				<div ng-bind-html="multipleSelection.answer|showAnswer"></div>
+				<div ng-bind-html="multipleSelection.difficulty|showDifficulty"></div>
 			</div>
 			<audit-status paper="{{paper}}" question="{{multipleSelection}}" />
 		</div>
@@ -63,6 +65,7 @@
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="essayQuestion.question|showQuestion:$index"></div>
 				<div ng-bind-html="essayQuestion.answer|showAnswer"></div>
+				<div ng-bind-html="essayQuestion.difficulty|showDifficulty"></div>
 			</div>
 			<audit-status paper="{{paper}}" question="{{essayQuestion}}" />
 		</div>

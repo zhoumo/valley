@@ -141,16 +141,10 @@ public class PaperController extends BaseController {
 
 	@RequestMapping("/startExam.do")
 	@ResponseBody
-	public boolean startExam(Long paperId, HttpServletRequest request) {
-		try {
-			User user = (User) request.getSession().getAttribute(super.getUserName());
-			Paper paper = paperService.getPaper(paperId);
-			examService.startExam(paper, user);
-			return true;
-		} catch (Exception e) {
-			logger.error("start exam error!", e);
-			return false;
-		}
+	public Long startExam(Long paperId, HttpServletRequest request) {
+		User user = (User) request.getSession().getAttribute(super.getUserName());
+		Paper paper = paperService.getPaper(paperId);
+		return examService.startExam(paper, user);
 	}
 
 	@RequestMapping("/timer.do")

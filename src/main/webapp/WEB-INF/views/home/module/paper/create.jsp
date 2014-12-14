@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <form safe-mode="true" name="paperForm" action="savePaper.do" method="post" novalidate>
 	<input type="hidden" name="selectJobId" value="{{selectJobId}}">
-	<input type="hidden" name="singleSelections" value="{{singleSelections}}" />
+	<input type="text" name="singleSelections" value="{{singleSelections}}" />
 	<input type="hidden" name="multipleSelections" value="{{multipleSelections}}" />
 	<input type="hidden" name="essayQuestions" value="{{essayQuestions}}" />
 	<div class="modal fade" id="singleSelectionModal" role="dialog" aria-hidden="true" data-backdrop="static">
@@ -15,6 +15,8 @@
 					<div class="ueditor" ng-model="singleSelection" style="width: 835px; height: 350px"></div>
 					<label>答案：</label>
 					<div class="paper-choice-answers"></div>
+					<label>难度：</label>
+					<select id="singleSelectionDifficulty" difficulty></select>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" ng-click="addQuestion('single')" ng-disabled="!validate">保存</button>
@@ -34,6 +36,8 @@
 					<div class="ueditor" ng-model="multipleSelection" style="width: 835px; height: 350px"></div>
 					<label>答案：</label>
 					<div class="paper-choice-answers"></div>
+					<label>难度：</label>
+					<select id="multipleSelectionDifficulty" difficulty></select>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" ng-click="addQuestion('multiple')" ng-disabled="!validate">保存</button>
@@ -53,6 +57,8 @@
 					<div class="ueditor" ng-model="essayQuestion" style="width: 835px; height: 200px"></div>
 					<label>答案：</label>
 					<div class="ueditor" ng-model="essayQuestionAnswer" style="width: 835px; height: 200px"></div>
+					<label>难度：</label>
+					<select id="essayQuestionDifficulty" difficulty></select>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" ng-click="addQuestion('essay')" ng-disabled="!validate">保存</button>
@@ -103,6 +109,7 @@
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="text|showQuestion:$index"></div>
 				<div ng-bind-html="singleSelections|showAnswer:id"></div>
+				<div ng-bind-html="singleSelections|showDifficulty:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#singleSelectionModal" ng-click="editQuestion('single',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
 			</div>
@@ -116,6 +123,7 @@
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="text|showQuestion:$index"></div>
 				<div ng-bind-html="multipleSelections|showAnswer:id"></div>
+				<div ng-bind-html="multipleSelections|showDifficulty:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#multipleSelectionModal" ng-click="editQuestion('multiple',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
 			</div>
@@ -129,6 +137,7 @@
 			<div ng-class="{'paper-question-even':$even,'paper-question-odd':$odd}">
 				<div ng-bind-html="text|showQuestion:$index"></div>
 				<div ng-bind-html="essayQuestions|showAnswer:id"></div>
+				<div ng-bind-html="essayQuestions|showDifficulty:id"></div>
 				<a class="paper-question-button" data-toggle="modal" data-target="#essayQuestionModal" ng-click="editQuestion('essay',id)">编辑</a>
 				<a class="paper-question-button" ng-click="deleteQuestion(id)">删除</a>
 			</div>

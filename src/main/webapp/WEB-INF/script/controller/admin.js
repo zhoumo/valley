@@ -31,7 +31,7 @@ controller.controller('jobController', [ '$scope', 'jobService', function($scope
 			scope.jobId = node.id;
 			scope.jobName = node.text;
 			scope.jobParent = null;
-			for (var i = 0; i < scope.jobList.length; i++) {
+			for ( var i = 0; i < scope.jobList.length; i++) {
 				if (scope.jobList[i].id == node.parent) {
 					$scope.jobParent = scope.jobList[i];
 				}

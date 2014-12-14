@@ -47,6 +47,7 @@ public class PaperService extends BaseService {
 				}
 				question.setQuestion(json.getString("Q" + key));
 				question.setAnswer(json.getString("A" + key));
+				question.setDifficulty((short) json.getInt("D" + key));
 				question.setType(type);
 				question.setPaper(paper);
 				question.setCreateTime();

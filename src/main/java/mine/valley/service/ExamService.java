@@ -19,7 +19,7 @@ public class ExamService extends BaseService {
 
 	private Map<String, ExamDaemon> daemonMap = new ConcurrentHashMap<String, ExamDaemon>();
 
-	public void startExam(Paper paper, User user) {
+	public Long startExam(Paper paper, User user) {
 		Exam exam = new Exam();
 		exam.setUser(user);
 		exam.setPaper(paper);
@@ -30,6 +30,7 @@ public class ExamService extends BaseService {
 		daemon.setDaemon(true);
 		daemonMap.put(paper.getId() + "-" + user.getId(), daemon);
 		daemon.start();
+		return exam.getId();
 	}
 
 	public void endExam(Exam exam) {

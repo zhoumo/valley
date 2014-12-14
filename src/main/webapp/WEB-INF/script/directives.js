@@ -25,7 +25,6 @@ directives.directive("auditPanel", function() {
 			var label = $('<label></label>');
 			label.css('float', 'left');
 			var auditYes = element.children().eq(0);
-			alert();
 			auditYes.click(function() {
 				input.val(true);
 				auditYes.css('display', 'none');
@@ -81,5 +80,11 @@ directives.directive('safeMode', function() {
 				};
 			}
 		}
+	};
+});
+directives.directive('difficulty', function() {
+	return {
+		restrict : 'A',
+		template : '<option value="0">简单</option><option selected="selected" value="1">一般</option><option value="2">困难</option>'
 	};
 });
