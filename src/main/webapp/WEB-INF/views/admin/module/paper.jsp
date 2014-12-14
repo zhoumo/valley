@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="admin-paper-panel" ng-controller="paperController">
+<div class="admin-paper-panel">
 	<div class="form-group">
 		<label>职位名称：</label>
 		<input type="text" />

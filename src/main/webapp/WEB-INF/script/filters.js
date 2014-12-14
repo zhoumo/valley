@@ -34,6 +34,15 @@ filters.filter('userType', function() {
 		}
 	};
 });
+filters.filter('userEnabled', function() {
+	return function(enabled) {
+		if (enabled) {
+			return '启用';
+		} else {
+			return '禁用';
+		}
+	};
+});
 filters.filter('paperStatus', function() {
 	return function(status) {
 		switch (status) {
@@ -63,7 +72,7 @@ filters.filter('getQuestions', function() {
 			return questions;
 		} else {
 			var questions = new Array();
-			for ( var index = 0; index < object.length; index++) {
+			for (var index = 0; index < object.length; index++) {
 				var question = object[index];
 				if (question.type == type) {
 					questions.push(question);
@@ -103,7 +112,7 @@ filters.filter('thirdLevelJob', function() {
 	return function(jobList) {
 		jobList = jobList || [];
 		var thirdLevelJobList = new Array();
-		for ( var index = 0; index < jobList.length; index++) {
+		for (var index = 0; index < jobList.length; index++) {
 			if (jobList[index].level + 1 == 3) {
 				thirdLevelJobList.push(jobList[index]);
 			}

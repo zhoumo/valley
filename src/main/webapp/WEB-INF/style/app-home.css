@@ -2,7 +2,7 @@
 	width: 100%;
 }
 
-.home>div,form {
+.home>div,.home>form {
 	width: 900px;
 	margin: 0 auto;
 	min-height: 650px;

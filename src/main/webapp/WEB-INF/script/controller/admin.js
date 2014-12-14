@@ -31,7 +31,7 @@ controller.controller('jobController', [ '$scope', 'jobService', function($scope
 			scope.jobId = node.id;
 			scope.jobName = node.text;
 			scope.jobParent = null;
-			for ( var i = 0; i < scope.jobList.length; i++) {
+			for (var i = 0; i < scope.jobList.length; i++) {
 				if (scope.jobList[i].id == node.parent) {
 					$scope.jobParent = scope.jobList[i];
 				}
@@ -56,11 +56,11 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 		columnDefs : [ {
 			field : 'id',
 			displayName : 'ID',
-			width : 50
+			width : 30
 		}, {
 			field : 'loginName',
 			displayName : '用户名',
-			width : 200
+			width : 180
 		}, {
 			field : 'realName',
 			displayName : '真实姓名'
@@ -69,8 +69,13 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 			displayName : '用户类型',
 			cellTemplate : '<div">{{COL_FIELD|userType}}</div>'
 		}, {
+			displayName : '申请出题'
+		}, {
+			displayName : '申请审核'
+		}, {
 			field : 'enabled',
 			displayName : '用户状态',
+			cellTemplate : '<div">{{COL_FIELD|userEnabled}}</div>'
 		}, {
 			field : 'updateTime',
 			displayName : '更新时间',
