@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <form safe-mode="true" name="paperForm" action="finishExam.do" method="post" novalidate>
-	<input name="id" value="{{examId}}" />
+	<input name="id" type="hidden" value="{{examId}}" />
 	<div class="paper-top">
 		<div class="paper-time">剩余时间：{{paper.time}}</div>
 	</div>

@@ -58,6 +58,9 @@ public class Paper extends BaseEntity {
 	private Long selectJobId;
 
 	@Transient
+	private Long examId;
+
+	@Transient
 	private Short examStatus;
 
 	public String getName() {
@@ -130,6 +133,14 @@ public class Paper extends BaseEntity {
 
 	public void setSelectJobId(Long selectJobId) {
 		this.selectJobId = selectJobId;
+	}
+
+	public Long getExamId() {
+		return examId;
+	}
+
+	public void setExamId(Long examId) {
+		this.examId = examId;
 	}
 
 	public Short getExamStatus() {

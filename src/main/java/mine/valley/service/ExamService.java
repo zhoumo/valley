@@ -19,6 +19,10 @@ public class ExamService extends BaseService {
 
 	private Map<String, ExamDaemon> daemonMap = new ConcurrentHashMap<String, ExamDaemon>();
 
+	public Exam getExam(Long id) {
+		return baseDao.get(Exam.class, id);
+	}
+
 	public Long startExam(Paper paper, User user) {
 		Exam exam = new Exam();
 		exam.setUser(user);
@@ -41,5 +45,9 @@ public class ExamService extends BaseService {
 
 	public int getTime(String id) {
 		return daemonMap.get(id).getTime();
+	}
+
+	public void saveExam(Exam exam) {
+		baseDao.save(exam);
 	}
 }

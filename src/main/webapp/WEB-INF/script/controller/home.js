@@ -170,6 +170,9 @@ controller.controller('paperCreateController', [ '$scope', '$rootScope', '$locat
 	};
 } ]);
 controller.controller('paperExamController', [ '$scope', '$routeParams', '$interval', 'paperService', function($scope, $routeParams, $interval, paperService) {
+	var id = $routeParams.id.split('_');
+	$scope.paperId = id[0];
+	$scope.examId = id[1];
 	$scope.finishExam = function() {
 		$('[type=radio]:checked').each(function() {
 			$('[name^=' + $(this).attr('name') + '_]').val($(this).val());
@@ -195,7 +198,7 @@ controller.controller('paperExamController', [ '$scope', '$routeParams', '$inter
 			window.close();
 		}
 	};
-	paperService.getPaper($routeParams.id).success(function(res) {
+	paperService.getPaper($scope.paperId).success(function(res) {
 		$scope.paper = res;
 		$interval(function() {
 			if ($scope.paper.time != 0) {
@@ -206,7 +209,7 @@ controller.controller('paperExamController', [ '$scope', '$routeParams', '$inter
 				window.close();
 			}
 		}, 1000);
-		paperService.timer($routeParams.id).success(function(res) {
+		paperService.timer($scope.paperId).success(function(res) {
 			$scope.paper.time = res;
 		});
 	});
@@ -235,14 +238,17 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 				if (!res) {
 					alert('考试未能成功开始！');
 				} else {
-					window.open('#/paper/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+					var success = window.open('#/paper/exam/' + id + '_' + res, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+					if (!success) {
+						alert('考试页面可能被浏览器拦截！');
+					}
 					location.reload();
 				}
 			});
 		}
 	};
-	$scope.continueAnswer = function(id) {
-		window.open('#/paper/exam/' + id, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
+	$scope.continueAnswer = function(paperId, examId) {
+		window.open('#/paper/exam/' + paperId + '_' + examId, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
 	};
 	$scope.auditPaper = function(id) {
 		$location.path('paper/audit/' + id).search('');

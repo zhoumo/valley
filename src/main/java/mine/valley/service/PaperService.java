@@ -80,18 +80,23 @@ public class PaperService extends BaseService {
 
 	public Page<Paper> getExamPaper(Page<Paper> page, Long userId) {
 		List<Exam> examList = baseDao.find("FROM Exam WHERE user.id = ?", new Object[] { userId });
-		Map<Long, Short> statusMap = new HashMap<Long, Short>();
+		Map<Long, Exam> examMap = new HashMap<Long, Exam>();
 		for (Exam exam : examList) {
-			statusMap.put(exam.getPaper().getId(), exam.getStatus());
+			examMap.put(exam.getPaper().getId(), exam);
 		}
 		page = baseDao.findByPage("FROM Paper WHERE status = ? ORDER BY job", new Object[] { PaperStatus.AUDIT_YES.getValue() }, page);
 		List<Paper> finishedPaper = new ArrayList<Paper>();
 		for (Paper paper : page.getResult()) {
-			Short status = statusMap.get(paper.getId());
-			if (status != null && status.equals(ExamStatus.END.getValue())) {
+			Exam exam = examMap.get(paper.getId());
+			if (exam == null) {
+				continue;
+			}
+			Short status = exam.getStatus();
+			if (status.equals(ExamStatus.END.getValue())) {
 				finishedPaper.add(paper);
 			} else {
 				paper.setExamStatus(status);
+				paper.setExamId(exam.getId());
 			}
 		}
 		page.getResult().removeAll(finishedPaper);

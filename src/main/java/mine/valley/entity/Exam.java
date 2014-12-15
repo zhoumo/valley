@@ -21,6 +21,9 @@ public class Exam extends BaseEntity {
 	@JoinColumn(name = "PAPER")
 	private Paper paper;
 
+	@Column(name = "ANSWER", length = 65535)
+	private String answer;
+
 	@Column(name = "STATUS", nullable = false)
 	private Short status;
 
@@ -38,6 +41,14 @@ public class Exam extends BaseEntity {
 
 	public void setPaper(Paper paper) {
 		this.paper = paper;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 
 	public Short getStatus() {

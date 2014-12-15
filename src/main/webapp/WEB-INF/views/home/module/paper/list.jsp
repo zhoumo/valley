@@ -23,7 +23,7 @@
 			<div>附加消息：</div>
 			<div class="list-button">
 				<button type="button" class="btn btn-primary" ng-click="startAnswer(paper.id)" ng-show="type=='exam' && paper.examStatus==null">开始答题</button>
-				<button type="button" class="btn btn-primary" ng-click="continueAnswer(paper.id)" ng-show="type=='exam' && paper.examStatus==0">继续答题</button>
+				<button type="button" class="btn btn-primary" ng-click="continueAnswer(paper.id, paper.examId)" ng-show="type=='exam' && paper.examStatus==0">继续答题</button>
 				<button type="button" class="btn btn-primary" ng-click="auditPaper(paper.id)" ng-show="type=='audit'">审核试卷</button>
 				<button type="button" class="btn btn-primary" ng-click="editPaper(paper.id)" ng-show="type=='create' && paper.status==0">编辑试卷</button>
 				<button type="button" class="btn btn-primary" ng-click="submitPaper(paper.id)" ng-show="type=='create' && paper.status==0">提交试卷</button>

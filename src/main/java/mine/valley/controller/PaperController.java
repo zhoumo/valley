@@ -2,13 +2,16 @@ package mine.valley.controller;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import mine.valley.base.BaseController;
 import mine.valley.constant.PaperStatus;
+import mine.valley.entity.Exam;
 import mine.valley.entity.Paper;
 import mine.valley.entity.Question;
 import mine.valley.entity.User;
@@ -127,15 +130,19 @@ public class PaperController extends BaseController {
 		return paperService.getPaper(id);
 	}
 
-	@RequestMapping("/endExam.do")
-	public String submitPaper(HttpServletRequest request) {
+	@RequestMapping("/finishExam.do")
+	public String finishExam(Long id, HttpServletRequest request) {
+		Exam exam = examService.getExam(id);
+		Map<String, String> answer = new HashMap<String, String>();
 		for (Object key : request.getParameterMap().keySet()) {
 			if (!key.toString().contains("_")) {
 				continue;
 			}
 			String questionId = key.toString().split("_")[1];
-			System.out.println(questionId + "-" + request.getParameter(key.toString()));
+			answer.put(questionId, request.getParameter(key.toString()));
 		}
+		exam.setAnswer(answer.toString());
+		examService.saveExam(exam);
 		return "redirect:/";
 	}
 
