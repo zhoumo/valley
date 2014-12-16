@@ -78,6 +78,11 @@ public class PaperService extends BaseService {
 		return baseDao.findByPage(search, new Object[] { PaperStatus.SUBMIT.getValue(), userId, ApplyType.AUDITOR.getValue() }, page);
 	}
 
+	public Page<Paper> getAuditedPaper(Page<Paper> page, Long userId) {
+		String search = "FROM Paper WHERE auditor.id = ? ORDER BY status, job";
+		return baseDao.findByPage(search, new Object[] { userId }, page);
+	}
+
 	public Page<Paper> getExamPaper(Page<Paper> page, Long userId) {
 		List<Exam> examList = baseDao.find("FROM Exam WHERE user.id = ?", new Object[] { userId });
 		Map<Long, Exam> examMap = new HashMap<Long, Exam>();

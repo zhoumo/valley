@@ -78,7 +78,7 @@ public class PaperController extends BaseController {
 		paper.setAuditor(getUser());
 		paper.setAuditTime(new Date());
 		paperService.save(paper);
-		return PAPER_LIST_FOR_AUDIT;
+		return PAPER_LIST_FOR_AUDITED;
 	}
 
 	@RequestMapping("/renewPaper.do")
@@ -112,6 +112,8 @@ public class PaperController extends BaseController {
 			page = paperService.getPaperByAuthor(page, user.getId());
 		} else if ("audit".equals(type)) {
 			page = paperService.getNoAuditPaper(page, user.getId());
+		} else if ("audited".equals(type)) {
+			page = paperService.getAuditedPaper(page, user.getId());
 		} else if ("exam".equals(type)) {
 			page = paperService.getExamPaper(page, user.getId());
 		} else {

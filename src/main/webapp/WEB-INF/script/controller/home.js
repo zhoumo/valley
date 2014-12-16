@@ -1,5 +1,5 @@
 var controller = angular.module('controllers', [ 'ngGrid', 'ngSanitize', 'ngUeditor', 'services', 'filters' ]);
-controller.controller('homeController', [ '$scope', '$rootScope', '$location', 'userService', 'jobService', function($scope, $rootScope, $location, userService, jobService) {
+controller.controller('homeController', [ '$scope', '$rootScope', '$location', 'userService', 'jobService', 'paperService', function($scope, $rootScope, $location, userService, jobService, paperService) {
 	userService.getAuthority().success(function(res) {
 		$rootScope.user = {
 			loginName : res.loginName,
@@ -48,6 +48,12 @@ controller.controller('homeController', [ '$scope', '$rootScope', '$location', '
 	$scope.setApplyType = function(type) {
 		$scope.applyType = type;
 	};
+	$scope.auditPaper = function(id) {
+		$location.path('paper/audit/' + id);
+	};
+	paperService.getPaperList('audit', 1, 4).success(function(res) {
+		$scope.auditPapers = res.result;
+	});
 } ]);
 controller.controller('paperCreateController', [ '$scope', '$rootScope', '$location', 'paperService', function($scope, $rootScope, $location, paperService) {
 	$scope.id = $location.search().id;
@@ -251,9 +257,6 @@ controller.controller('paperListController', [ '$scope', '$location', 'paperServ
 	};
 	$scope.continueAnswer = function(paperId, examId) {
 		window.open('#/paper/exam/' + paperId + '_' + examId, 'newwindow', 'toolbar=no,menubar=no,scrollbars=yes,location=no,status=no');
-	};
-	$scope.auditPaper = function(id) {
-		$location.path('paper/audit/' + id).search('');
 	};
 	$scope.editPaper = function(id) {
 		$location.path('paper/create').search('id=' + id);

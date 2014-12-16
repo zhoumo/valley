@@ -72,9 +72,9 @@
 			<a href="#" onclick="window.onbeforeunload = null">首页</a>
 		</li>
 		<li>
-			<a href="#/paper/list?type=create" onclick="window.onbeforeunload = null">我的笔试题</a>
+			<a href="#/paper/list?type=create" onclick="window.onbeforeunload = null">试卷列表</a>
 		</li>
-		<li class="active">创建试卷</li>
+		<li class="active">当前位置</li>
 	</ol>
 	<div class="paper-title">
 		新增笔试题：

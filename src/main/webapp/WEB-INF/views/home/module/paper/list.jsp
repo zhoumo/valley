@@ -4,7 +4,7 @@
 		<li>
 			<a href="#">首页</a>
 		</li>
-		<li class="active">我的笔试题</li>
+		<li class="active">当前位置</li>
 	</ol>
 	<div class="paper-list-empty" ng-show="(paperList|size) == 0">未找到满足条件的试卷！</div>
 	<div ng-repeat="paper in paperList">
@@ -24,10 +24,9 @@
 			<div class="list-button">
 				<button type="button" class="btn btn-primary" ng-click="startAnswer(paper.id)" ng-show="type=='exam' && paper.examStatus==null">开始答题</button>
 				<button type="button" class="btn btn-primary" ng-click="continueAnswer(paper.id, paper.examId)" ng-show="type=='exam' && paper.examStatus==0">继续答题</button>
-				<button type="button" class="btn btn-primary" ng-click="auditPaper(paper.id)" ng-show="type=='audit'">审核试卷</button>
 				<button type="button" class="btn btn-primary" ng-click="editPaper(paper.id)" ng-show="type=='create' && paper.status==0">编辑试卷</button>
 				<button type="button" class="btn btn-primary" ng-click="submitPaper(paper.id)" ng-show="type=='create' && paper.status==0">提交试卷</button>
-				<button type="button" class="btn btn-default" ng-click="showPaper(paper.id)" ng-show="type=='create' && paper.status!=0">查看试卷</button>
+				<button type="button" class="btn btn-default" ng-click="showPaper(paper.id)" ng-show="(type=='create' && paper.status!=0) || type=='audited'">查看试卷</button>
 				<button type="button" class="btn btn-default">给HR发消息</button>
 			</div>
 		</div>

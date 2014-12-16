@@ -34,8 +34,14 @@
 	</panel>
 	<panel title="我要审题" type="audit" color="#6f8ba9" ng-show="user.approveAuditor">
 		<div class="panel-top-button">
-			<a href="#/paper/list?type=audit">已审试卷</a>
+			<a href="#/paper/list?type=audited">已审试卷</a>
 		</div>
+		<ul class="panel-list" ng-repeat="paper in auditPapers">
+			<li>
+				<label>{{paper.name}}</label>
+				<a ng-click="auditPaper(paper.id)">审核</a>
+			</li>
+		</ul>
 	</panel>
 	<panel title="账户管理" type="account" color="#15467a">
 		<div class="panel-content">

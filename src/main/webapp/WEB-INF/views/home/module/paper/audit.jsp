@@ -4,10 +4,7 @@
 		<li>
 			<a href="#" onclick="window.onbeforeunload = null">首页</a>
 		</li>
-		<li>
-			<a href="#/paper/list?type=create" onclick="window.onbeforeunload = null">我的笔试题</a>
-		</li>
-		<li class="active">审核试卷</li>
+		<li class="active">当前位置</li>
 	</ol>
 	<input name="id" value="{{id}}" type="hidden" />
 	<div class="paper-title">{{paper.name}} - 笔试题</div>

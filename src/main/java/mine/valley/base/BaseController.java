@@ -27,7 +27,7 @@ public class BaseController {
 
 	protected static final String PAPER_LIST_FOR_CREATE = "redirect:/#/paper/list?type=create";
 
-	protected static final String PAPER_LIST_FOR_AUDIT = "redirect:/#/paper/list?type=audit";
+	protected static final String PAPER_LIST_FOR_AUDITED = "redirect:/#/paper/list?type=audited";
 
 	protected static final String PAPER_RENEW = "redirect:/#/paper/create?id=";
 

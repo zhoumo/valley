@@ -5,9 +5,9 @@
 			<a href="#">首页</a>
 		</li>
 		<li>
-			<a href="#/paper/list?type=create">我的笔试题</a>
+			<a href="#/paper/list?type=create">试卷列表</a>
 		</li>
-		<li class="active">查看试卷</li>
+		<li class="active">当前位置</li>
 	</ol>
 	<input type="hidden" name="id" value="{{paper.id}}" />
 	<div class="paper-title">{{paper.name}} - 笔试题</div>
