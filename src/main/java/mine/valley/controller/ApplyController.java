@@ -2,12 +2,9 @@ package mine.valley.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import mine.valley.base.BaseController;
 import mine.valley.constant.ApplyType;
 import mine.valley.entity.Apply;
-import mine.valley.entity.User;
 import mine.valley.service.ApplyService;
 
 import org.json.JSONObject;
@@ -22,20 +19,19 @@ public class ApplyController extends BaseController {
 	private ApplyService applyService;
 
 	@RequestMapping("/apply.do")
-	public String apply(String applyType, String resume, String selectedJobs, HttpServletRequest request) {
+	public String apply(String applyType, String resume, String selectedJobs) {
 		String jobIds = "";
 		JSONObject jobs = new JSONObject(selectedJobs);
 		for (Object key : jobs.keySet()) {
 			JSONObject job = jobs.getJSONObject(key.toString());
 			jobIds += job.getString("id") + ",";
 		}
-		User user = (User) request.getSession().getAttribute(super.getUserName());
 		if (ApplyType.CREATOR.getName().equals(applyType)) {
-			applyService.applyCreator(jobIds, user, resume);
+			applyService.applyCreator(jobIds, getUser(), resume);
 		} else {
-			applyService.applyAuditor(jobIds, user, resume);
+			applyService.applyAuditor(jobIds, getUser(), resume);
 		}
-		return "redirect:/";
+		return ROOT_PATH;
 	}
 
 	@RequestMapping("/approve.do")
@@ -45,6 +41,6 @@ public class ApplyController extends BaseController {
 			apply.setApproved(approved);
 		}
 		applyService.batchSave(applyList);
-		return "redirect:/#?active=user";
+		return ACTIVE_USER;
 	}
 }

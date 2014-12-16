@@ -39,7 +39,7 @@
 	</panel>
 	<panel title="账户管理" type="account" color="#15467a">
 		<div class="panel-content">
-			<a href="#/account/edit">修改个人资料</a>
+			<a data-toggle="modal" data-target="#userModal">修改个人资料</a>
 		</div>
 	</panel>
 	<div class="modal fade" id="applyModal" role="dialog" aria-hidden="true" data-backdrop="static">
@@ -100,6 +100,36 @@
 					<p>将成为数十万相关职位应聘者的偶像，并有高性价比的现金回报！</p>
 					<p style="color: red">您已经提交过该申请，系统正在审核过程中，请耐心等待！</p>
 				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="userModal" role="dialog" aria-hidden="true" data-backdrop="static">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">修改个人资料</h4>
+				</div>
+				<form name="userForm" class="form-horizontal" action="updateUser.do" method="post" novalidate>
+					<div class="modal-body">
+						<div class="form-group">
+							<label class="col-sm-2">姓 名</label>
+							<div class="col-sm-6">
+								<input name="realName" type="text" class="form-control" placeholder="请输入您的真实姓名" ng-model="user.realName" required="required" autocomplete="off" />
+							</div>
+							<div class="error" ng-if="userForm.realName.$invalid">未填写</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2">密 码</label>
+							<div class="col-sm-6">
+								<input name="password" type="password" class="form-control" placeholder="6-12位的密码" ng-model="password" required="required" ng-minlength="6" ng-maxlength="12" autocomplete="off" />
+							</div>
+							<div class="error" ng-if="userForm.password.$invalid">密码格式错误</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" type="submit" ng-disabled="userForm.$invalid">保存</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

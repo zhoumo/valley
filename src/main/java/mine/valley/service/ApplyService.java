@@ -16,6 +16,20 @@ import org.springframework.util.StringUtils;
 @Transactional
 public class ApplyService extends BaseService {
 
+	private void save(Apply apply) {
+		baseDao.save(apply);
+	}
+
+	private void deleteByUser(Long uesrId, Short type) {
+		baseDao.executeSQL("DELETE FROM APPLY WHERE USER_ID = " + uesrId + " AND TYPE = " + type);
+	}
+
+	public void batchSave(List<Apply> applyList) {
+		for (Apply apply : applyList) {
+			baseDao.save(apply);
+		}
+	}
+
 	private void apply(String jobIds, User user, String resume, Short type) {
 		deleteByUser(user.getId(), type);
 		for (String jobId : jobIds.split(",")) {
@@ -30,14 +44,6 @@ public class ApplyService extends BaseService {
 			apply.setCreateTime();
 			save(apply);
 		}
-	}
-
-	private void save(Apply apply) {
-		baseDao.save(apply);
-	}
-
-	private void deleteByUser(Long uesrId, Short type) {
-		baseDao.executeSQL("DELETE FROM APPLY WHERE USER_ID = " + uesrId + " AND TYPE = " + type);
 	}
 
 	public void applyCreator(String jobIds, User user, String resume) {
@@ -58,11 +64,5 @@ public class ApplyService extends BaseService {
 
 	public boolean isApproved(Short type, Long userId) {
 		return baseDao.find("FROM Apply WHERE type = ? AND user.id = ? AND approved = TRUE", type, userId).size() != 0;
-	}
-
-	public void batchSave(List<Apply> applyList) {
-		for (Apply apply : applyList) {
-			baseDao.save(apply);
-		}
 	}
 }

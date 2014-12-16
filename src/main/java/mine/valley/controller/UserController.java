@@ -1,7 +1,5 @@
 package mine.valley.controller;
 
-import javax.servlet.http.HttpSession;
-
 import mine.valley.base.BaseController;
 import mine.valley.constant.ApplyType;
 import mine.valley.entity.User;
@@ -26,34 +24,42 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/getAuthority.do")
 	@ResponseBody
-	public Authority getAuthority(HttpSession session) {
-		User user = (User) session.getAttribute(super.getUserName());
+	public Authority getAuthority() {
 		Authority authority = new Authority();
-		authority.setLoginName(user.getLoginName());
-		authority.setRealName(user.getRealName());
-		authority.setApplyCreator(applyService.isApplied(ApplyType.CREATOR.getValue(), user.getId()));
-		authority.setApplyAuditor(applyService.isApplied(ApplyType.AUDITOR.getValue(), user.getId()));
-		authority.setApproveCreator(applyService.isApproved(ApplyType.CREATOR.getValue(), user.getId()));
-		authority.setApproveAuditor(applyService.isApproved(ApplyType.AUDITOR.getValue(), user.getId()));
+		authority.setLoginName(getUser().getLoginName());
+		authority.setRealName(getUser().getRealName());
+		authority.setApplyCreator(applyService.isApplied(ApplyType.CREATOR.getValue(), getUser().getId()));
+		authority.setApplyAuditor(applyService.isApplied(ApplyType.AUDITOR.getValue(), getUser().getId()));
+		authority.setApproveCreator(applyService.isApproved(ApplyType.CREATOR.getValue(), getUser().getId()));
+		authority.setApproveAuditor(applyService.isApproved(ApplyType.AUDITOR.getValue(), getUser().getId()));
 		return authority;
 	}
 
 	@RequestMapping("/registerUser.do")
 	public String registerUser(User user) {
-		userService.saveOrUpdate(user);
-		return "redirect:/";
+		userService.save(user);
+		return ROOT_PATH;
 	}
 
 	@RequestMapping("/saveUser.do")
 	public String saveUser(User user) {
-		userService.saveOrUpdate(user);
-		return "redirect:/#?active=user";
+		userService.save(user);
+		return ACTIVE_USER;
+	}
+
+	@RequestMapping("/updateUser.do")
+	public String updateUser(String realName, String password) {
+		User user = getUser();
+		user.setRealName(realName);
+		user.setPassword(password);
+		userService.save(user);
+		return ROOT_PATH;
 	}
 
 	@RequestMapping("/deleteUser.do")
 	public String deleteUser(Long id) {
 		userService.delete(id);
-		return "redirect:/#?active=user";
+		return ACTIVE_USER;
 	}
 
 	@RequestMapping("/getUserList.do")

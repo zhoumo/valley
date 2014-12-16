@@ -16,7 +16,5 @@ angular.module('home', [ 'ngAnimate', 'ngRoute', 'controllers', 'directives' ]).
 	}).when('/paper/exam/:id', {
 		templateUrl : 'home/paper/exam',
 		controller : 'paperExamController'
-	}).when('/account/edit', {
-		templateUrl : 'home/account/edit'
 	});
 });

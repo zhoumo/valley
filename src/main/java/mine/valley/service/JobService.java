@@ -14,6 +14,31 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class JobService extends BaseService {
 
+	public void save(Job job) {
+		String jobName = job.getName();
+		Long jobParentId = job.getParentId();
+		if (job.getId() != null) {
+			job = baseDao.get(Job.class, job.getId());
+			job.setName(jobName);
+		} else {
+			job.setCreateTime();
+		}
+		if (jobParentId != null && jobParentId != job.getId()) {
+			job.setParent(baseDao.get(Job.class, jobParentId));
+			job.setLevel(job.getParent().getLevel() + 1);
+		} else {
+			job.setParent(null);
+			job.setLevel(0);
+		}
+		baseDao.save(job);
+	}
+
+	public void delete(Long id) {
+		Job job = baseDao.get(Job.class, id);
+		job.setIsDeleted(true);
+		baseDao.save(job);
+	}
+
 	public Job getJob(Long id) {
 		return baseDao.get(Job.class, id);
 	}
@@ -46,30 +71,5 @@ public class JobService extends BaseService {
 		}
 		tree.setNodes(treeList);
 		return tree;
-	}
-
-	public void saveJob(Job job) {
-		String jobName = job.getName();
-		Long jobParentId = job.getParentId();
-		if (job.getId() != null) {
-			job = baseDao.get(Job.class, job.getId());
-			job.setName(jobName);
-		} else {
-			job.setCreateTime();
-		}
-		if (jobParentId != null && jobParentId != job.getId()) {
-			job.setParent(baseDao.get(Job.class, jobParentId));
-			job.setLevel(job.getParent().getLevel() + 1);
-		} else {
-			job.setParent(null);
-			job.setLevel(0);
-		}
-		baseDao.save(job);
-	}
-
-	public void deleteJob(Long id) {
-		Job job = baseDao.get(Job.class, id);
-		job.setIsDeleted(true);
-		baseDao.save(job);
 	}
 }

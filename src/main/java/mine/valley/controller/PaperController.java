@@ -44,20 +44,20 @@ public class PaperController extends BaseController {
 		questionList.addAll(paperService.createMultipleSelectionList(request.getParameter("multipleSelections"), paper));
 		questionList.addAll(paperService.createEssayQuestionList(request.getParameter("essayQuestions"), paper));
 		paper.setQuestions(questionList);
-		paper.setAuthor((User) request.getSession().getAttribute(super.getUserName()));
+		paper.setAuthor(getUser());
 		paper.setJob(jobService.getJob(paper.getSelectJobId()));
 		paper.setStatus(PaperStatus.CREATE.getValue());
 		paper.setCreateTime();
-		paperService.savePaper(paper);
-		return "redirect:/#/paper/list?type=create";
+		paperService.save(paper);
+		return PAPER_LIST_FOR_CREATE;
 	}
 
 	@RequestMapping("/submitPaper.do")
 	public String submitPaper(Long id) {
 		Paper paper = paperService.getPaper(id);
 		paper.setStatus(PaperStatus.SUBMIT.getValue());
-		paperService.savePaper(paper);
-		return "redirect:/#/paper/list?type=create";
+		paperService.save(paper);
+		return PAPER_LIST_FOR_CREATE;
 	}
 
 	@RequestMapping("/auditPaper.do")
@@ -74,38 +74,34 @@ public class PaperController extends BaseController {
 				question.setComment(auditResult);
 			}
 		}
-		if (isAuditYes) {
-			paper.setStatus(PaperStatus.AUDIT_YES.getValue());
-		} else {
-			paper.setStatus(PaperStatus.AUDIT_NO.getValue());
-		}
-		paper.setAuditor((User) request.getSession().getAttribute(super.getUserName()));
+		paper.setStatus(isAuditYes ? PaperStatus.AUDIT_YES.getValue() : PaperStatus.AUDIT_NO.getValue());
+		paper.setAuditor(getUser());
 		paper.setAuditTime(new Date());
-		paperService.savePaper(paper);
-		return "redirect:/#/paper/list?type=audit";
+		paperService.save(paper);
+		return PAPER_LIST_FOR_AUDIT;
 	}
 
 	@RequestMapping("/renewPaper.do")
 	public String renewPaper(Long id) {
 		Paper paper = paperService.getPaper(id);
 		paper.setStatus(PaperStatus.CREATE.getValue());
-		paperService.savePaper(paper);
-		return "redirect:/#/paper/create?id=" + id;
+		paperService.save(paper);
+		return PAPER_RENEW + id;
 	}
 
 	@RequestMapping("/reviewPaper.do")
 	public String reviewPaper(Long id) {
 		Paper paper = paperService.getPaper(id);
 		paper.setStatus(PaperStatus.SUBMIT.getValue());
-		paperService.savePaper(paper);
-		return "redirect:/#?active=paper";
+		paperService.save(paper);
+		return ACTIVE_PAPER;
 	}
 
 	@RequestMapping("/deletePaper.do")
 	public String deletePaper(Long id) {
 		Paper paper = paperService.getPaper(id);
-		paperService.deletePaper(paper);
-		return "redirect:/#?active=paper";
+		paperService.delete(paper);
+		return ACTIVE_PAPER;
 	}
 
 	@RequestMapping("/getPaperList.do")
@@ -142,22 +138,19 @@ public class PaperController extends BaseController {
 			answer.put(questionId, request.getParameter(key.toString()));
 		}
 		exam.setAnswer(answer.toString());
-		examService.saveExam(exam);
-		return "redirect:/";
+		examService.save(exam);
+		return ROOT_PATH;
 	}
 
 	@RequestMapping("/startExam.do")
 	@ResponseBody
-	public Long startExam(Long paperId, HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute(super.getUserName());
-		Paper paper = paperService.getPaper(paperId);
-		return examService.startExam(paper, user);
+	public Long startExam(Long paperId) {
+		return examService.startExam(paperService.getPaper(paperId), getUser());
 	}
 
 	@RequestMapping("/timer.do")
 	@ResponseBody
-	public int timer(Long paperId, HttpServletRequest request) {
-		User user = (User) request.getSession().getAttribute(super.getUserName());
-		return examService.getTime(paperId + "-" + user.getId());
+	public int timer(Long paperId) {
+		return examService.getTime(paperId + "-" + getUser().getId());
 	}
 }

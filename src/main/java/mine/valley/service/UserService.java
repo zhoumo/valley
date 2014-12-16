@@ -26,7 +26,7 @@ public class UserService extends BaseService {
 		return (Role) baseDao.find("FROM Role WHERE name = ? AND isDeleted = false", roleName).get(0);
 	}
 
-	public void saveOrUpdate(User user) {
+	public void save(User user) {
 		user.setRoles(Arrays.asList(new Role[] { getRole(RoleType.USER.getValue()), getRole(user.getType()) }));
 		if (user.getId() == null) {
 			user.setCreateTime();

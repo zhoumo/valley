@@ -33,13 +33,13 @@ public class JobController extends BaseController {
 
 	@RequestMapping("/saveJob.do")
 	public String saveJob(Job job) {
-		jobService.saveJob(job);
-		return "redirect:/#?active=job";
+		jobService.save(job);
+		return ACTIVE_JOB;
 	}
 
 	@RequestMapping("/deleteJob.do")
 	public String deleteJob(Long id) {
-		jobService.deleteJob(id);
-		return "redirect:/#?active=job";
+		jobService.delete(id);
+		return ACTIVE_JOB;
 	}
 }

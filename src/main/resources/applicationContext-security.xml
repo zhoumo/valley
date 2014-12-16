@@ -13,7 +13,7 @@
 		<security:intercept-url pattern="/views/login/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/register**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-		<security:form-login login-page="/login.jsp" default-target-url="/" authentication-failure-url="/login.jsp?error=true" authentication-success-handler-ref="authSuccess" />
+		<security:form-login login-page="/login.jsp" default-target-url="/" authentication-failure-url="/login.jsp?error=true" />
 		<security:intercept-url pattern="/**" access="ROLE_USER" />
 	</security:http>
 	<security:authentication-manager>
@@ -21,5 +21,4 @@
 			<security:jdbc-user-service data-source-ref="dataSource" users-by-username-query="SELECT U.LOGIN_NAME, U.PASSWORD, U.ENABLED FROM USER U WHERE U.LOGIN_NAME = ?" authorities-by-username-query="SELECT U.LOGIN_NAME, R.NAME AS AUTHORITY FROM USER U, ROLE R, ACCESS A WHERE U.LOGIN_NAME = ? AND U.ID = A.USER_ID AND A.ROLE_ID = R.ID" />
 		</security:authentication-provider>
 	</security:authentication-manager>
-	<bean id="authSuccess" class="mine.valley.security.AuthenticationSuccessHandlerImpl" />
 </beans>

@@ -1,20 +1,24 @@
 package mine.valley.controller;
 
-import javax.servlet.http.HttpSession;
-
 import mine.valley.base.BaseController;
 import mine.valley.constant.RoleType;
 import mine.valley.entity.User;
+import mine.valley.service.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class RouteController extends BaseController {
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping("/")
-	public String index(HttpSession session) {
-		User user = (User) session.getAttribute(super.getUserName());
+	public String index() {
+		User user = userService.getUserByName(getUserName());
+		session.setAttribute(user.getLoginName(), user);
 		if (user.getType().equals(RoleType.ADMIN.getValue())) {
 			return "admin";
 		} else {
@@ -55,10 +59,5 @@ public class RouteController extends BaseController {
 	@RequestMapping("home/paper/list")
 	public String homePaperList() {
 		return "home/module/paper/list";
-	}
-
-	@RequestMapping("home/account/edit")
-	public String homeAccountEdit() {
-		return "home/module/account/edit";
 	}
 }

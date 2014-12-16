@@ -57,11 +57,11 @@ public class PaperService extends BaseService {
 		return questionList;
 	}
 
-	public void savePaper(Paper paper) {
+	public void save(Paper paper) {
 		baseDao.save(paper);
 	}
 
-	public void deletePaper(Paper paper) {
+	public void delete(Paper paper) {
 		baseDao.delete(paper);
 	}
 
