@@ -31,8 +31,10 @@ public class UserController extends BaseController {
 		Authority authority = new Authority();
 		authority.setLoginName(user.getLoginName());
 		authority.setRealName(user.getRealName());
-		authority.setHasAppliedCreator(applyService.hasApplied(ApplyType.CREATOR.getValue()));
-		authority.setHasAppliedAuditor(applyService.hasApplied(ApplyType.AUDITOR.getValue()));
+		authority.setApplyCreator(applyService.isApplied(ApplyType.CREATOR.getValue(), user.getId()));
+		authority.setApplyAuditor(applyService.isApplied(ApplyType.AUDITOR.getValue(), user.getId()));
+		authority.setApproveCreator(applyService.isApproved(ApplyType.CREATOR.getValue(), user.getId()));
+		authority.setApproveAuditor(applyService.isApproved(ApplyType.AUDITOR.getValue(), user.getId()));
 		return authority;
 	}
 

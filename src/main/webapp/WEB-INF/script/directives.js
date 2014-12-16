@@ -16,7 +16,7 @@ directives.directive("panel", function() {
 		}
 	};
 });
-directives.directive("auditPanel", function() {
+directives.directive('auditPanel', function() {
 	return {
 		restrict : 'E',
 		template : '<button type="button" class="btn btn-success">通过</button><div class="space"></div><button type="button" class="btn btn-danger">不通过</button>',
@@ -62,6 +62,34 @@ directives.directive("auditStatus", function() {
 				}
 			} else {
 				element.append('<label style="color:#808080">未审核</label>');
+			}
+		}
+	};
+});
+directives.directive('approve', function() {
+	return {
+		restrict : 'E',
+		link : function(scope, element, attrs) {
+			var value = JSON.parse(attrs.value);
+			if (!value || value.length == 0) {
+				element.append('未申请');
+				return;
+			}
+			if (value[0].approved) {
+				element.append('<div style="color:green">已通过</div>');
+			} else {
+				var message = '申请职位：';
+				for ( var index = 0; index < value.length; index++) {
+					message += value[index].job.name + ' ';
+				}
+				message += '\n\n';
+				message += '个人资历：' + value[0].resume;
+				message += '\n\n';
+				var button = $('<div style="color:red">待处理</div>');
+				button.click(function() {
+					scope.approve(attrs.type, attrs.user, message);
+				});
+				element.append(button);
 			}
 		}
 	};

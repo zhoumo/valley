@@ -4,8 +4,10 @@ controller.controller('homeController', [ '$scope', '$rootScope', '$location', '
 		$rootScope.user = {
 			loginName : res.loginName,
 			realName : res.realName,
-			hasAppliedCreator : res.hasAppliedCreator,
-			hasAppliedAuditor : res.hasAppliedAuditor,
+			applyCreator : res.applyCreator,
+			applyAuditor : res.applyAuditor,
+			approveCreator : res.approveCreator,
+			approveAuditor : res.approveAuditor,
 			user : true
 		};
 	});

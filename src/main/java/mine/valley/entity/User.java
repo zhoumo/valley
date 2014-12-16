@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import mine.valley.base.BaseEntity;
 
@@ -38,6 +39,12 @@ public class User extends BaseEntity {
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinTable(name = "ACCESS", joinColumns = { @JoinColumn(name = "USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 	private List<Role> roles;
+
+	@Transient
+	private List<Apply> applyCreator;
+
+	@Transient
+	private List<Apply> applyAuditor;
 
 	public String getLoginName() {
 		return loginName;
@@ -85,5 +92,21 @@ public class User extends BaseEntity {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public List<Apply> getApplyCreator() {
+		return applyCreator;
+	}
+
+	public void setApplyCreator(List<Apply> applyCreator) {
+		this.applyCreator = applyCreator;
+	}
+
+	public List<Apply> getApplyAuditor() {
+		return applyAuditor;
+	}
+
+	public void setApplyAuditor(List<Apply> applyAuditor) {
+		this.applyAuditor = applyAuditor;
 	}
 }

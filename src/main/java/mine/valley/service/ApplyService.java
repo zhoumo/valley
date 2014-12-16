@@ -1,5 +1,7 @@
 package mine.valley.service;
 
+import java.util.List;
+
 import mine.valley.base.BaseService;
 import mine.valley.constant.ApplyType;
 import mine.valley.entity.Apply;
@@ -46,7 +48,21 @@ public class ApplyService extends BaseService {
 		apply(jobIds, user, resume, ApplyType.AUDITOR.getValue());
 	}
 
-	public boolean hasApplied(Short type) {
-		return baseDao.find("FROM Apply WHERE type = ?", type).size() != 0;
+	public List<Apply> getApplyList(Short type, Long userId) {
+		return baseDao.find("FROM Apply WHERE type = ? AND user.id = ?", type, userId);
+	}
+
+	public boolean isApplied(Short type, Long userId) {
+		return getApplyList(type, userId).size() != 0;
+	}
+
+	public boolean isApproved(Short type, Long userId) {
+		return baseDao.find("FROM Apply WHERE type = ? AND user.id = ? AND approved = TRUE", type, userId).size() != 0;
+	}
+
+	public void batchSave(List<Apply> applyList) {
+		for (Apply apply : applyList) {
+			baseDao.save(apply);
+		}
 	}
 }

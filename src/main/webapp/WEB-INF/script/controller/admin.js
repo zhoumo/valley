@@ -69,9 +69,13 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 			displayName : '用户类型',
 			cellTemplate : '<div">{{COL_FIELD|userType}}</div>'
 		}, {
-			displayName : '申请出题'
+			field : 'applyCreator',
+			displayName : '申请出题',
+			cellTemplate : '<approve type="0" value="{{COL_FIELD}}" user="{{row.entity.id}}"></approve>'
 		}, {
-			displayName : '申请审核'
+			field : 'applyAuditor',
+			displayName : '申请审核',
+			cellTemplate : '<approve type="1" value="{{COL_FIELD}}" user="{{row.entity.id}}"></approve>'
 		}, {
 			field : 'enabled',
 			displayName : '用户状态',
@@ -83,7 +87,7 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 			cellTemplate : '<div>{{COL_FIELD|date:"yyyy-MM-dd hh:mm:ss"}}</div>'
 		}, {
 			displayName : '操作',
-			cellTemplate : '<a ng-click="updateUser({user:row.entity})">修改</a>&nbsp;&nbsp;<a ng-click="deleteUser({user:row.entity})">删除</a>'
+			cellTemplate : '<a ng-click="updateUser(row.entity)">修改</a>&nbsp;&nbsp;<a ng-click="deleteUser(row.entity)">删除</a>'
 		} ]
 	}, function() {
 		userService.getUserList($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize).success(function(res) {
@@ -92,14 +96,21 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 		});
 	});
 	$scope.updateUser = function(entity) {
-		$scope.userId = entity.user.id;
-		$scope.loginName = entity.user.loginName;
-		$scope.realName = entity.user.realName;
+		$scope.userId = entity.id;
+		$scope.loginName = entity.loginName;
+		$scope.realName = entity.realName;
 		$('#userModal').modal('show');
 	};
 	$scope.deleteUser = function(entity) {
-		if (window.confirm('确定删除' + entity.user.loginName + '吗？')) {
-			location.href = 'deleteUser.do?id=' + entity.user.id;
+		if (window.confirm('确定删除' + entity.loginName + '吗？')) {
+			location.href = 'deleteUser.do?id=' + entity.id;
+		}
+	};
+	$scope.approve = function(type, user, message) {
+		if (window.confirm(message + '确定申请通过吗？')) {
+			location.href = 'approve.do?type=' + type + '&user=' + user + '&approved=true';
+		} else {
+			location.href = 'approve.do?type=' + type + '&user=' + user + '&approved=false';
 		}
 	};
 } ]);
@@ -165,7 +176,7 @@ controller.controller('paperController', [ '$scope', 'paperService', function($s
 			cellTemplate : '<div>{{COL_FIELD|getQuestions:2|size}}</div>'
 		}, {
 			displayName : '操作',
-			cellTemplate : '<a ng-click="deletePaper({paper:row.entity})">删除</a>&nbsp;&nbsp;<a ng-show="row.entity.status != 1" ng-click="reviewPaper({paper:row.entity})">重审</a>'
+			cellTemplate : '<a ng-click="deletePaper(row.entity)">删除</a>&nbsp;&nbsp;<a ng-show="row.entity.status != 1" ng-click="reviewPaper(row.entity)">重审</a>'
 		} ]
 	}, function() {
 		paperService.getPaperList("all", $scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize).success(function(res) {
@@ -174,13 +185,13 @@ controller.controller('paperController', [ '$scope', 'paperService', function($s
 		});
 	});
 	$scope.deletePaper = function(entity) {
-		if (window.confirm('确定删除' + entity.paper.name + '吗？')) {
-			location.href = 'deletePaper.do?id=' + entity.paper.id;
+		if (window.confirm('确定删除' + entity.name + '吗？')) {
+			location.href = 'deletePaper.do?id=' + entity.id;
 		}
 	};
 	$scope.reviewPaper = function(entity) {
-		if (window.confirm('确定重审' + entity.paper.name + '吗？')) {
-			location.href = 'reviewPaper.do?id=' + entity.paper.id;
+		if (window.confirm('确定重审' + entity.name + '吗？')) {
+			location.href = 'reviewPaper.do?id=' + entity.id;
 		}
 	};
 	$scope.showPaper = function(id) {

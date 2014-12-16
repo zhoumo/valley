@@ -9,9 +9,13 @@ public class Authority extends BaseModel {
 
 	private String realName;
 
-	private Boolean hasAppliedCreator;
+	private Boolean applyCreator;
 
-	private Boolean hasAppliedAuditor;
+	private Boolean applyAuditor;
+
+	private Boolean approveCreator;
+
+	private Boolean approveAuditor;
 
 	public String getLoginName() {
 		return loginName;
@@ -29,19 +33,35 @@ public class Authority extends BaseModel {
 		this.realName = realName;
 	}
 
-	public Boolean getHasAppliedCreator() {
-		return hasAppliedCreator;
+	public Boolean getApplyCreator() {
+		return applyCreator;
 	}
 
-	public void setHasAppliedCreator(Boolean hasAppliedCreator) {
-		this.hasAppliedCreator = hasAppliedCreator;
+	public void setApplyCreator(Boolean applyCreator) {
+		this.applyCreator = applyCreator;
 	}
 
-	public Boolean getHasAppliedAuditor() {
-		return hasAppliedAuditor;
+	public Boolean getApplyAuditor() {
+		return applyAuditor;
 	}
 
-	public void setHasAppliedAuditor(Boolean hasAppliedAuditor) {
-		this.hasAppliedAuditor = hasAppliedAuditor;
+	public void setApplyAuditor(Boolean applyAuditor) {
+		this.applyAuditor = applyAuditor;
+	}
+
+	public Boolean getApproveCreator() {
+		return approveCreator;
+	}
+
+	public void setApproveCreator(Boolean approveCreator) {
+		this.approveCreator = approveCreator;
+	}
+
+	public Boolean getApproveAuditor() {
+		return approveAuditor;
+	}
+
+	public void setApproveAuditor(Boolean approveAuditor) {
+		this.approveAuditor = approveAuditor;
 	}
 }

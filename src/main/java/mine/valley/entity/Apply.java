@@ -6,6 +6,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import mine.valley.base.BaseEntity;
 
 @Entity
@@ -15,6 +17,7 @@ public class Apply extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "USER_ID")
+	@JsonBackReference
 	private User user;
 
 	@ManyToOne
@@ -24,8 +27,8 @@ public class Apply extends BaseEntity {
 	@Column(name = "TYPE", nullable = false)
 	private Short type;
 
-	@Column(name = "APPROVED", nullable = false)
-	private Boolean approved = false;
+	@Column(name = "APPROVED")
+	private Boolean approved;
 
 	@Column(name = "RESUME", nullable = false, length = 65535)
 	private String resume;
@@ -52,6 +55,14 @@ public class Apply extends BaseEntity {
 
 	public void setType(Short type) {
 		this.type = type;
+	}
+
+	public Boolean getApproved() {
+		return approved;
+	}
+
+	public void setApproved(Boolean approved) {
+		this.approved = approved;
 	}
 
 	public String getResume() {

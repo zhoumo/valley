@@ -1,9 +1,12 @@
 package mine.valley.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import mine.valley.base.BaseController;
 import mine.valley.constant.ApplyType;
+import mine.valley.entity.Apply;
 import mine.valley.entity.User;
 import mine.valley.service.ApplyService;
 
@@ -33,5 +36,15 @@ public class ApplyController extends BaseController {
 			applyService.applyAuditor(jobIds, user, resume);
 		}
 		return "redirect:/";
+	}
+
+	@RequestMapping("/approve.do")
+	public String approve(Short type, Long user, Boolean approved) {
+		List<Apply> applyList = applyService.getApplyList(type, user);
+		for (Apply apply : applyList) {
+			apply.setApproved(approved);
+		}
+		applyService.batchSave(applyList);
+		return "redirect:/#?active=user";
 	}
 }

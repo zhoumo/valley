@@ -13,17 +13,17 @@
 		</div>
 		<div class="panel-content"></div>
 	</panel>
-	<panel title="申请成为题库生产者，贡献你的智慧！" type="apply-creator" color="#00aeef">
+	<panel title="申请成为题库生产者，贡献你的智慧！" type="apply-creator" color="#00aeef" ng-show="!user.approveCreator">
 		<div class="panel-content">
 			<a data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('生产者')">现在申请</a>
 		</div>
 	</panel>
-	<panel title="申请成为题库审核人，为题库把关！" type="apply-auditor" color="#00aeef">
+	<panel title="申请成为题库审核人，为题库把关！" type="apply-auditor" color="#00aeef" ng-show="!user.approveAuditor">
 		<div class="panel-content">
 			<a data-toggle="modal" data-target="#applyModal" ng-click="setApplyType('审核者')">现在申请</a>
 		</div>
 	</panel>
-	<panel title="我要出题" type="create" color="#6f8ba9">
+	<panel title="我要出题" type="create" color="#6f8ba9" ng-show="user.approveCreator">
 		<div class="panel-top-button">
 			<a href="#/paper/list?type=create">我的试卷</a>
 		</div>
@@ -32,18 +32,18 @@
 			<button class="btn btn-primary" type="button" ng-click="selectJob()">现在去出题</button>
 		</div>
 	</panel>
-	<panel title="我要审题" type="audit" color="#6f8ba9">
-	<div class="panel-top-button">
-		<a href="#/paper/list?type=audit">已审试卷</a>
-	</div>
+	<panel title="我要审题" type="audit" color="#6f8ba9" ng-show="user.approveAuditor">
+		<div class="panel-top-button">
+			<a href="#/paper/list?type=audit">已审试卷</a>
+		</div>
 	</panel>
 	<panel title="账户管理" type="account" color="#15467a">
-	<div class="panel-content">
-		<a href="#/account/edit">修改个人资料</a>
-	</div>
+		<div class="panel-content">
+			<a href="#/account/edit">修改个人资料</a>
+		</div>
 	</panel>
 	<div class="modal fade" id="applyModal" role="dialog" aria-hidden="true" data-backdrop="static">
-		<div class="modal-dialog" style="width: 800px">
+		<div class="modal-dialog" style="width: 860px">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
@@ -51,7 +51,7 @@
 					</button>
 					<h4 class="modal-title">题库{{applyType}}申请</h4>
 				</div>
-				<form name="applyForm" class="form-horizontal" style="width: 778px" action="apply.do" method="post" novalidate ng-show="applyType=='生产者' && !user.hasAppliedCreator || applyType=='审核者' && !user.hasAppliedAuditor">
+				<form name="applyForm" class="form-horizontal" style="width: 778px" action="apply.do" method="post" novalidate ng-show="applyType=='生产者' && !user.applyCreator || applyType=='审核者' && !user.applyAuditor">
 					<input name="selectedJobs" type="hidden" value="{{selectedJobs}}" />
 					<input name="applyType" type="hidden" value="{{applyType}}" />
 					<div class="modal-body">
@@ -68,7 +68,7 @@
 							<b>个人资历：</b>
 						</p>
 						<p>
-							<textarea name="resume" rows="15" cols="100" ng-model="resume"></textarea>
+							<textarea name="resume" rows="15" cols="110" ng-model="resume"></textarea>
 						</p>
 						<p>选择出题的职位：</p>
 						<div class="form-group">
@@ -88,7 +88,7 @@
 						<button type="submit" class="btn btn-primary" ng-disabled="!resume || !selectedJobs">发送请求</button>
 					</div>
 				</form>
-				<div class="modal-body" ng-show="applyType=='生产者' && user.hasAppliedCreator || applyType=='审核者' && user.hasAppliedAuditor">
+				<div class="modal-body" ng-show="applyType=='生产者' && user.applyCreator || applyType=='审核者' && user.applyAuditor">
 					<p>申请成为题库{{applyType}}，为题库把关！</p>
 					<p>
 						<b>资格要求：</b>
