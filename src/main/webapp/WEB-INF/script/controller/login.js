@@ -9,5 +9,6 @@ controller.controller('loginController', function($scope) {
 			}
 		}
 	}
+	$scope.unique = true;
 	$scope.error = location.search.indexOf('error=true') > 0;
 });

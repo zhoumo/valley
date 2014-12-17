@@ -1,4 +1,4 @@
-angular.module('login', [ 'ngAnimate', 'ngRoute', 'controllers' ]).config(function($routeProvider) {
+angular.module('login', [ 'ngAnimate', 'ngRoute', 'controllers', 'directives' ]).config(function($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'views/login/default.html'
 	}).when('/register', {

@@ -67,4 +67,10 @@ public class UserController extends BaseController {
 	public Page<User> getUserList(Page<User> page) {
 		return userService.getUserList(page);
 	}
+
+	@RequestMapping("/loginNameUnique.do")
+	@ResponseBody
+	public Boolean loginNameUnique(String loginName) {
+		return userService.getUserByName(loginName).getId() == null ? true : false;
+	}
 }

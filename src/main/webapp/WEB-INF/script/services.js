@@ -3,7 +3,7 @@ services.service('baseService', [ '$http', function($http) {
 	return {
 		getHttp : function(url) {
 			return $http({
-				method : 'post',
+				method : 'get',
 				url : url
 			});
 		},

@@ -12,6 +12,7 @@
 		<security:intercept-url pattern="/upload/**" filters="none" />
 		<security:intercept-url pattern="/views/login/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/register**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<security:intercept-url pattern="/loginNameUnique.do**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:form-login login-page="/login.jsp" default-target-url="/" authentication-failure-url="/login.jsp?error=true" />
 		<security:intercept-url pattern="/**" access="ROLE_USER" />

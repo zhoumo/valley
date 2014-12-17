@@ -94,6 +94,25 @@ directives.directive('approve', function() {
 		}
 	};
 });
+directives.directive('unique', function($http) {
+	return {
+		restrict : 'A',
+		require : 'ngModel',
+		scope : {
+			unique : '='
+		},
+		link : function(scope, element, attrs) {
+			element.bind('keyup change blur', function() {
+				$http({
+					method : 'get',
+					url : attrs.name + 'Unique.do?' + attrs.name + '=' + element.val()
+				}).success(function(res) {
+					scope.unique = (res == 'true');
+				});
+			});
+		}
+	};
+});
 directives.directive('safeMode', function() {
 	return {
 		restrict : 'A',
