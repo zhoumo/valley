@@ -50,6 +50,23 @@ controller.controller('jobController', [ '$scope', 'jobService', function($scope
 	};
 } ]);
 controller.controller('userController', [ '$scope', 'userService', function($scope, userService) {
+	$scope.userTypes = [ {
+		id : 1,
+		name : '管理员'
+	}, {
+		id : 2,
+		name : 'IT从业者'
+	}, {
+		id : 3,
+		name : 'HR'
+	}, {
+		id : 4,
+		name : '猎头顾问'
+	} ];
+	$scope.changeType = function(type) {
+		$scope.userType = type.id;
+		$scope.paging();
+	};
 	$scope.userList = [];
 	userService.setGridPaging($scope, {
 		data : 'userList',
@@ -90,7 +107,7 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 			cellTemplate : '<a ng-click="updateUser(row.entity)">修改</a>&nbsp;&nbsp;<a ng-click="deleteUser(row.entity)">删除</a>'
 		} ]
 	}, function() {
-		userService.getUserList($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize).success(function(res) {
+		userService.getUserList($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, $scope.userType).success(function(res) {
 			$scope.userList = res.result;
 			$scope.totalServerItems = res.totalCount;
 		});

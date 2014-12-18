@@ -10,6 +10,7 @@ import mine.valley.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -64,8 +65,8 @@ public class UserController extends BaseController {
 
 	@RequestMapping("/getUserList.do")
 	@ResponseBody
-	public Page<User> getUserList(Page<User> page) {
-		return userService.getUserList(page);
+	public Page<User> getUserList(Page<User> page, String type) {
+		return userService.getUserList(page, (StringUtils.isEmpty(type) || "undefined".equals(type)) ? null : Short.parseShort(type));
 	}
 
 	@RequestMapping("/loginNameUnique.do")

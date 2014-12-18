@@ -45,8 +45,8 @@ public class UserService extends BaseService {
 		return users.size() == 0 ? new User() : users.get(0);
 	}
 
-	public Page<User> getUserList(Page<User> page) {
-		baseDao.findByPage("FROM User WHERE isDeleted = false", new Object[] {}, page);
+	public Page<User> getUserList(Page<User> page, Short type) {
+		baseDao.findByPage("FROM User WHERE" + (type == null ? "" : " type = " + type + " AND") + " isDeleted = false", new Object[] {}, page);
 		for (User user : page.getResult()) {
 			user.setApplyCreator(applyService.getApplyList(ApplyType.CREATOR.getValue(), user.getId()));
 			user.setApplyAuditor(applyService.getApplyList(ApplyType.AUDITOR.getValue(), user.getId()));

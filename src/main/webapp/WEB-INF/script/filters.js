@@ -24,13 +24,13 @@ filters.filter('userType', function() {
 	return function(type) {
 		switch (type) {
 			case 1:
-				return 'IT从业者';
-			case 2:
-				return 'HR';
-			case 3:
-				return '猎头顾问';
-			default:
 				return '管理员';
+			case 2:
+				return 'IT从业者';
+			case 3:
+				return 'HR';
+			case 4:
+				return '猎头顾问';
 		}
 	};
 });

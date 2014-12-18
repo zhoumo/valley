@@ -8,6 +8,12 @@ services.service('baseService', [ '$http', function($http) {
 			});
 		},
 		setGridPaging : function(scope, config, paging) {
+			scope.pagingOptions = {
+				pageSizes : [ 10 ],
+				pageSize : 10,
+				currentPage : 1
+			};
+			scope.totalServerItems = 0;
 			angular.extend(config, {
 				enableColumnResize : true,
 				multiSelect : false,
@@ -18,12 +24,6 @@ services.service('baseService', [ '$http', function($http) {
 				pagingOptions : scope.pagingOptions,
 			});
 			scope.gridOptions = config;
-			scope.totalServerItems = 0;
-			scope.pagingOptions = {
-				pageSizes : [ 10 ],
-				pageSize : 10,
-				currentPage : 1
-			};
 			scope.$watch('pagingOptions', function(newVal, oldVal) {
 				if (newVal !== oldVal) {
 					scope.paging();
@@ -42,8 +42,8 @@ services.service('userService', [ 'baseService', function(baseService) {
 		getAuthority : function() {
 			return baseService.getHttp('getAuthority.do');
 		},
-		getUserList : function(pageNo, pageSize) {
-			return baseService.getHttp('getUserList.do?pageNo=' + pageNo + '&pageSize=' + pageSize);
+		getUserList : function(pageNo, pageSize, type) {
+			return baseService.getHttp('getUserList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type);
 		}
 	};
 } ]);

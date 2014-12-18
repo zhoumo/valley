@@ -1,12 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="admin-user-panel">
 	<div class="form-group">
-		<select class="form-control">
-			<option value="1" selected="selected">管理员</option>
-			<option value="2">IT从业者</option>
-			<option value="3">HR</option>
-			<option value="4">猎头顾问</option>
-		</select>
+		<select class="form-control" data-ng-model="type" data-ng-options="type.name for type in userTypes track by type.id" ng-change="changeType(type)"></select>
 		<button class="btn btn-primary" type="button" data-toggle="modal" data-target="#userModal">添加用户</button>
 	</div>
 	<div ng-grid="gridOptions" style="width: 100%; height: 400px;"></div>
