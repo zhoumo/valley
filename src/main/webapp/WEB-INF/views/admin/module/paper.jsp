@@ -2,12 +2,11 @@
 <div class="admin-paper-panel">
 	<div class="form-group">
 		<label>职位名称：</label>
-		<input type="text" />
+		<input type="text" ng-model="paper.job" />
 		<label>试卷作者：</label>
-		<input type="text" />
+		<input type="text" ng-model="paper.author" />
 		<div class="space"></div>
-		<button class="btn btn-primary" type="button">查询试卷</button>
-		<button class="btn btn-primary" type="button">统计报表</button>
+		<button class="btn btn-primary" type="button" ng-click="paging()">查询试卷</button>
 	</div>
 	<div ng-grid="gridOptions" style="width: 100%; height: 400px;"></div>
 	<div id="showPaperDialog" class="modal fade" role="dialog" aria-hidden="true" data-backdrop="static">

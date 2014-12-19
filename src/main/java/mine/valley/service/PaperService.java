@@ -65,8 +65,8 @@ public class PaperService extends BaseService {
 		baseDao.delete(paper);
 	}
 
-	public Page<Paper> getSubmitPaper(Page<Paper> page) {
-		return baseDao.findByPage("FROM Paper WHERE status >= ? ORDER BY status, job", new Object[] { PaperStatus.SUBMIT.getValue() }, page);
+	public Page<Paper> getSubmitPaper(Page<Paper> page, String job, String author) {
+		return baseDao.findByPage("FROM Paper WHERE job.name LIKE '%" + job + "%' AND author.realName LIKE '%" + author + "%' AND status >= ? ORDER BY status, job", new Object[] { PaperStatus.SUBMIT.getValue() }, page);
 	}
 
 	public Page<Paper> getPaperByAuthor(Page<Paper> page, Long userId) {

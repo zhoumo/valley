@@ -1,5 +1,7 @@
 package mine.valley.base;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpSession;
 
 import mine.valley.entity.User;
@@ -38,5 +40,14 @@ public class BaseController {
 
 	protected User getUser() {
 		return (User) session.getAttribute(getUserName());
+	}
+
+	protected String transcode(String text) {
+		try {
+			return new String(text.getBytes("ISO8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			logger.error("transcode failed.", e);
+			return text;
+		}
 	}
 }

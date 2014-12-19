@@ -68,8 +68,8 @@ services.service('paperService', [ 'baseService', function(baseService) {
 		setGridPaging : function(scope, config, paging) {
 			baseService.setGridPaging(scope, config, paging);
 		},
-		getPaperList : function(type, pageNo, pageSize) {
-			return baseService.getHttp('getPaperList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type);
+		getPaperList : function(pageNo, pageSize, type, job, author) {
+			return baseService.getHttp('getPaperList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type + '&job=' + job + '&author=' + author);
 		},
 		getPaper : function(id) {
 			return baseService.getHttp('getPaper.do?id=' + id);

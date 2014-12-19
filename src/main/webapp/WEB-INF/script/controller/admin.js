@@ -132,6 +132,10 @@ controller.controller('userController', [ '$scope', 'userService', function($sco
 	};
 } ]);
 controller.controller('paperController', [ '$scope', 'paperService', function($scope, paperService) {
+	$scope.paper = {
+		job : '',
+		author : ''
+	};
 	$scope.paperList = [];
 	paperService.setGridPaging($scope, {
 		data : 'paperList',
@@ -196,7 +200,7 @@ controller.controller('paperController', [ '$scope', 'paperService', function($s
 			cellTemplate : '<a ng-click="deletePaper(row.entity)">删除</a>&nbsp;&nbsp;<a ng-show="row.entity.status != 1" ng-click="reviewPaper(row.entity)">重审</a>'
 		} ]
 	}, function() {
-		paperService.getPaperList("all", $scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize).success(function(res) {
+		paperService.getPaperList($scope.pagingOptions.currentPage, $scope.pagingOptions.pageSize, 'all', $scope.paper.job, $scope.paper.author).success(function(res) {
 			$scope.paperList = res.result;
 			$scope.totalServerItems = res.totalCount;
 		});

@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import mine.valley.base.BaseController;
 import mine.valley.constant.PaperStatus;
 import mine.valley.entity.Exam;
 import mine.valley.entity.Paper;
 import mine.valley.entity.Question;
-import mine.valley.entity.User;
 import mine.valley.model.Page;
 import mine.valley.service.ExamService;
 import mine.valley.service.JobService;
@@ -106,18 +104,17 @@ public class PaperController extends BaseController {
 
 	@RequestMapping("/getPaperList.do")
 	@ResponseBody
-	public Page<Paper> getPaperList(String type, Page<Paper> page, HttpSession session) {
-		User user = (User) session.getAttribute(super.getUserName());
+	public Page<Paper> getPaperList(String type, Page<Paper> page, String job, String author) {
 		if ("create".equals(type)) {
-			page = paperService.getPaperByAuthor(page, user.getId());
+			page = paperService.getPaperByAuthor(page, getUser().getId());
 		} else if ("audit".equals(type)) {
-			page = paperService.getNoAuditPaper(page, user.getId());
+			page = paperService.getNoAuditPaper(page, getUser().getId());
 		} else if ("audited".equals(type)) {
-			page = paperService.getAuditedPaper(page, user.getId());
+			page = paperService.getAuditedPaper(page, getUser().getId());
 		} else if ("exam".equals(type)) {
-			page = paperService.getExamPaper(page, user.getId());
+			page = paperService.getExamPaper(page, getUser().getId());
 		} else {
-			page = paperService.getSubmitPaper(page);
+			page = paperService.getSubmitPaper(page, transcode(job), transcode(author));
 		}
 		return page;
 	}
