@@ -51,8 +51,11 @@ controller.controller('homeController', [ '$scope', '$rootScope', '$location', '
 	$scope.auditPaper = function(id) {
 		$location.path('paper/audit/' + id);
 	};
-	paperService.getPaperList('audit', 1, 4).success(function(res) {
+	paperService.getPaperList('audit', 1, 3).success(function(res) {
 		$scope.auditPapers = res.result;
+	});
+	userService.getMessage(1, 3).success(function(res) {
+		$scope.messages = res.result;
 	});
 } ]);
 controller.controller('paperCreateController', [ '$scope', '$rootScope', '$location', 'paperService', function($scope, $rootScope, $location, paperService) {

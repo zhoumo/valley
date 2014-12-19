@@ -1,10 +1,7 @@
 package mine.valley.controller;
 
-import java.util.List;
-
 import mine.valley.base.BaseController;
 import mine.valley.constant.ApplyType;
-import mine.valley.entity.Apply;
 import mine.valley.service.ApplyService;
 
 import org.json.JSONObject;
@@ -36,11 +33,7 @@ public class ApplyController extends BaseController {
 
 	@RequestMapping("/approve.do")
 	public String approve(Short type, Long user, Boolean approved) {
-		List<Apply> applyList = applyService.getApplyList(type, user);
-		for (Apply apply : applyList) {
-			apply.setApproved(approved);
-		}
-		applyService.batchSave(applyList);
+		applyService.approve(type, user, approved);
 		return ACTIVE_USER;
 	}
 }

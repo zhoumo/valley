@@ -44,6 +44,9 @@ services.service('userService', [ 'baseService', function(baseService) {
 		},
 		getUserList : function(pageNo, pageSize, type) {
 			return baseService.getHttp('getUserList.do?pageNo=' + pageNo + '&pageSize=' + pageSize + '&type=' + type);
+		},
+		getMessage : function(pageNo, pageSize) {
+			return baseService.getHttp('getMessage.do?pageNo=' + pageNo + '&pageSize=' + pageSize);
 		}
 	};
 } ]);

@@ -75,9 +75,7 @@ directives.directive('approve', function() {
 				element.append('未申请');
 				return;
 			}
-			if (value[0].approved) {
-				element.append('<div style="color:green">已通过</div>');
-			} else {
+			if (value[0].approved == null) {
 				var message = '申请职位：';
 				for ( var index = 0; index < value.length; index++) {
 					message += value[index].job.name + ' ';
@@ -90,6 +88,10 @@ directives.directive('approve', function() {
 					scope.approve(attrs.type, attrs.user, message);
 				});
 				element.append(button);
+			} else if (value[0].approved) {
+				element.append('<div style="color:green">已通过</div>');
+			} else {
+				element.append('<div style="color:red">未通过</div>');
 			}
 		}
 	};

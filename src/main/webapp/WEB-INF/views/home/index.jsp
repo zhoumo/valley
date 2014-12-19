@@ -9,9 +9,14 @@
 	</panel>
 	<panel title="系统消息" type="message" color="#01caa0">
 		<div class="panel-top-button">
-			<a>全部清除</a>
+			<a href="readAllMessage.do">全部清除</a>
 		</div>
-		<div class="panel-content"></div>
+		<ul class="panel-list" ng-repeat="message in messages">
+			<li>
+				<label style="width: 220px">{{message.title}}</label>
+				<label>{{message.createTime|date:"yyyy-MM-dd hh:mm:ss"}}</label>
+			</li>
+		</ul>
 	</panel>
 	<panel title="申请成为题库生产者，贡献你的智慧！" type="apply-creator" color="#00aeef" ng-show="!user.approveCreator">
 		<div class="panel-content">
@@ -38,7 +43,7 @@
 		</div>
 		<ul class="panel-list" ng-repeat="paper in auditPapers">
 			<li>
-				<label>{{paper.name}}</label>
+				<label style="width: 320px">{{paper.name}}</label>
 				<a ng-click="auditPaper(paper.id)">审核</a>
 			</li>
 		</ul>

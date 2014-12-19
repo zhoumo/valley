@@ -2,10 +2,12 @@ package mine.valley.controller;
 
 import mine.valley.base.BaseController;
 import mine.valley.constant.ApplyType;
+import mine.valley.entity.Message;
 import mine.valley.entity.User;
 import mine.valley.model.Authority;
 import mine.valley.model.Page;
 import mine.valley.service.ApplyService;
+import mine.valley.service.MessageService;
 import mine.valley.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class UserController extends BaseController {
 	private UserService userService;
 
 	@Autowired
+	private MessageService messageService;
+
+	@Autowired
 	private ApplyService applyService;
 
 	@RequestMapping("/getAuthority.do")
@@ -34,6 +39,18 @@ public class UserController extends BaseController {
 		authority.setApproveCreator(applyService.isApproved(ApplyType.CREATOR.getValue(), getUser().getId()));
 		authority.setApproveAuditor(applyService.isApproved(ApplyType.AUDITOR.getValue(), getUser().getId()));
 		return authority;
+	}
+
+	@RequestMapping("/getMessage.do")
+	@ResponseBody
+	public Page<Message> getMessage(Page<Message> page) {
+		return messageService.getNoReadMessage(page, getUser());
+	}
+
+	@RequestMapping("/readAllMessage.do")
+	public String readAllMessage() {
+		messageService.readAllMessage(getUser());
+		return ROOT_PATH;
 	}
 
 	@RequestMapping("/registerUser.do")
