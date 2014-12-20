@@ -76,12 +76,12 @@ directives.directive('approve', function() {
 				return;
 			}
 			if (value[0].approved == null) {
-				var message = '申请职位：';
+				var message = '【申请职位】\n';
 				for ( var index = 0; index < value.length; index++) {
-					message += value[index].job.name + ' ';
+					message += value[index].job.name + '\n';
 				}
-				message += '\n\n';
-				message += '个人资历：' + value[0].resume;
+				message += '\n';
+				message += '【个人资历】\n' + value[0].resume;
 				message += '\n\n';
 				var button = $('<div style="color:red">待处理</div>');
 				button.click(function() {

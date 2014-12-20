@@ -24,6 +24,12 @@ public class JobController extends BaseController {
 	public List<Job> getJobList() {
 		return jobService.getJobList();
 	}
+	
+	@RequestMapping("/getApplyJobList.do")
+	@ResponseBody
+	public List<Job> getApplyJobList() {
+		return jobService.getApplyJobList(getUser());
+	}
 
 	@RequestMapping("/getJobTree.do")
 	@ResponseBody

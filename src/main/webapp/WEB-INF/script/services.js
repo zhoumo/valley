@@ -55,11 +55,14 @@ services.service('jobService', [ 'baseService', function(baseService) {
 		setGridPaging : function(scope, config, paging) {
 			baseService.setGridPaging(scope, config, paging);
 		},
+		getJobTree : function() {
+			return baseService.getHttp('getJobTree.do');
+		},
 		getJobList : function() {
 			return baseService.getHttp('getJobList.do');
 		},
-		getJobTree : function() {
-			return baseService.getHttp('getJobTree.do');
+		getApplyJobList : function() {
+			return baseService.getHttp('getApplyJobList.do');
 		}
 	};
 } ]);

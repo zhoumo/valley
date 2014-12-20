@@ -12,6 +12,7 @@ import mine.valley.thread.ExamDaemon;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Service
 @Transactional
@@ -34,16 +35,19 @@ public class ExamService extends BaseService {
 		exam.setCreateTime();
 		exam.setStatus(ExamStatus.START.getValue());
 		baseDao.save(exam);
-		ExamDaemon daemon = new ExamDaemon(paper.getTime(), exam, this);
+		ExamDaemon daemon = new ExamDaemon(paper.getTime(), exam.getId(), this);
 		daemon.setDaemon(true);
 		daemonMap.put(paper.getId() + "-" + user.getId(), daemon);
 		daemon.start();
 		return exam.getId();
 	}
 
-	public void endExam(Exam exam) {
-		exam.setStatus(ExamStatus.END.getValue());
-		baseDao.save(exam);
+	public void endExam(Long examId) {
+		Exam exam = getExam(examId);
+		if (StringUtils.isEmpty(exam.getAnswer())) {
+			exam.setStatus(ExamStatus.END.getValue());
+			baseDao.save(exam);
+		}
 		daemonMap.remove(exam.getPaper().getId() + "-" + exam.getUser().getId());
 	}
 

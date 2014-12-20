@@ -1,19 +1,18 @@
 package mine.valley.thread;
 
-import mine.valley.entity.Exam;
 import mine.valley.service.ExamService;
 
 public class ExamDaemon extends Thread {
-
+	
 	private int time;
-
-	private Exam exam;
-
+	
+	private Long examId;
+	
 	private ExamService examService;
 
-	public ExamDaemon(int time, Exam exam, ExamService examService) {
+	public ExamDaemon(int time, Long examId, ExamService examService) {
 		this.time = time;
-		this.exam = exam;
+		this.examId = examId;
 		this.examService = examService;
 	}
 
@@ -30,6 +29,6 @@ public class ExamDaemon extends Thread {
 				e.printStackTrace();
 			}
 		}
-		examService.endExam(exam);
+		examService.endExam(examId);
 	}
 }

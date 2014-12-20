@@ -59,7 +59,7 @@
 		</div>
 	</div>
 	<div class="paper-bottom">
-		<button type="submit" class="btn btn-primary" ng-click="finishExam()" onclick="window.onbeforeunload = null">提交试卷</button>
+		<button type="submit" class="btn btn-primary" ng-click="finishExam()">提交试卷</button>
 		<button type="button" class="btn btn-default" ng-click="endExam()">放弃考试</button>
 	</div>
 </form>

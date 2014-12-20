@@ -11,7 +11,7 @@ controller.controller('homeController', [ '$scope', '$rootScope', '$location', '
 			user : true
 		};
 	});
-	jobService.getJobList().success(function(res) {
+	jobService.getApplyJobList().success(function(res) {
 		$scope.jobList = res;
 		$scope.job = res[0];
 	});
@@ -202,11 +202,11 @@ controller.controller('paperExamController', [ '$scope', '$routeParams', '$inter
 		for ( var name in anwsers) {
 			$('[name^=' + name + '_]').val(anwsers[name]);
 		}
+		$scope.close();
 	};
 	$scope.endExam = function() {
 		if (confirm('确定放弃答题吗?')) {
-			window.onbeforeunload = null;
-			window.close();
+			$scope.close();
 		}
 	};
 	paperService.getPaper($scope.paperId).success(function(res) {
@@ -216,14 +216,18 @@ controller.controller('paperExamController', [ '$scope', '$routeParams', '$inter
 				$scope.paper.time = $scope.paper.time - 1;
 			} else {
 				alert('答题时间到！');
-				window.onbeforeunload = null;
-				window.close();
+				$scope.close();
 			}
 		}, 1000);
 		paperService.timer($scope.paperId).success(function(res) {
 			$scope.paper.time = res;
 		});
 	});
+	$scope.close = function() {
+		window.onbeforeunload = null;
+		window.close();
+		window.opener.location.reload();
+	};
 } ]);
 controller.controller('paperAuditController', [ '$scope', '$routeParams', 'paperService', function($scope, $routeParams, paperService) {
 	$scope.id = $routeParams.id;

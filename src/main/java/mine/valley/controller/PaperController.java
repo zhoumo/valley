@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import mine.valley.base.BaseController;
+import mine.valley.constant.ExamStatus;
 import mine.valley.constant.PaperStatus;
 import mine.valley.entity.Exam;
 import mine.valley.entity.Paper;
@@ -137,6 +138,7 @@ public class PaperController extends BaseController {
 			answer.put(questionId, request.getParameter(key.toString()));
 		}
 		exam.setAnswer(answer.toString());
+		exam.setStatus(ExamStatus.END.getValue());
 		examService.save(exam);
 		return ROOT_PATH;
 	}

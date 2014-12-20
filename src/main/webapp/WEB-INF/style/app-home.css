@@ -34,7 +34,7 @@
 }
 
 .panel-list label {
-	display: table-cell;
+	display: inline-block;
 	padding-left: 0px;
 	padding-top: 8px;
 	padding-bottom: 2px;
@@ -44,7 +44,7 @@
 }
 
 .panel-list a {
-	display: table-cell;
+	display: inline-block;
 	padding-top: 8px;
 	padding-bottom: 2px;
 	border-bottom: 1px dotted #cccccc;

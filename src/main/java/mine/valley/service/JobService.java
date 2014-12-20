@@ -5,6 +5,7 @@ import java.util.List;
 
 import mine.valley.base.BaseService;
 import mine.valley.entity.Job;
+import mine.valley.entity.User;
 import mine.valley.model.Tree;
 
 import org.springframework.stereotype.Service;
@@ -45,6 +46,10 @@ public class JobService extends BaseService {
 
 	public List<Job> getJobList() {
 		return baseDao.find("FROM Job WHERE isDeleted = false");
+	}
+	
+	public List<Job> getApplyJobList(User user) {
+		return baseDao.find("FROM Job WHERE isDeleted = false AND id IN (SELECT job.id FROM Apply WHERE user.id = ?)", user.getId());
 	}
 
 	public List<Tree> getJobTree() {
