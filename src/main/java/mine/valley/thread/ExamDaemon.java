@@ -3,11 +3,11 @@ package mine.valley.thread;
 import mine.valley.service.ExamService;
 
 public class ExamDaemon extends Thread {
-	
+
 	private int time;
-	
+
 	private Long examId;
-	
+
 	private ExamService examService;
 
 	public ExamDaemon(int time, Long examId, ExamService examService) {

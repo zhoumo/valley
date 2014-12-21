@@ -47,7 +47,7 @@ public class JobService extends BaseService {
 	public List<Job> getJobList() {
 		return baseDao.find("FROM Job WHERE isDeleted = false");
 	}
-	
+
 	public List<Job> getApplyJobList(User user) {
 		return baseDao.find("FROM Job WHERE isDeleted = false AND id IN (SELECT job.id FROM Apply WHERE user.id = ?)", user.getId());
 	}

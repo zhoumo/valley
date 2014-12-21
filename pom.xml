@@ -3,7 +3,7 @@
 	<groupId>mine.valley</groupId>
 	<artifactId>valley</artifactId>
 	<packaging>war</packaging>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>valley</name>
 	<properties>
 		<java.version>1.6</java.version>

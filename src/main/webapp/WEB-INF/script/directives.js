@@ -1,5 +1,5 @@
 var directives = angular.module('directives', []);
-directives.directive("panel", function() {
+directives.directive('panel', function() {
 	return {
 		restrict : 'E',
 		template : '<div class="panel"><div class="panel-title"></div><span ng-transclude></span></div>',
@@ -48,7 +48,7 @@ directives.directive('auditPanel', function() {
 		}
 	};
 });
-directives.directive("auditStatus", function() {
+directives.directive('auditStatus', function() {
 	return {
 		restrict : 'E',
 		link : function(scope, element, attrs) {
